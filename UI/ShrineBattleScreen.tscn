@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxrlf7xjnneu2"]
 
 [ext_resource type="Script" uid="uid://sjcoh8dt4tdt" path="res://UI/autobattle_scene.gd" id="1_435sf"]
-[ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/dice-faces.png" id="2_ocyaw"]
+[ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/Sprites/dice-faces.png" id="2_ocyaw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
 atlas = ExtResource("2_ocyaw")
