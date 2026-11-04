@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dice" format=3 uid="uid://b2uumcvo6182t"]
+
+[ext_resource type="Script" uid="uid://ctvpsi8vrgudu" path="res://example.gd" id="1_b43yc"]
+
+[resource]
+script = ExtResource("1_b43yc")
+exposed = null
+sides = null
+metadata/_custom_type_script = "uid://ctvpsi8vrgudu"

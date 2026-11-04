@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cmxsvl6i45vws"]
+
+[ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="1_gm7d2"]
+
+[node name="Shop" type="Control" unique_id=1662070465]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=454044985]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 122.0
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=1628979831]
+layout_mode = 2
+theme = ExtResource("1_gm7d2")
+theme_override_font_sizes/font_size = 120
+text = "SHOP"
