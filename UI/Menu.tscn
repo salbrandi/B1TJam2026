@@ -1,7 +1,29 @@
 [gd_scene format=3 uid="uid://d1omoofou3ys1"]
 
+[ext_resource type="Script" uid="uid://dr8435yvyb85p" path="res://UI/menu.gd" id="1_gda05"]
+
 [node name="Menu" type="Control" unique_id=1655401109]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1153.0
+offset_bottom = 648.0
+script = ExtResource("1_gda05")
+
+[node name="StartButton" type="Button" parent="." unique_id=1073174090]
+layout_mode = 0
+offset_left = 483.0
+offset_top = 334.0
+offset_right = 655.0
+offset_bottom = 392.0
+text = "Start"
+
+[node name="ExitGame" type="Button" parent="." unique_id=1282393345]
+layout_mode = 0
+offset_left = 483.0
+offset_top = 421.0
+offset_right = 655.0
+offset_bottom = 479.0
+text = "Exit"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]
