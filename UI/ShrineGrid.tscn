@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6gjwqyyjttdx"]
 
-[ext_resource type="Script" uid="uid://c0h7s0yi3388r" path="res://UI/shrine_grid.gd" id="1_388e0"]
+[ext_resource type="Script" uid="uid://c0h7s0yi3388r" path="res://UI/Scripts/shrine_grid.gd" id="1_388e0"]
 [ext_resource type="Texture2D" uid="uid://ciage5fp71e2r" path="res://UI/Sprites/inventory_slot_indicator.png" id="1_4632k"]
 [ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/shrine_inventory.gd" id="2_7n60n"]
 [ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="3_f05nt"]
