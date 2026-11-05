@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://gnwsh3idklh4"]
+
+[ext_resource type="Texture2D" uid="uid://db7diihj280ls" path="res://UI/Sprites/stick_figure_jumping.png" id="1_go6pp"]
+[ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/Sprites/dice-faces.png" id="2_e5ho3"]
+[ext_resource type="Script" uid="uid://dvs4und1qblr3" path="res://UI/dice_character_pivot.gd" id="2_n6kjf"]
+
+[sub_resource type="Animation" id="Animation_n6kjf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qej6v"]
+resource_name = "bounce"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfmix"]
+_data = {
+&"RESET": SubResource("Animation_n6kjf"),
+&"bounce": SubResource("Animation_qej6v")
+}
+
+[node name="DiceCharacter" type="Sprite2D" unique_id=1915844384]
+texture = ExtResource("1_go6pp")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1066029118]
+libraries/ = SubResource("AnimationLibrary_pfmix")
+
+[node name="Pivot" type="Node2D" parent="." unique_id=1207976705]
+script = ExtResource("2_n6kjf")
+
+[node name="DiceFaces" type="Sprite2D" parent="Pivot" unique_id=1849898514]
+position = Vector2(-16, 0)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_e5ho3")
+hframes = 6
+
+[node name="DiceFaces2" type="Sprite2D" parent="Pivot" unique_id=2011230577]
+position = Vector2(-8, -16)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_e5ho3")
+hframes = 6
+frame = 1
+
+[node name="DiceFaces3" type="Sprite2D" parent="Pivot" unique_id=1527463211]
+position = Vector2(8, -16)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_e5ho3")
+hframes = 6
+frame = 2
+
+[node name="DiceFaces4" type="Sprite2D" parent="Pivot" unique_id=1662649770]
+position = Vector2(16, 0)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_e5ho3")
+hframes = 6
+frame = 3
+
+[node name="DiceFaces5" type="Sprite2D" parent="Pivot" unique_id=2040834621]
+position = Vector2(8, 16)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_e5ho3")
+hframes = 6
+frame = 4
+
+[node name="DiceFaces6" type="Sprite2D" parent="Pivot" unique_id=912023290]
+position = Vector2(-8, 16)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_e5ho3")
+hframes = 6
+frame = 5
