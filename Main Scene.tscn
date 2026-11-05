@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://ff2x563vmrnw"]
 
+[ext_resource type="Script" uid="uid://cqq10awc4185t" path="res://Gameplay/GameManager.gd" id="1_2uwcf"]
+[ext_resource type="PackedScene" uid="uid://bxrlf7xjnneu2" path="res://UI/ShrineBattleScreen.tscn" id="1_nxxrv"]
+
 [node name="MainScene" type="Node2D" unique_id=699406317]
+script = ExtResource("1_2uwcf")
+
+[node name="ShrineBattleScreen" parent="." unique_id=706737663 instance=ExtResource("1_nxxrv")]

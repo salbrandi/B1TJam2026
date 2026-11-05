@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dflnd1db5ihqg"]
+
+[ext_resource type="Script" uid="uid://5xevxxl58gj8" path="res://Sound/PlayRandomSound.gd" id="1_yw55o"]
+[ext_resource type="AudioStream" uid="uid://mucw1wp3d5v0" path="res://Sound/synth1.wav" id="2_5u5av"]
+[ext_resource type="AudioStream" uid="uid://di8uknkg8ewer" path="res://Sound/slow-dice (1).wav" id="3_5u5av"]
+[ext_resource type="AudioStream" uid="uid://ck6ljd2i8wswu" path="res://Sound/synth2.wav" id="3_xmdwn"]
+[ext_resource type="AudioStream" uid="uid://di6kqu3wn4c1t" path="res://Sound/synth3.wav" id="4_fh8ve"]
+[ext_resource type="AudioStream" uid="uid://cmuyam6j322ky" path="res://Sound/slow-dice (2).wav" id="4_xmdwn"]
+[ext_resource type="AudioStream" uid="uid://bypoana8mn7xm" path="res://Sound/slow-dice (3).wav" id="5_fh8ve"]
+[ext_resource type="AudioStream" uid="uid://5um01jcpuj82" path="res://Sound/slow-dice (4).wav" id="6_uy3hf"]
+[ext_resource type="AudioStream" uid="uid://b4p1inkqw1s4w" path="res://Sound/slow-dice (5).wav" id="7_wvsxp"]
+[ext_resource type="AudioStream" uid="uid://jhqblwkyo4pt" path="res://Sound/slow-dice (6).wav" id="8_p4nqc"]
+
+[node name="SoundManager" type="Node" unique_id=782213402]
+
+[node name="SweepingSynth" type="AudioStreamPlayer" parent="." unique_id=564271164]
+volume_db = -7.017
+script = ExtResource("1_yw55o")
+sounds = Array[AudioStream]([ExtResource("2_5u5av"), ExtResource("3_xmdwn"), ExtResource("4_fh8ve")])
+fade_start_time = 0.3
+fade_time = 0.3
+
+[node name="DiceRoll" type="AudioStreamPlayer" parent="." unique_id=71574982]
+script = ExtResource("1_yw55o")
+sounds = Array[AudioStream]([ExtResource("3_5u5av"), ExtResource("4_xmdwn"), ExtResource("5_fh8ve"), ExtResource("6_uy3hf"), ExtResource("7_wvsxp"), ExtResource("8_p4nqc")])

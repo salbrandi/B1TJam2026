@@ -2,6 +2,44 @@
 
 [ext_resource type="FontFile" uid="uid://m3ikk7sab0mp" path="res://UI/Pixel Game.otf" id="1_drjrk"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drjrk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alyq0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5s7b"]
+content_margin_top = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
 [resource]
 default_font = ExtResource("1_drjrk")
 default_font_size = 48
+Button/colors/font_pressed_color = Color(0.09411765, 0.015686275, 0, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_drjrk")
+Button/styles/normal = SubResource("StyleBoxFlat_alyq0")
+Button/styles/pressed = SubResource("StyleBoxFlat_i5s7b")

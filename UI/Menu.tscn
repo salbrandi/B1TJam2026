@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1omoofou3ys1"]
 
-[ext_resource type="Script" uid="uid://dr8435yvyb85p" path="res://UI/menu.gd" id="1_gda05"]
+[ext_resource type="Script" uid="uid://dr8435yvyb85p" path="res://UI/Scripts/menu.gd" id="2_gj576"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_h7hgu"]
 [ext_resource type="PackedScene" uid="uid://lf42aa2jde2f" path="res://UI/follower.tscn" id="3_f2m7h"]
 [ext_resource type="Texture2D" uid="uid://0kkt8jpiwh3y" path="res://UI/Sprites/angel.png" id="4_3qhay"]
@@ -13,7 +13,7 @@ anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 648.0
 theme = ExtResource("2_h7hgu")
-script = ExtResource("1_gda05")
+script = ExtResource("2_gj576")
 
 [node name="FollowerContainer" type="Container" parent="." unique_id=320998963]
 layout_mode = 0

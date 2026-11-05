@@ -2,7 +2,29 @@
 
 [ext_resource type="Script" uid="uid://sjcoh8dt4tdt" path="res://UI/Scripts/autobattle_scene.gd" id="1_435sf"]
 [ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/Sprites/dice-faces.png" id="2_ocyaw"]
+[ext_resource type="Script" uid="uid://vyolun4emo6r" path="res://UI/battle_score_label.gd" id="3_nat1o"]
 [ext_resource type="PackedScene" uid="uid://c6gjwqyyjttdx" path="res://UI/ShrineGrid.tscn" id="3_ocyaw"]
+[ext_resource type="Texture2D" uid="uid://dyiqkv808jec7" path="res://UI/Sprites/benevolent-cube.png" id="3_oq1rh"]
+[ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="4_bu5cc"]
+[ext_resource type="PackedScene" uid="uid://dflnd1db5ihqg" path="res://Sound/SoundManager.tscn" id="4_vkv4v"]
+[ext_resource type="Script" uid="uid://bvlmq3x6dfq66" path="res://UI/Scripts/dice_handler.gd" id="4_ytthq"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="5_2ocd6"]
+[ext_resource type="Script" uid="uid://cm3bwfmhhv0gp" path="res://UI/Scripts/DiceRect.gd" id="5_rf8r7"]
+[ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="6_wng8v"]
+[ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/dice.tres" id="7_wng8v"]
+[ext_resource type="Texture2D" uid="uid://cmuvmg8a6rgnp" path="res://UI/Sprites/fallen-head.png" id="12_wng8v"]
+[ext_resource type="Script" uid="uid://b5trm118wwsny" path="res://UI/Scripts/follower_count_label.gd" id="13_wng8v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpg8m"]
+atlas = ExtResource("2_ocyaw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_2ocd6"]
+script = ExtResource("5_2ocd6")
+name = "Regular Dice"
+effect = "Rolls between 1-6"
+icon = SubResource("AtlasTexture_gpg8m")
+metadata/_custom_type_script = "uid://5k3ce70ad2py"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
 atlas = ExtResource("2_ocyaw")
@@ -10,14 +32,38 @@ region = Rect2(0, 0, 32, 32)
 
 [node name="ShrineBattleScreen" type="Control" unique_id=706737663]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 0
 offset_left = -1.0
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1279.0
+offset_bottom = 720.0
 script = ExtResource("1_435sf")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=718305159]
+layout_mode = 0
+offset_right = 1281.0
+offset_bottom = 720.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1086372515]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="PlayerScoreLabel" type="Label" parent="CenterContainer/HBoxContainer" unique_id=62404417]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "10"
+script = ExtResource("3_nat1o")
+
+[node name="Dash" type="Label" parent="CenterContainer/HBoxContainer" unique_id=1613577372]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "-"
+
+[node name="EnemyScoreLabel" type="Label" parent="CenterContainer/HBoxContainer" unique_id=1690199438]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "10"
+script = ExtResource("3_nat1o")
+is_player_score = false
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1352046641]
 visible = false
@@ -44,72 +90,144 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/CenterContainer" unique_id=2087025952]
 layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DeityIcon" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=1325839354]
+custom_minimum_size = Vector2(240, 128)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_oq1rh")
+expand_mode = 5
 
 [node name="MarginContainer2" type="MarginContainer" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=399318846]
 layout_mode = 2
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_bottom = 50
 
 [node name="ShrineGrid" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer2" unique_id=495070305 instance=ExtResource("3_ocyaw")]
 layout_mode = 2
+default_shrines = Array[ExtResource("5_2ocd6")]([ExtResource("6_wng8v"), SubResource("Resource_2ocd6"), ExtResource("7_wng8v")])
 
-[node name="HFlowContainer" type="HFlowContainer" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=901366882]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=197926843]
 layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Dice" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/HFlowContainer" unique_id=73531596]
+[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer" unique_id=901366882]
 layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
+theme_override_constants/h_separation = 7
+alignment = 1
+script = ExtResource("4_ytthq")
 
-[node name="Dice2" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/HFlowContainer" unique_id=548224078]
-layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
-
-[node name="Dice3" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/HFlowContainer" unique_id=778838252]
-layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
-
-[node name="Dice4" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/HFlowContainer" unique_id=545610102]
+[node name="Dice" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=73531596]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lke5m")
+script = ExtResource("5_rf8r7")
 
-[node name="Dice5" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/HFlowContainer" unique_id=1360793138]
+[node name="Dice2" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=7057532]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lke5m")
+script = ExtResource("5_rf8r7")
 
-[node name="CenterContainer2" type="CenterContainer" parent="GridContainer" unique_id=273504270]
-custom_minimum_size = Vector2(640, 96)
+[node name="Button" type="Button" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=1451408597]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "ROLL"
+
+[node name="CenterContainer2" type="CenterContainer" parent="GridContainer" unique_id=313893942]
+custom_minimum_size = Vector2(640, 720)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/CenterContainer2" unique_id=1584259661]
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/CenterContainer2" unique_id=1477156220]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DeityIcon" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=1372843442]
+custom_minimum_size = Vector2(240, 128)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_wng8v")
+expand_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=666959879]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=1620392548]
+[node name="ShrineGrid" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer2" unique_id=698383202 instance=ExtResource("3_ocyaw")]
 layout_mode = 2
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_bottom = 50
+default_shrines = Array[ExtResource("5_2ocd6")]([ExtResource("6_wng8v"), SubResource("Resource_2ocd6")])
 
-[node name="ShrineGrid" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer2" unique_id=1675203504 instance=ExtResource("3_ocyaw")]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=2120659682]
 layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="HFlowContainer" type="HFlowContainer" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=1962013583]
+[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer" unique_id=1705542725]
 layout_mode = 2
+theme_override_constants/h_separation = 7
+alignment = 1
+script = ExtResource("4_ytthq")
 
-[node name="Dice" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/HFlowContainer" unique_id=576505440]
+[node name="Dice" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer/DiceContainer" unique_id=1950382260]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lke5m")
+script = ExtResource("5_rf8r7")
 
-[node name="Dice2" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/HFlowContainer" unique_id=678079162]
+[node name="Dice2" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer/DiceContainer" unique_id=617147894]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lke5m")
+script = ExtResource("5_rf8r7")
 
-[node name="Dice3" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/HFlowContainer" unique_id=1674307860]
+[node name="Button" type="Button" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=410157076]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
+theme = ExtResource("4_bu5cc")
+disabled = true
+text = "ROLL"
 
-[node name="Dice4" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/HFlowContainer" unique_id=483224883]
-layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
+[node name="SoundManager" parent="." unique_id=782213402 instance=ExtResource("4_vkv4v")]
+unique_name_in_owner = true
 
-[node name="Dice5" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/HFlowContainer" unique_id=1762170535]
+[node name="PlayerFollowersLabel" type="VBoxContainer" parent="." unique_id=752098391]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 150.0
+offset_right = 144.0
+offset_bottom = 220.0
+
+[node name="Followers" type="Label" parent="PlayerFollowersLabel" unique_id=1768713872]
 layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
+theme = ExtResource("4_bu5cc")
+theme_override_font_sizes/font_size = 16
+text = "Followers"
+horizontal_alignment = 1
+
+[node name="FollowerCount" type="Label" parent="PlayerFollowersLabel" unique_id=1127469576]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "1132"
+horizontal_alignment = 1
+script = ExtResource("13_wng8v")
+
+[node name="EnemyFollowersLabel" type="VBoxContainer" parent="." unique_id=1242905840]
+layout_mode = 0
+offset_left = 1155.0
+offset_top = 150.0
+offset_right = 1227.0
+offset_bottom = 220.0
+
+[node name="Followers" type="Label" parent="EnemyFollowersLabel" unique_id=1554497455]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+theme_override_font_sizes/font_size = 16
+text = "Followers"
+horizontal_alignment = 1
+
+[node name="FollowerCount" type="Label" parent="EnemyFollowersLabel" unique_id=590199266]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "1132"
+horizontal_alignment = 1
+script = ExtResource("13_wng8v")
+player_label = false
+
+[connection signal="pressed" from="GridContainer/CenterContainer/VBoxContainer/Button" to="GridContainer/CenterContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]

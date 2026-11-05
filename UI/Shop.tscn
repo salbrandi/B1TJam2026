@@ -5,13 +5,15 @@
 [node name="Shop" type="Control" unique_id=1662070465]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=454044985]
-layout_mode = 0
-offset_right = 1151.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 122.0
+grow_horizontal = 2
 
 [node name="Label" type="Label" parent="CenterContainer" unique_id=1628979831]
 layout_mode = 2

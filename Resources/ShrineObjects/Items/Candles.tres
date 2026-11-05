@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://drkjg1ar67oh3"]
 
 [ext_resource type="Texture2D" uid="uid://dhtpmtiscct2r" path="res://Resources/ShrineObjects/Sprites/candle.png" id="1_k0vp6"]
-[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/shrine_inventory.gd" id="2_rjksn"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="2_rjksn"]
 
 [resource]
 script = ExtResource("2_rjksn")
