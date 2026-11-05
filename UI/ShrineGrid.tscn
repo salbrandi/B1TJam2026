@@ -1,7 +1,187 @@
 [gd_scene format=3 uid="uid://c6gjwqyyjttdx"]
 
+[ext_resource type="Script" uid="uid://c0h7s0yi3388r" path="res://UI/shrine_grid.gd" id="1_388e0"]
+[ext_resource type="Texture2D" uid="uid://ciage5fp71e2r" path="res://UI/Sprites/inventory_slot_indicator.png" id="1_4632k"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/shrine_inventory.gd" id="2_7n60n"]
+[ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="3_f05nt"]
+[ext_resource type="Resource" uid="uid://dt83dihcfuxyi" path="res://Resources/ShrineObjects/Dice/regular_dice.tres" id="4_f05nt"]
+
 [node name="ShrineGrid" type="Control" unique_id=1532651584]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1296254390]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.1120001
+anchor_bottom = 1.11
+offset_right = -143.3601
+offset_bottom = -79.20001
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer" unique_id=1131820411]
+custom_minimum_size = Vector2(320, 96)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/CenterContainer" unique_id=1434405231]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="ShrineGrid" type="Container" parent="GridContainer/CenterContainer/MarginContainer2" unique_id=495070305]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+script = ExtResource("1_388e0")
+cell_size = Vector2(32, 32)
+default_shrines = Array[ExtResource("2_7n60n")]([ExtResource("3_f05nt"), ExtResource("4_f05nt")])
+metadata/_custom_type_script = "uid://c0h7s0yi3388r"
+
+[node name="GridSlot" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1865893884]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot2" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1605122836]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot3" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1712968986]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot4" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=174246342]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot5" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=736393691]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot6" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=382043671]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot7" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=790826748]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot8" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=2107420881]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot9" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1966911800]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot10" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1954376704]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot11" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=2092350317]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot12" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=78499025]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot13" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1203904236]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot14" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=902344065]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot15" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=204337732]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot16" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1793424236]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot17" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1705846450]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot18" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1030901158]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot19" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=111514983]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot20" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=756266383]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot21" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1598823422]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot22" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1227080329]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot23" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=798323633]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot24" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1312953190]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot25" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1795661805]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot26" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1789483065]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot27" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=685780334]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot28" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=293950631]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot29" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=2054334349]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot30" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=19081326]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot31" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1529275729]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot32" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=920211001]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot33" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=701423649]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot34" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=272335296]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot35" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=371133674]
+layout_mode = 2
+texture = ExtResource("1_4632k")
+
+[node name="GridSlot36" type="TextureRect" parent="GridContainer/CenterContainer/MarginContainer2/ShrineGrid" unique_id=1120238942]
+layout_mode = 2
+texture = ExtResource("1_4632k")
