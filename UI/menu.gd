@@ -4,7 +4,6 @@ extends Control
 @onready var followerContainer = $FollowerContainer
 
 func _ready() -> void:
-	get_viewport_rect()
 	randomly_generate_crowd()
 	pass
 

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://wssnl82u7gt0"]
+
+[ext_resource type="Texture2D" uid="uid://c3h6btfvtfyqx" path="res://UI/Sprites/firework_dot.png" id="1_88xos"]
+
+[sub_resource type="Gradient" id="Gradient_e3l0p"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="Fireworks" type="CPUParticles2D" unique_id=1476126513]
+amount = 500
+texture = ExtResource("1_88xos")
+lifetime = 2.0
+speed_scale = 2.0
+explosiveness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 40)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+damping_min = 40.0
+damping_max = 60.0
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_e3l0p")

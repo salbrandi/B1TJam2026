@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bjc3067dfy7wi"]
+
+[ext_resource type="Script" uid="uid://pwwcb0jc0ysu" path="res://UI/final_win.gd" id="1_t641b"]
+[ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_3ly53"]
+[ext_resource type="PackedScene" uid="uid://wssnl82u7gt0" path="res://UI/firework.tscn" id="3_uyqdc"]
+
+[node name="FinalWin" type="Control" unique_id=105094686]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t641b")
+
+[node name="Label" type="Label" parent="." unique_id=1612310206]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 264.0
+offset_right = 643.0
+offset_bottom = 313.0
+scale = Vector2(2, 2)
+theme = ExtResource("2_3ly53")
+text = "You Win!"
+
+[node name="Firework" parent="." unique_id=1476126513 instance=ExtResource("3_uyqdc")]
+visible = false
+
+[node name="BackToMenu" type="Button" parent="." unique_id=296365330]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 440.0
+offset_right = 762.0
+offset_bottom = 498.0
+theme = ExtResource("2_3ly53")
+text = "Back To Menu"
+
+[connection signal="pressed" from="BackToMenu" to="." method="_on_back_to_menu_pressed"]
