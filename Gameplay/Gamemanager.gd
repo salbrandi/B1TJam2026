@@ -6,6 +6,7 @@ var enemy_follower_count: int = 0
 
 var current_player_score: int = 0
 var current_enemy_score: int = 0
+var current_dice: Array[ShrineDice] = []
 
 func dice_rolled(dice: Array[int]) -> void:
 	var dice_sum: int = 0

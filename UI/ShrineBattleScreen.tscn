@@ -48,9 +48,11 @@ layout_mode = 2
 theme_override_constants/separation = 30
 
 [node name="PlayerScoreLabel" type="Label" parent="CenterContainer/HBoxContainer" unique_id=62404417]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("4_bu5cc")
 text = "10"
+horizontal_alignment = 1
 script = ExtResource("3_nat1o")
 
 [node name="Dash" type="Label" parent="CenterContainer/HBoxContainer" unique_id=1613577372]
@@ -59,9 +61,11 @@ theme = ExtResource("4_bu5cc")
 text = "-"
 
 [node name="EnemyScoreLabel" type="Label" parent="CenterContainer/HBoxContainer" unique_id=1690199438]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("4_bu5cc")
 text = "10"
+horizontal_alignment = 1
 script = ExtResource("3_nat1o")
 is_player_score = false
 
