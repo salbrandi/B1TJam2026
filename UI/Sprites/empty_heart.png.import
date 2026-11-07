@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd22a34n5bjns"
-path="res://.godot/imported/devil.png-b916420560fb51f905c5847c5cb0c904.ctex"
+uid="uid://67d8qbe5jo33"
+path="res://.godot/imported/empty_heart.png-d50c4eb61b2e19bcbf5b5abf96f26a73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Sprites/devil.png"
-dest_files=["res://.godot/imported/devil.png-b916420560fb51f905c5847c5cb0c904.ctex"]
+source_file="res://UI/Sprites/empty_heart.png"
+dest_files=["res://.godot/imported/empty_heart.png-d50c4eb61b2e19bcbf5b5abf96f26a73.ctex"]
 
 [params]
 

@@ -1,17 +1,37 @@
 class_name GameManager
 extends Node2D
 
+@onready var all_screens = {
+	"after_battle": $AfterBattle,
+	"battle": $ShrineBattleScreen,
+	"final": $FinalOutcome,
+	"shop": $Shop,
+	"title": $Menu
+}
+
 var player_follower_count: int = 50
 var enemy_follower_count: int = 10
 
 var current_player_score: int = 0
 var current_enemy_score: int = 0
+
 @export var current_player_dice: Array[ShrineDice] = []
 @export var current_enemy_dice: Array[ShrineDice] = []
 @export var follower_requirement_to_win: int = 10000
 
 
 signal initalize_combat(current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
+
+func _ready() -> void:
+	for child in get_children():
+		if child is Control and child.has_signal("screen_change_request"):
+			child.screen_change_request.connect(transition_scenes)
+
+func transition_scenes(from_scene: String, to_scene: String) -> void:
+	if all_screens.has(from_scene):
+		all_screens[from_scene].hide()
+	if all_screens.has(to_scene):
+		all_screens[to_scene].show()
 
 func transition_to_combat() -> void:
 	emit_signal("initalize_combat", current_player_dice, current_enemy_dice, player_follower_count, enemy_follower_count)

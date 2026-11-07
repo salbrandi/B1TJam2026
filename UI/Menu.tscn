@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dr8435yvyb85p" path="res://UI/Scripts/menu.gd" id="2_gj576"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_h7hgu"]
-[ext_resource type="PackedScene" uid="uid://lf42aa2jde2f" path="res://UI/follower.tscn" id="3_f2m7h"]
+[ext_resource type="PackedScene" uid="uid://lf42aa2jde2f" path="res://UI/Follower.tscn" id="3_f2m7h"]
 [ext_resource type="Texture2D" uid="uid://cpn1kw0asharu" path="res://UI/Sprites/unkowable-toad.png" id="3_gj576"]
 [ext_resource type="Texture2D" uid="uid://bcpa32hg3mgi1" path="res://UI/Sprites/cthulu-god.png" id="5_ildal"]
-[ext_resource type="PackedScene" uid="uid://gnwsh3idklh4" path="res://UI/dice_character.tscn" id="6_gj576"]
+[ext_resource type="PackedScene" uid="uid://gnwsh3idklh4" path="res://UI/DiceCharacter.tscn" id="6_gj576"]
 
 [node name="Menu" type="Control" unique_id=1655401109]
 layout_mode = 3

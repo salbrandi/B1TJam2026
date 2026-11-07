@@ -2,15 +2,13 @@
 
 [ext_resource type="Script" uid="uid://pwwcb0jc0ysu" path="res://UI/Scripts/final_win.gd" id="1_t641b"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_3ly53"]
-[ext_resource type="PackedScene" uid="uid://wssnl82u7gt0" path="res://UI/firework.tscn" id="3_uyqdc"]
+[ext_resource type="PackedScene" uid="uid://wssnl82u7gt0" path="res://UI/Firework.tscn" id="3_uyqdc"]
 
-[node name="FinalWin" type="Control" unique_id=105094686]
+[node name="FinalOutcome" type="Control" unique_id=105094686]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_t641b")
@@ -20,24 +18,23 @@ visible = false
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1185387594]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1974573781]
 layout_mode = 2
 theme_override_constants/separation = 150
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1612310206]
+[node name="FinalWinOrLossTitle" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1612310206]
 layout_mode = 2
 theme = ExtResource("2_3ly53")
 theme_override_font_sizes/font_size = 128
 text = "You Win!"
 
 [node name="BackToMenu" type="Button" parent="CenterContainer/VBoxContainer" unique_id=296365330]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("2_3ly53")
 text = "Back To Menu"
 

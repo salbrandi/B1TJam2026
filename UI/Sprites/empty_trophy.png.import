@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0kkt8jpiwh3y"
-path="res://.godot/imported/angel.png-a67fb1bac83ad9534cfb6ca4703d7c99.ctex"
+uid="uid://bx6nstlfqtqeu"
+path="res://.godot/imported/empty_trophy.png-3ae48304e5938d35a832beb06d9108d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Sprites/angel.png"
-dest_files=["res://.godot/imported/angel.png-a67fb1bac83ad9534cfb6ca4703d7c99.ctex"]
+source_file="res://UI/Sprites/empty_trophy.png"
+dest_files=["res://.godot/imported/empty_trophy.png-3ae48304e5938d35a832beb06d9108d8.ctex"]
 
 [params]
 
