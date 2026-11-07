@@ -4,7 +4,7 @@ func _ready() -> void:
 	for child in get_children():
 		child.queue_free()
 	# create a dice for each ShrineDice in the grid
-	for dice in Global.gm.shrine_dice:
+	for dice in Global.gm.current_dice:
 		var dicerect = DiceRect.new()
 		dicerect.dice = dice
 		add_child(dicerect)
