@@ -54,4 +54,3 @@ func _bounce() -> void:
 	bounce_tween = create_tween()
 	bounce_tween.tween_property(self, "scale", Vector2.ONE * bounce_scale, bounce_duration * 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	bounce_tween.tween_property(self, "scale", Vector2.ONE, bounce_duration * 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-

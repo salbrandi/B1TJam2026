@@ -3,70 +3,122 @@
 [ext_resource type="Script" uid="uid://dr8435yvyb85p" path="res://UI/Scripts/menu.gd" id="2_gj576"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_h7hgu"]
 [ext_resource type="PackedScene" uid="uid://lf42aa2jde2f" path="res://UI/follower.tscn" id="3_f2m7h"]
-[ext_resource type="Texture2D" uid="uid://0kkt8jpiwh3y" path="res://UI/Sprites/angel.png" id="4_3qhay"]
-[ext_resource type="Texture2D" uid="uid://bd22a34n5bjns" path="res://UI/Sprites/devil.png" id="5_gj576"]
+[ext_resource type="Texture2D" uid="uid://cpn1kw0asharu" path="res://UI/Sprites/unkowable-toad.png" id="3_gj576"]
+[ext_resource type="Texture2D" uid="uid://bcpa32hg3mgi1" path="res://UI/Sprites/cthulu-god.png" id="5_ildal"]
 [ext_resource type="PackedScene" uid="uid://gnwsh3idklh4" path="res://UI/dice_character.tscn" id="6_gj576"]
 
 [node name="Menu" type="Control" unique_id=1655401109]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1153.0
-offset_bottom = 648.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("2_h7hgu")
 script = ExtResource("2_gj576")
 
-[node name="FollowerContainer" type="Container" parent="." unique_id=320998963]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 504.0
-offset_right = 1280.0
-offset_bottom = 712.0
+[node name="GridContainer" type="GridContainer" parent="." unique_id=843013446]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Follower" parent="FollowerContainer" unique_id=1446825379 instance=ExtResource("3_f2m7h")]
-position = Vector2(577, 194)
-scale = Vector2(2, 2)
+[node name="TopThird" type="HBoxContainer" parent="GridContainer" unique_id=886822715]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="." unique_id=514327121]
-layout_mode = 0
-offset_left = 402.0
-offset_top = 8.0
-offset_right = 669.0
-offset_bottom = 57.0
-scale = Vector2(2, 2)
+[node name="Label" type="Label" parent="GridContainer/TopThird" unique_id=514327121]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("2_h7hgu")
+theme_override_font_sizes/font_size = 128
 text = "Shrine Battler"
+horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="." unique_id=1073174090]
-layout_mode = 0
-offset_left = 576.0
-offset_top = 317.0
-offset_right = 748.0
-offset_bottom = 375.0
+[node name="MiddleThird" type="HBoxContainer" parent="GridContainer" unique_id=2019849602]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="MarginContainer" parent="GridContainer/MiddleThird" unique_id=1369373190]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/MiddleThird/CenterContainer" unique_id=1805550560]
+custom_minimum_size = Vector2(512, 512)
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("3_gj576")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/MiddleThird" unique_id=1858782834]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer/MiddleThird/VBoxContainer" unique_id=1228290749]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="GridContainer/MiddleThird/VBoxContainer/CenterContainer" unique_id=538289993]
+layout_mode = 2
+
+[node name="DiceCharacter" parent="GridContainer/MiddleThird/VBoxContainer/CenterContainer/Control" unique_id=1915844384 instance=ExtResource("6_gj576")]
+scale = Vector2(5, 5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/MiddleThird/VBoxContainer" unique_id=116536675]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 15
+
+[node name="StartButton" type="Button" parent="GridContainer/MiddleThird/VBoxContainer/VBoxContainer" unique_id=1073174090]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("2_h7hgu")
 text = "Start"
 
-[node name="ExitGame" type="Button" parent="." unique_id=1282393345]
-layout_mode = 0
-offset_left = 576.0
-offset_top = 396.0
-offset_right = 748.0
-offset_bottom = 454.0
+[node name="ExitGame" type="Button" parent="GridContainer/MiddleThird/VBoxContainer/VBoxContainer" unique_id=1282393345]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("2_h7hgu")
 text = "Exit"
 
-[node name="Angel" type="Sprite2D" parent="." unique_id=319257024]
-position = Vector2(325.00003, 205)
-scale = Vector2(15, 15)
-texture = ExtResource("4_3qhay")
+[node name="Container2" type="MarginContainer" parent="GridContainer/MiddleThird" unique_id=1160588210]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Devil" type="Sprite2D" parent="." unique_id=1420659533]
-position = Vector2(1021.0001, 206.00002)
-scale = Vector2(15, 15)
-texture = ExtResource("5_gj576")
+[node name="TextureRect" type="TextureRect" parent="GridContainer/MiddleThird/Container2" unique_id=1632298121]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_ildal")
+expand_mode = 1
+stretch_mode = 4
 
-[node name="DiceCharacter" parent="." unique_id=1915844384 instance=ExtResource("6_gj576")]
-position = Vector2(664.00006, 192)
-scale = Vector2(5, 5)
+[node name="BottomThird" type="HBoxContainer" parent="GridContainer" unique_id=2007418809]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]
+[node name="FollowerContainer" type="Container" parent="GridContainer/BottomThird" unique_id=320998963]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Follower" parent="GridContainer/BottomThird/FollowerContainer" unique_id=1446825379 instance=ExtResource("3_f2m7h")]
+position = Vector2(577, 194)
+scale = Vector2(2, 2)
+
+[connection signal="pressed" from="GridContainer/MiddleThird/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="GridContainer/MiddleThird/VBoxContainer/VBoxContainer/ExitGame" to="." method="_on_exit_game_pressed"]

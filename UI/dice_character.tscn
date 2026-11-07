@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://db7diihj280ls" path="res://UI/Sprites/stick_figure_jumping.png" id="1_go6pp"]
 [ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/Sprites/dice-faces.png" id="2_e5ho3"]
-[ext_resource type="Script" uid="uid://dvs4und1qblr3" path="res://UI/dice_character_pivot.gd" id="2_n6kjf"]
+[ext_resource type="Script" uid="uid://dvs4und1qblr3" path="res://UI/Scripts/dice_character_pivot.gd" id="2_n6kjf"]
 
 [sub_resource type="Animation" id="Animation_n6kjf"]
 length = 0.001
