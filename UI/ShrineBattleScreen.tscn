@@ -15,17 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://cmuvmg8a6rgnp" path="res://UI/Sprites/fallen-head.png" id="12_wng8v"]
 [ext_resource type="Script" uid="uid://b5trm118wwsny" path="res://UI/Scripts/follower_count_label.gd" id="13_wng8v"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gpg8m"]
-atlas = ExtResource("2_ocyaw")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="Resource" id="Resource_2ocd6"]
-script = ExtResource("5_2ocd6")
-name = "Regular Dice"
-effect = "Rolls between 1-6"
-icon = SubResource("AtlasTexture_gpg8m")
-metadata/_custom_type_script = "uid://5k3ce70ad2py"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
 atlas = ExtResource("2_ocyaw")
 region = Rect2(0, 0, 32, 32)
@@ -88,99 +77,91 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="GridContainer" unique_id=756122685]
+[node name="PlayerContainer" type="CenterContainer" parent="GridContainer" unique_id=756122685]
 custom_minimum_size = Vector2(640, 720)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/CenterContainer" unique_id=2087025952]
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/PlayerContainer" unique_id=2087025952]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="DeityIcon" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=1325839354]
+[node name="DeityIcon" type="TextureRect" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=1325839354]
 custom_minimum_size = Vector2(240, 128)
 layout_mode = 2
 offset_transform_scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_oq1rh")
 expand_mode = 5
 
-[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=399318846]
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=399318846]
 layout_mode = 2
 
-[node name="ShrineGrid" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer2" unique_id=495070305 instance=ExtResource("3_ocyaw")]
+[node name="ShrineGrid" parent="GridContainer/PlayerContainer/VBoxContainer/MarginContainer2" unique_id=495070305 instance=ExtResource("3_ocyaw")]
 layout_mode = 2
-default_shrines = Array[ExtResource("5_2ocd6")]([ExtResource("6_wng8v"), SubResource("Resource_2ocd6"), ExtResource("7_wng8v")])
+default_objects = Array[ExtResource("5_2ocd6")]([ExtResource("6_wng8v"), ExtResource("6_wng8v"), ExtResource("6_wng8v"), ExtResource("6_wng8v"), ExtResource("7_wng8v"), ExtResource("7_wng8v"), ExtResource("7_wng8v")])
+is_player_grid = true
 
-[node name="MarginContainer" type="MarginContainer" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=197926843]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=197926843]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer" unique_id=901366882]
+[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/PlayerContainer/VBoxContainer/MarginContainer" unique_id=901366882]
 layout_mode = 2
 theme_override_constants/h_separation = 7
 alignment = 1
 script = ExtResource("4_ytthq")
+is_player_dice = true
 
-[node name="Dice" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=73531596]
+[node name="Dice2" type="TextureRect" parent="GridContainer/PlayerContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=617147894]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lke5m")
 script = ExtResource("5_rf8r7")
 
-[node name="Dice2" type="TextureRect" parent="GridContainer/CenterContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=7057532]
-layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
-script = ExtResource("5_rf8r7")
-
-[node name="Button" type="Button" parent="GridContainer/CenterContainer/VBoxContainer" unique_id=1451408597]
+[node name="Button" type="Button" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=1451408597]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme = ExtResource("4_bu5cc")
 text = "ROLL"
 
-[node name="CenterContainer2" type="CenterContainer" parent="GridContainer" unique_id=313893942]
+[node name="EnemyContainer" type="CenterContainer" parent="GridContainer" unique_id=313893942]
 custom_minimum_size = Vector2(640, 720)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/CenterContainer2" unique_id=1477156220]
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/EnemyContainer" unique_id=1477156220]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="DeityIcon" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=1372843442]
+[node name="DeityIcon" type="TextureRect" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=1372843442]
 custom_minimum_size = Vector2(240, 128)
 layout_mode = 2
 offset_transform_scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_wng8v")
 expand_mode = 5
 
-[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=666959879]
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=666959879]
 layout_mode = 2
 
-[node name="ShrineGrid" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer2" unique_id=698383202 instance=ExtResource("3_ocyaw")]
+[node name="ShrineGrid" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer2" unique_id=698383202 instance=ExtResource("3_ocyaw")]
 layout_mode = 2
-default_shrines = Array[ExtResource("5_2ocd6")]([ExtResource("6_wng8v"), SubResource("Resource_2ocd6")])
+default_objects = Array[ExtResource("5_2ocd6")]([ExtResource("7_wng8v")])
 
-[node name="MarginContainer" type="MarginContainer" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=2120659682]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=2120659682]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer" unique_id=1705542725]
+[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer" unique_id=1705542725]
 layout_mode = 2
 theme_override_constants/h_separation = 7
 alignment = 1
 script = ExtResource("4_ytthq")
 
-[node name="Dice" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer/DiceContainer" unique_id=1950382260]
+[node name="Dice" type="TextureRect" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=1950382260]
 layout_mode = 2
 texture = SubResource("AtlasTexture_lke5m")
 script = ExtResource("5_rf8r7")
 
-[node name="Dice2" type="TextureRect" parent="GridContainer/CenterContainer2/VBoxContainer/MarginContainer/DiceContainer" unique_id=617147894]
-layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
-script = ExtResource("5_rf8r7")
-
-[node name="Button" type="Button" parent="GridContainer/CenterContainer2/VBoxContainer" unique_id=410157076]
+[node name="Button" type="Button" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=410157076]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -234,4 +215,5 @@ horizontal_alignment = 1
 script = ExtResource("13_wng8v")
 player_label = false
 
-[connection signal="pressed" from="GridContainer/CenterContainer/VBoxContainer/Button" to="GridContainer/CenterContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]
+[connection signal="pressed" from="GridContainer/PlayerContainer/VBoxContainer/Button" to="GridContainer/PlayerContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]
+[connection signal="pressed" from="GridContainer/PlayerContainer/VBoxContainer/Button" to="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]

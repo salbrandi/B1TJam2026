@@ -13,7 +13,9 @@ signal placements_changed
 		cell_size = value
 		refresh()
 
-@export var default_objects: Array[ShrineObject] = [preload("res://Resources/ShrineObjects/d6.tres")]
+@export var default_objects: Array[ShrineObject] = []
+
+@export var is_player_grid: bool = false
 
 var _placements: Array[Dictionary] = []
 var _dragged: Dictionary = {}
@@ -33,13 +35,17 @@ func _ready() -> void:
 
 
 func initialize_combat():
+	current_dice.clear()
 	for shrineObj in default_objects:
 		if shrineObj is ShrineDice:
-			current_dice.append(shrineObj)
+			current_dice.append(shrineObj as ShrineDice)
 		for i in columns * rows():
 			if place_object(shrineObj, Vector2i(i % columns, i / columns)):
 				break
-	Global.gm.current_dice = current_dice
+	if is_player_grid:
+		Global.gm.current_player_dice = current_dice
+	else:
+		Global.gm.current_enemy_dice = current_dice
 
 # Arrange children
 func _notification(what: int) -> void:
@@ -216,4 +222,3 @@ func show_markers(on: bool) -> void:
 
 func rows() -> int:
 	return ceili(float(get_cells().size()) / columns)
-
