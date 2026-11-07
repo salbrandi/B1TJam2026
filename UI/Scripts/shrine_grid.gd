@@ -13,13 +13,13 @@ signal placements_changed
 		cell_size = value
 		refresh()
 
-@export var default_shrines: Array[ShrineObject] = [preload("res://Resources/ShrineObjects/d6.tres")]
+@export var default_objects: Array[ShrineObject] = [preload("res://Resources/ShrineObjects/d6.tres")]
 
 var _placements: Array[Dictionary] = []
 var _dragged: Dictionary = {}
 var _target := Rect2i()
 var _layer := Control.new()
-
+var current_dice: Array[ShrineDice] = []
 
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_STOP
@@ -29,10 +29,17 @@ func _ready() -> void:
 	child_entered_tree.connect(func(_node): move_child.call_deferred(_layer, -1))
 	refresh()
 	show_markers(false)
-	for shrine in default_shrines:
+	initialize_combat()
+
+
+func initialize_combat():
+	for shrineObj in default_objects:
+		if shrineObj is ShrineDice:
+			current_dice.append(shrineObj)
 		for i in columns * rows():
-			if place_object(shrine, Vector2i(i % columns, i / columns)):
+			if place_object(shrineObj, Vector2i(i % columns, i / columns)):
 				break
+	Global.gm.current_dice = current_dice
 
 # Arrange children
 func _notification(what: int) -> void:
