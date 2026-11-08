@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bjc3067dfy7wi"]
 
-[ext_resource type="Script" uid="uid://pwwcb0jc0ysu" path="res://UI/Scripts/final_win.gd" id="1_t641b"]
+[ext_resource type="Script" uid="uid://pwwcb0jc0ysu" path="res://UI/Scripts/game_over.gd" id="1_t641b"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_3ly53"]
 [ext_resource type="PackedScene" uid="uid://wssnl82u7gt0" path="res://UI/Firework.tscn" id="3_uyqdc"]
 
-[node name="FinalOutcome" type="Control" unique_id=105094686]
+[node name="GameOver" type="Control" unique_id=105094686]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1280.0

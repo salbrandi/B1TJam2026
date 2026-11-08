@@ -4,8 +4,6 @@ extends Control
 @onready var follower_container = $GridContainer/BottomThird/FollowerContainer
 @onready var follower_container_size = [$GridContainer.size.x, $GridContainer/BottomThird.size.y]
 
-signal screen_change_request(from_scene: String, to_scene: String)
-
 func _ready() -> void:
 	randomly_generate_crowd()
 	pass
@@ -16,7 +14,7 @@ func _process(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	screen_change_request.emit("title", "battle")
+	Global.gm.transition_to_shop("title")
 	pass
 
 

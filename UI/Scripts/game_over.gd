@@ -3,29 +3,30 @@ extends Control
 @onready var firework = $Firework
 @onready var final_title = $CenterContainer/VBoxContainer/FinalWinOrLossTitle
 
-var is_final_win = true
-
-signal screen_change_request(from_scene: String, to_scene: String)
-
 func _ready() -> void:
-	if is_final_win:
-		process_final_win()
-	else: 
-		process_final_loss()
+	Global.gm.game_over.connect(process_game_over)
+	pass
 
 func _process(delta: float) -> void:
 	pass
+	
+func process_game_over():
+	if is_inside_tree() and is_visible_in_tree():
+		if Global.gm._is_victory:
+			process_victory()
+		else:
+			process_loss()
+	pass
 
-func process_final_win() -> void:
+func process_victory() -> void:
 	final_title.text = "You Win!"
 	spawn_fireworks()
 	
-func process_final_loss() -> void:
+func process_loss() -> void:
 	final_title.text = "You Lost!"
 	
 func spawn_fireworks() -> void:
-	var window_size = get_viewport_rect().size
-	
+	var window_size = get_viewport_rect().size	
 	var max_x = window_size.x
 	var max_y = window_size.y
 	
@@ -44,5 +45,5 @@ func spawn_fireworks() -> void:
 
 
 func _on_back_to_menu_pressed() -> void:
-	screen_change_request.emit("final", "title")
+	Global.gm.transition_to_title("game_over")
 	pass

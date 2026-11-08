@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://cf8i7bgn10r13"]
+
+[ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="1_gbthc"]
+[ext_resource type="Script" uid="uid://c58gtkhvb37xh" path="res://UI/after_combat.gd" id="2_1hhwx"]
+[ext_resource type="Texture2D" uid="uid://67d8qbe5jo33" path="res://UI/Sprites/empty_heart.png" id="3_0p3eq"]
+[ext_resource type="PackedScene" uid="uid://lf42aa2jde2f" path="res://UI/Follower.tscn" id="4_jqoea"]
+
+[node name="AfterCombat" type="Control" unique_id=1655401109]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_gbthc")
+script = ExtResource("2_1hhwx")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=843013446]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopThird" type="HBoxContainer" parent="GridContainer" unique_id=886822715]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WinOrLossTitle" type="Label" parent="GridContainer/TopThird" unique_id=514327121]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_gbthc")
+theme_override_font_sizes/font_size = 128
+text = "Loss"
+horizontal_alignment = 1
+
+[node name="MiddleThird" type="HBoxContainer" parent="GridContainer" unique_id=2019849602]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProgressContainer" type="HBoxContainer" parent="GridContainer/MiddleThird" unique_id=2051830166]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ProgressItem0" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=1342637338]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem1" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=1062363099]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem2" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=466047336]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem3" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=1277299675]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem4" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=541835671]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem5" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=2078644234]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem6" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=761637870]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem7" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=1556901389]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem8" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=88850206]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="ProgressItem9" type="TextureRect" parent="GridContainer/MiddleThird/ProgressContainer" unique_id=25607051]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_0p3eq")
+
+[node name="BottomThird" type="HBoxContainer" parent="GridContainer" unique_id=2007418809]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FollowerContainer" type="Container" parent="GridContainer/BottomThird" unique_id=320998963]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Follower" parent="GridContainer/BottomThird/FollowerContainer" unique_id=1446825379 instance=ExtResource("4_jqoea")]
+position = Vector2(577, 194)
+scale = Vector2(2, 2)

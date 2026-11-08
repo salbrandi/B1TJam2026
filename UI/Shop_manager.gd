@@ -19,3 +19,9 @@ func roll_pool():
 	offering_slot.shrineObject = offering_pool.pick_random()
 	dice_slot.shrineObject = dice_pool.pick_random()
 	cursed_slot.shrineObject = cursed_pool.pick_random()
+
+
+func _on_proceed_button_pressed() -> void:
+	Global.gm.transition_to_combat("shop")
+	get_viewport().set_input_as_handled()
+	pass

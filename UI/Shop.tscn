@@ -510,3 +510,5 @@ custom_minimum_size = Vector2(222, 50)
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
 text = "PROCEED..."
+
+[connection signal="pressed" from="VBoxContainer2/ProceedButton/Button" to="." method="_on_proceed_button_pressed"]
