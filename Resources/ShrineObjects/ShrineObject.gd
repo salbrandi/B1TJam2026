@@ -7,3 +7,4 @@ class_name ShrineObject extends Resource
 @export var grid_width: int = 1
 @export var grid_height: int = 1
 @export var price: int = 10
+@export var effects: Array[ShrineEffect] = []

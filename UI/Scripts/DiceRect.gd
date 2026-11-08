@@ -9,11 +9,13 @@ const SHAKE_CYCLES := 1.0
 const SHAKE_ANGLE := 12.0
 
 var animator: AnimationPlayer
+var label: Label
 var rolling_texture: AtlasTexture
 
 func _ready() -> void:
 	rolling_texture = texture as AtlasTexture
 	animator = $AnimationPlayer
+	label = $Label
 	if dice:
 		pass
 	else:
@@ -42,19 +44,12 @@ func roll() -> Tween:
 
 
 func finish_roll() -> void:
-	animator.stop()
-	show_face(dice.current_value)
+	animator.play("RESET")
+	label.text = str(dice.current_value)
+	label.show()
 
 
 func animate_roll(t: float, base_rotation: float, cycles: float, angle: float) -> void:
+	label.hide()
 	var wobble := sin(t * TAU * cycles) * (1.0 - t)
 	offset_transform_rotation = base_rotation + wobble * angle
-
-
-func show_face(value: int) -> void:
-	var atlas := dice.faces_atlas as AtlasTexture
-	var face_size := atlas.region.size
-	var face := AtlasTexture.new()
-	face.atlas = atlas.atlas
-	face.region = Rect2(atlas.region.position + Vector2(face_size.x * (value - 1), 0), face_size)
-	texture = face

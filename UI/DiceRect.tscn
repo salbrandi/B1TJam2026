@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cr6b1bjidqvmu" path="res://UI/Sprites/dice-roll-animation.png" id="1_376ut"]
 [ext_resource type="Script" uid="uid://cm3bwfmhhv0gp" path="res://UI/Scripts/DiceRect.gd" id="2_owxaf"]
+[ext_resource type="FontFile" uid="uid://cm3k1ytg6n6ay" path="res://UI/PixelOperator.ttf" id="3_owxaf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_376ut"]
 atlas = ExtResource("1_376ut")
@@ -54,3 +55,12 @@ script = ExtResource("2_owxaf")
 libraries/ = SubResource("AnimationLibrary_jxpb7")
 autoplay = &"roll"
 speed_scale = 2.0
+
+[node name="Label" type="Label" parent="." unique_id=418915792]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_owxaf")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1

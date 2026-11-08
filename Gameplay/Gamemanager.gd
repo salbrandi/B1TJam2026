@@ -26,6 +26,8 @@ var current_enemy_shrine_objects: Array[ShrineObject] = []
 signal initalize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
 signal shop_opened
 
+var pending_rolls: Dictionary = {}
+
 func _init() -> void:
 	Global.gm = self
 
@@ -47,30 +49,53 @@ func transition_to_shop(player_follower_count: int) -> void:
 	transition_scenes("battle", "shop")
 	emit_signal("shop_opened")
 
-func transition_to_game_over() -> void:
-	# Implement game over transition logic here
-	pass
+func all_effects() -> Array[ShrineEffect]:
+	var effects: Array[ShrineEffect] = []
+	for item in current_player_shrine_objects:
+		effects.append_array(item.effects)
+	return effects
 
+func add_shrine_object(item: ShrineObject) -> void:
+	current_player_shrine_objects.append(item)
+	for effect in item.effects:
+		effect.on_pickup()
 
-func dice_rolled(dice: Array[int], is_player_dice: bool) -> void:
-	var dice_sum: int = 0
-	# TODO apply dice and shrine object effects here
-	
-	for result in dice:
-		dice_sum += result
+func add_score(amount: int) -> void:
+	current_player_score += amount
+
+func add_followers(amount: int) -> void:
+	player_follower_count += amount
+
+func followers_percent(percent: float) -> void:
+	player_follower_count = int(player_follower_count * (1.0 + percent))
+
+func steal_followers(amount: int) -> void:
+	var taken := mini(amount, enemy_follower_count)
+	enemy_follower_count -= taken
+	player_follower_count += taken
+
+func score_rolls(rolls: Array[int], is_player_dice: bool) -> void:
+	pending_rolls[is_player_dice] = rolls
+	var total := 0
+	for value in rolls:
+		total += value
 	if is_player_dice:
-		current_player_score += dice_sum * player_follower_count
+		var effects := all_effects()
+		for value in rolls:
+			for effect in effects:
+				effect.on_die_rolled(value)
+		var score := float(total * player_follower_count)
+		for effect in effects:
+			score = effect.modify_score(score)
+		current_player_score += int(score)
+		for effect in effects:
+			effect.on_roll_complete()
 	else:
-		current_enemy_score += dice_sum * enemy_follower_count
-	
-	if current_player_score >= current_enemy_score:
-		player_follower_count += enemy_follower_count/2
-	else:
-		player_follower_count -= player_follower_count/2 - 10
-	
-	if player_follower_count <= 0:
-		# await get_tree().create_timer(2.5).timeout
-		transition_to_game_over()
+		current_enemy_score += total * enemy_follower_count
+	if pending_rolls.size() == 2:
+		end_combat()
+		pending_rolls.clear()
 
-	# await get_tree().create_timer(2.5).timeout
-	transition_to_shop(player_follower_count)
+func end_combat() -> void:
+	for effect in all_effects():
+		effect.on_combat_end()

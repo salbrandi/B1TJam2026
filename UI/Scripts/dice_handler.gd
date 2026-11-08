@@ -35,7 +35,7 @@ func roll_all_dice() -> Array[int]:
 
 
 func _on_button_pressed():
-	var rolls := await roll_all_dice()
-	Global.gm.dice_rolled(rolls, is_player_dice)
-	%SoundManager/DiceRoll.play_random_sound()
 	%SoundManager/SweepingSynth.play_random_sound()
+	var rolls := await roll_all_dice()
+	Global.gm.score_rolls(rolls, is_player_dice)
+	%SoundManager/DiceRoll.play_random_sound()
