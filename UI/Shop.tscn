@@ -2,10 +2,13 @@
 
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="1_gm7d2"]
 [ext_resource type="Script" uid="uid://b8ooc8urcaq25" path="res://UI/Shop_manager.gd" id="1_rocv8"]
+[ext_resource type="Texture2D" uid="uid://bjodrhhvlns36" path="res://UI/Sprites/filigree.png" id="2_424kp"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="2_cb3o4"]
 [ext_resource type="Script" uid="uid://b4rdan2ohti2s" path="res://UI/shop_item.gd" id="3_6rs1d"]
 [ext_resource type="Texture2D" uid="uid://dhtpmtiscct2r" path="res://Resources/ShrineObjects/Sprites/candle.png" id="3_wehs5"]
 [ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="4_n4obd"]
 [ext_resource type="FontFile" uid="uid://cm3k1ytg6n6ay" path="res://UI/PixelOperator.ttf" id="4_wehs5"]
+[ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="5_jjp1b"]
 [ext_resource type="Texture2D" uid="uid://db7diihj280ls" path="res://UI/Sprites/stick_figure_jumping.png" id="6_2e0xv"]
 [ext_resource type="Texture2D" uid="uid://c7mfdp6h0sibk" path="res://UI/Sprites/skelemerchant.png" id="7_2e0xv"]
 [ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/dice.tres" id="8_424kp"]
@@ -81,6 +84,19 @@ anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("1_rocv8")
+offering_pool = Array[ExtResource("2_cb3o4")]([ExtResource("8_424kp"), ExtResource("4_n4obd")])
+dice_pool = Array[ExtResource("5_jjp1b")]([ExtResource("8_424kp")])
+cursed_pool = Array[ExtResource("2_cb3o4")]([ExtResource("4_n4obd"), ExtResource("4_n4obd")])
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1530747282]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 166.0
+offset_right = 185.0
+offset_bottom = 198.0
+scale = Vector2(3, 3)
+offset_transform_enabled = true
+texture = ExtResource("2_424kp")
 
 [node name="CenterContainer2" type="CenterContainer" parent="." unique_id=457358184]
 layout_mode = 0
@@ -101,7 +117,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 533.0
-offset_top = 163.0
+offset_top = 121.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -149,18 +166,34 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("1_gm7d2")
 theme_override_fonts/font = ExtResource("4_wehs5")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum dolor sit amet. Conviscilio amout mandum bandi. Caro man sequit amo"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem" unique_id=714889291]
+[node name="Button" type="Button" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem" unique_id=1970141036]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme = ExtResource("1_gm7d2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/Button" unique_id=714889291]
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(200, -1)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -24.5
+offset_right = 75.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/HBoxContainer" unique_id=827005562]
+[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/Button/HBoxContainer" unique_id=827005562]
 custom_minimum_size = Vector2(31.859, 32)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -170,7 +203,7 @@ offset_transform_position = Vector2(0, -3.32)
 texture = SubResource("AtlasTexture_lke5m")
 expand_mode = 2
 
-[node name="Price" type="Label" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/HBoxContainer" unique_id=2114427018]
+[node name="Price" type="Label" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/Button/HBoxContainer" unique_id=2114427018]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_gm7d2")
@@ -215,18 +248,34 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("1_gm7d2")
 theme_override_fonts/font = ExtResource("4_wehs5")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum dolor sit amet. Conviscilio amout mandum bandi. Caro man sequit amo"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem" unique_id=1340763144]
+[node name="Button" type="Button" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem" unique_id=70262909]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme = ExtResource("1_gm7d2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/Button" unique_id=588998062]
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(200, -1)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -24.5
+offset_right = 75.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/HBoxContainer" unique_id=37854263]
+[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/Button/HBoxContainer" unique_id=28573213]
 custom_minimum_size = Vector2(31.859, 32)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -236,7 +285,7 @@ offset_transform_position = Vector2(0, -3.32)
 texture = SubResource("AtlasTexture_lke5m")
 expand_mode = 2
 
-[node name="Price" type="Label" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/HBoxContainer" unique_id=370619933]
+[node name="Price" type="Label" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/Button/HBoxContainer" unique_id=602678111]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_gm7d2")
@@ -283,18 +332,34 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("1_gm7d2")
 theme_override_fonts/font = ExtResource("4_wehs5")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum dolor sit amet. Conviscilio amout mandum bandi. Caro man sequit amo"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem" unique_id=446014780]
+[node name="Button" type="Button" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem" unique_id=1696916952]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme = ExtResource("1_gm7d2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/Button" unique_id=1841492191]
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(200, -1)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -24.5
+offset_right = 75.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/HBoxContainer" unique_id=1535896029]
+[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/Button/HBoxContainer" unique_id=1072794137]
 custom_minimum_size = Vector2(31.859, 32)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -304,50 +369,12 @@ offset_transform_position = Vector2(0, -3.32)
 texture = SubResource("AtlasTexture_lke5m")
 expand_mode = 2
 
-[node name="Price" type="Label" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/HBoxContainer" unique_id=726287768]
+[node name="Price" type="Label" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/Button/HBoxContainer" unique_id=473504432]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_gm7d2")
 text = "100"
 horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=732073570]
-layout_mode = 2
-theme_override_constants/margin_left = 347
-theme_override_constants/margin_top = 80
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=739476457]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer" unique_id=29281476]
-oversampling_with_scale = 2
-custom_minimum_size = Vector2(222, 50)
-layout_mode = 2
-theme = ExtResource("1_gm7d2")
-text = "REROLL"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" unique_id=447134112]
-custom_minimum_size = Vector2(100, 0)
-custom_maximum_size = Vector2(200, -1)
-layout_mode = 2
-theme_override_constants/separation = -66
-
-[node name="Price" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1450883322]
-layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("1_gm7d2")
-text = "10"
-horizontal_alignment = 1
-
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/HBoxContainer" unique_id=220206537]
-custom_minimum_size = Vector2(31.859, 32)
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, -3.32)
-texture = SubResource("AtlasTexture_lke5m")
-expand_mode = 2
 
 [node name="shopkeep" type="TextureRect" parent="." unique_id=662756870]
 layout_mode = 1
@@ -418,3 +445,68 @@ offset_right = 441.0
 offset_bottom = 11.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2e0xv")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=904617653]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -673.0
+offset_top = -166.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="RerollButton" type="MarginContainer" parent="VBoxContainer2" unique_id=732073570]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/margin_left = 347
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/RerollButton" unique_id=739476457]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer2/RerollButton/HBoxContainer" unique_id=29281476]
+oversampling_with_scale = 2
+custom_minimum_size = Vector2(222, 50)
+layout_mode = 2
+theme = ExtResource("1_gm7d2")
+text = "REROLL"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/RerollButton/HBoxContainer" unique_id=447134112]
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+theme_override_constants/separation = -66
+
+[node name="Price" type="Label" parent="VBoxContainer2/RerollButton/HBoxContainer/HBoxContainer" unique_id=1450883322]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("1_gm7d2")
+text = "10"
+horizontal_alignment = 1
+
+[node name="followerIcon" type="TextureRect" parent="VBoxContainer2/RerollButton/HBoxContainer/HBoxContainer" unique_id=220206537]
+custom_minimum_size = Vector2(31.859, 32)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -3.32)
+texture = SubResource("AtlasTexture_lke5m")
+expand_mode = 2
+
+[node name="ProceedButton" type="MarginContainer" parent="VBoxContainer2" unique_id=1813963850]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 104
+theme_override_constants/margin_bottom = 30
+
+[node name="Button" type="Button" parent="VBoxContainer2/ProceedButton" unique_id=496457225]
+oversampling_with_scale = 2
+custom_minimum_size = Vector2(222, 50)
+layout_mode = 2
+theme = ExtResource("1_gm7d2")
+text = "PROCEED..."

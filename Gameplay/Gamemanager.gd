@@ -15,12 +15,15 @@ var enemy_follower_count: int = 10
 var current_player_score: int = 0
 var current_enemy_score: int = 0
 
+var current_player_shrine_objects: Array[ShrineObject] = []
+var current_enemy_shrine_objects: Array[ShrineObject] = []
+
 @export var current_player_dice: Array[ShrineDice] = []
 @export var current_enemy_dice: Array[ShrineDice] = []
 @export var follower_requirement_to_win: int = 10000
 
 
-signal initalize_combat(current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
+signal initalize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
 
 func _ready() -> void:
 	for child in get_children():
@@ -34,10 +37,10 @@ func transition_scenes(from_scene: String, to_scene: String) -> void:
 		all_screens[to_scene].show()
 
 func transition_to_combat() -> void:
-	emit_signal("initalize_combat", current_player_dice, current_enemy_dice, player_follower_count, enemy_follower_count)
+	emit_signal("initalize_combat", current_player_shrine_objects, current_player_dice, current_enemy_dice, player_follower_count, enemy_follower_count)
 
 func transition_to_shop(player_follower_count: int) -> void:
-	pass
+	transition_scenes("battle", "shop")
 
 func transition_to_game_over() -> void:
 	# Implement game over transition logic here
