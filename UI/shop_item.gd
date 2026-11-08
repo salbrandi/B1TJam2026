@@ -1,10 +1,12 @@
 extends VBoxContainer
 
-@export var shrineObject: Object
+@export var shrineObject: ShrineObject
 
-func ready():
+func _ready():
+	if not shrineObject:
+		return
 	$Name.text = shrineObject.name
-	$Description.text = shrineObject.description
+	$Description.text = shrineObject.effect
 	$Icon.texture = shrineObject.icon
-	$price.text = str(shrineObject.price)
+	$HBoxContainer/Price.text = str(shrineObject.price)
 	
