@@ -10,12 +10,8 @@ extends Control
 @onready var cursed_slot: ShopItem = $VBoxContainer/GridContainer/CurseSlot/ShopItem
 
 func _ready():
-	visibility_changed.connect(_on_visibility_changed)
+	Global.gm.shop_opened.connect(roll_pool)
 	roll_pool()
-
-func _on_visibility_changed():
-	if visible:
-		roll_pool()
 
 	
 func roll_pool():

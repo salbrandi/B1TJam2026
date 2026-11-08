@@ -1,7 +1,7 @@
 
 extends Node
 
-var gm: GameManager = GameManager.new()
+var gm: GameManager
 
 
 		

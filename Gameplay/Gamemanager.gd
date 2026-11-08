@@ -24,6 +24,10 @@ var current_enemy_shrine_objects: Array[ShrineObject] = []
 
 
 signal initalize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
+signal shop_opened
+
+func _init() -> void:
+	Global.gm = self
 
 func _ready() -> void:
 	for child in get_children():
@@ -41,6 +45,7 @@ func transition_to_combat() -> void:
 
 func transition_to_shop(player_follower_count: int) -> void:
 	transition_scenes("battle", "shop")
+	emit_signal("shop_opened")
 
 func transition_to_game_over() -> void:
 	# Implement game over transition logic here
