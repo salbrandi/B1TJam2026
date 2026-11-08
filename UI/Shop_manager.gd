@@ -10,6 +10,7 @@ extends Control
 @onready var cursed_slot: ShopItem = $VBoxContainer/GridContainer/CurseSlot/ShopItem
 
 func _ready():
+	await get_tree().process_frame
 	Global.gm.shop_opened.connect(roll_pool)
 	roll_pool()
 
