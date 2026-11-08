@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="ShrineDice" format=3 uid="uid://bhb44vli8d6v0"]
 
+[ext_resource type="Texture2D" uid="uid://snmdwjkx4gnb" path="res://Resources/ShrineObjects/Sprites/d6.png" id="1_cpf6x"]
 [ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="1_dbw1j"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dbw1j"]
@@ -13,7 +14,8 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("1_dbw1j")
 num_sides = 6
 current_value = 1
+faces_atlas = SubResource("AtlasTexture_cpf6x")
 name = "D6"
 effect = "Rolls 1-6"
-icon = SubResource("AtlasTexture_cpf6x")
+icon = ExtResource("1_cpf6x")
 metadata/_custom_type_script = "uid://ketutherx66m"

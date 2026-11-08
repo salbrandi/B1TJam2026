@@ -22,6 +22,7 @@ Global="*uid://djacs227n66og"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -33,4 +34,5 @@ window/stretch/aspect="expand"
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-environment/defaults/default_clear_color=Color(0.09467081, 0.01402508, 0, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+anti_aliasing/quality/use_taa=true

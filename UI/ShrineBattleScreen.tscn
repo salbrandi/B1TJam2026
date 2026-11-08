@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="6_wng8v"]
 [ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/dice.tres" id="7_wng8v"]
 [ext_resource type="Texture2D" uid="uid://cmuvmg8a6rgnp" path="res://UI/Sprites/fallen-head.png" id="12_wng8v"]
+[ext_resource type="PackedScene" uid="uid://c6gkll0t6vxml" path="res://UI/DiceRect.tscn" id="13_621yj"]
 [ext_resource type="Script" uid="uid://b5trm118wwsny" path="res://UI/Scripts/follower_count_label.gd" id="13_wng8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
@@ -156,10 +157,8 @@ theme_override_constants/h_separation = 7
 alignment = 1
 script = ExtResource("4_ytthq")
 
-[node name="Dice" type="TextureRect" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=1950382260]
+[node name="Dice" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=1104608372 instance=ExtResource("13_621yj")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_lke5m")
-script = ExtResource("5_rf8r7")
 
 [node name="Button" type="Button" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=410157076]
 modulate = Color(1, 1, 1, 0)
