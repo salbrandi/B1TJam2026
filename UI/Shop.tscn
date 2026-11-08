@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://db7diihj280ls" path="res://UI/Sprites/stick_figure_jumping.png" id="6_2e0xv"]
 [ext_resource type="Texture2D" uid="uid://c7mfdp6h0sibk" path="res://UI/Sprites/skelemerchant.png" id="7_2e0xv"]
 [ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/dice.tres" id="8_424kp"]
+[ext_resource type="Resource" uid="uid://c4r5ga2r8juj4" path="res://Resources/ShrineObjects/Items/FiveYenCoin.tres" id="9_coin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
 atlas = ExtResource("6_2e0xv")
@@ -84,16 +85,16 @@ anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("1_rocv8")
-offering_pool = Array[ExtResource("2_cb3o4")]([ExtResource("8_424kp"), ExtResource("4_n4obd")])
+offering_pool = Array[ExtResource("2_cb3o4")]([ExtResource("8_424kp"), ExtResource("4_n4obd"), ExtResource("9_coin"), ExtResource("9_coin")])
 dice_pool = Array[ExtResource("5_jjp1b")]([ExtResource("8_424kp")])
-cursed_pool = Array[ExtResource("2_cb3o4")]([ExtResource("4_n4obd"), ExtResource("4_n4obd")])
+cursed_pool = Array[ExtResource("2_cb3o4")]([ExtResource("4_n4obd"), ExtResource("9_coin")])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1530747282]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 166.0
-offset_right = 185.0
-offset_bottom = 198.0
+offset_left = 42.0
+offset_top = 157.0
+offset_right = 179.33334
+offset_bottom = 191.33334
 scale = Vector2(3, 3)
 offset_transform_enabled = true
 texture = ExtResource("2_424kp")
@@ -111,7 +112,7 @@ theme = ExtResource("1_gm7d2")
 theme_override_font_sizes/font_size = 250
 text = "SHOP"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=504904570]
+[node name="ItemCards" type="VBoxContainer" parent="." unique_id=504904570]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,26 +124,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=686362865]
+[node name="GridContainer" type="GridContainer" parent="ItemCards" unique_id=686362865]
 layout_mode = 2
 theme_override_constants/h_separation = 30
 columns = 3
 
-[node name="ItemSlot" type="MarginContainer" parent="VBoxContainer/GridContainer" unique_id=356700404]
+[node name="ItemSlot" type="MarginContainer" parent="ItemCards/GridContainer" unique_id=356700404]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ShopItem" type="VBoxContainer" parent="VBoxContainer/GridContainer/ItemSlot" unique_id=409452042]
+[node name="ShopItem" type="VBoxContainer" parent="ItemCards/GridContainer/ItemSlot" unique_id=409452042]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 script = ExtResource("3_6rs1d")
 shrineObject = ExtResource("4_n4obd")
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem" unique_id=1454879794]
+[node name="Icon" type="TextureRect" parent="ItemCards/GridContainer/ItemSlot/ShopItem" unique_id=1454879794]
 custom_minimum_size = Vector2(128, 128)
 custom_maximum_size = Vector2(128, 128)
 layout_mode = 2
@@ -151,7 +152,7 @@ size_flags_vertical = 0
 texture = ExtResource("3_wehs5")
 expand_mode = 5
 
-[node name="Name" type="Label" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem" unique_id=754246299]
+[node name="Name" type="Label" parent="ItemCards/GridContainer/ItemSlot/ShopItem" unique_id=754246299]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -159,7 +160,8 @@ theme = ExtResource("1_gm7d2")
 text = "Candles"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem" unique_id=1984316674]
+[node name="Description" type="Label" parent="ItemCards/GridContainer/ItemSlot/ShopItem" unique_id=1984316674]
+custom_minimum_size = Vector2(0, 150)
 custom_maximum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -169,14 +171,15 @@ theme_override_fonts/font = ExtResource("4_wehs5")
 theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum dolor sit amet. Conviscilio amout mandum bandi. Caro man sequit amo"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem" unique_id=1970141036]
+[node name="Button" type="Button" parent="ItemCards/GridContainer/ItemSlot/ShopItem" unique_id=1970141036]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/Button" unique_id=714889291]
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemCards/GridContainer/ItemSlot/ShopItem/Button" unique_id=714889291]
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(200, -1)
 layout_mode = 1
@@ -193,7 +196,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/Button/HBoxContainer" unique_id=827005562]
+[node name="followerIcon" type="TextureRect" parent="ItemCards/GridContainer/ItemSlot/ShopItem/Button/HBoxContainer" unique_id=827005562]
 custom_minimum_size = Vector2(31.859, 32)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -203,28 +206,28 @@ offset_transform_position = Vector2(0, -3.32)
 texture = SubResource("AtlasTexture_lke5m")
 expand_mode = 2
 
-[node name="Price" type="Label" parent="VBoxContainer/GridContainer/ItemSlot/ShopItem/Button/HBoxContainer" unique_id=2114427018]
+[node name="Price" type="Label" parent="ItemCards/GridContainer/ItemSlot/ShopItem/Button/HBoxContainer" unique_id=2114427018]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_gm7d2")
 text = "100"
 horizontal_alignment = 1
 
-[node name="DiceSlot" type="MarginContainer" parent="VBoxContainer/GridContainer" unique_id=687785506]
+[node name="DiceSlot" type="MarginContainer" parent="ItemCards/GridContainer" unique_id=687785506]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ShopItem" type="VBoxContainer" parent="VBoxContainer/GridContainer/DiceSlot" unique_id=1052217068]
+[node name="ShopItem" type="VBoxContainer" parent="ItemCards/GridContainer/DiceSlot" unique_id=1052217068]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 script = ExtResource("3_6rs1d")
 shrineObject = ExtResource("8_424kp")
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem" unique_id=931409884]
+[node name="Icon" type="TextureRect" parent="ItemCards/GridContainer/DiceSlot/ShopItem" unique_id=931409884]
 custom_minimum_size = Vector2(128, 128)
 custom_maximum_size = Vector2(128, 128)
 layout_mode = 2
@@ -233,7 +236,7 @@ size_flags_vertical = 0
 texture = ExtResource("3_wehs5")
 expand_mode = 5
 
-[node name="Name" type="Label" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem" unique_id=1254989879]
+[node name="Name" type="Label" parent="ItemCards/GridContainer/DiceSlot/ShopItem" unique_id=1254989879]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -241,7 +244,8 @@ theme = ExtResource("1_gm7d2")
 text = "Candles"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem" unique_id=1215261143]
+[node name="Description" type="Label" parent="ItemCards/GridContainer/DiceSlot/ShopItem" unique_id=1215261143]
+custom_minimum_size = Vector2(0, 150)
 custom_maximum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -251,14 +255,15 @@ theme_override_fonts/font = ExtResource("4_wehs5")
 theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum dolor sit amet. Conviscilio amout mandum bandi. Caro man sequit amo"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem" unique_id=70262909]
+[node name="Button" type="Button" parent="ItemCards/GridContainer/DiceSlot/ShopItem" unique_id=70262909]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/Button" unique_id=588998062]
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemCards/GridContainer/DiceSlot/ShopItem/Button" unique_id=588998062]
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(200, -1)
 layout_mode = 1
@@ -275,7 +280,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/Button/HBoxContainer" unique_id=28573213]
+[node name="followerIcon" type="TextureRect" parent="ItemCards/GridContainer/DiceSlot/ShopItem/Button/HBoxContainer" unique_id=28573213]
 custom_minimum_size = Vector2(31.859, 32)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -285,14 +290,14 @@ offset_transform_position = Vector2(0, -3.32)
 texture = SubResource("AtlasTexture_lke5m")
 expand_mode = 2
 
-[node name="Price" type="Label" parent="VBoxContainer/GridContainer/DiceSlot/ShopItem/Button/HBoxContainer" unique_id=602678111]
+[node name="Price" type="Label" parent="ItemCards/GridContainer/DiceSlot/ShopItem/Button/HBoxContainer" unique_id=602678111]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_gm7d2")
 text = "100"
 horizontal_alignment = 1
 
-[node name="CurseSlot" type="MarginContainer" parent="VBoxContainer/GridContainer" unique_id=1154387758]
+[node name="CurseSlot" type="MarginContainer" parent="ItemCards/GridContainer" unique_id=1154387758]
 custom_maximum_size = Vector2(200, -1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -301,14 +306,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ShopItem" type="VBoxContainer" parent="VBoxContainer/GridContainer/CurseSlot" unique_id=241298055]
+[node name="ShopItem" type="VBoxContainer" parent="ItemCards/GridContainer/CurseSlot" unique_id=241298055]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 script = ExtResource("3_6rs1d")
 shrineObject = ExtResource("4_n4obd")
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem" unique_id=316324220]
+[node name="Icon" type="TextureRect" parent="ItemCards/GridContainer/CurseSlot/ShopItem" unique_id=316324220]
 custom_minimum_size = Vector2(128, 128)
 custom_maximum_size = Vector2(128, 128)
 layout_mode = 2
@@ -317,7 +322,7 @@ size_flags_vertical = 0
 texture = ExtResource("3_wehs5")
 expand_mode = 5
 
-[node name="Name" type="Label" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem" unique_id=921607288]
+[node name="Name" type="Label" parent="ItemCards/GridContainer/CurseSlot/ShopItem" unique_id=921607288]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -325,7 +330,8 @@ theme = ExtResource("1_gm7d2")
 text = "Candles"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem" unique_id=886720327]
+[node name="Description" type="Label" parent="ItemCards/GridContainer/CurseSlot/ShopItem" unique_id=886720327]
+custom_minimum_size = Vector2(0, 150)
 custom_maximum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -335,14 +341,15 @@ theme_override_fonts/font = ExtResource("4_wehs5")
 theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum dolor sit amet. Conviscilio amout mandum bandi. Caro man sequit amo"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem" unique_id=1696916952]
+[node name="Button" type="Button" parent="ItemCards/GridContainer/CurseSlot/ShopItem" unique_id=1696916952]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/Button" unique_id=1841492191]
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemCards/GridContainer/CurseSlot/ShopItem/Button" unique_id=1841492191]
 custom_minimum_size = Vector2(150, 0)
 custom_maximum_size = Vector2(200, -1)
 layout_mode = 1
@@ -359,7 +366,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="followerIcon" type="TextureRect" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/Button/HBoxContainer" unique_id=1072794137]
+[node name="followerIcon" type="TextureRect" parent="ItemCards/GridContainer/CurseSlot/ShopItem/Button/HBoxContainer" unique_id=1072794137]
 custom_minimum_size = Vector2(31.859, 32)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -369,7 +376,7 @@ offset_transform_position = Vector2(0, -3.32)
 texture = SubResource("AtlasTexture_lke5m")
 expand_mode = 2
 
-[node name="Price" type="Label" parent="VBoxContainer/GridContainer/CurseSlot/ShopItem/Button/HBoxContainer" unique_id=473504432]
+[node name="Price" type="Label" parent="ItemCards/GridContainer/CurseSlot/ShopItem/Button/HBoxContainer" unique_id=473504432]
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("1_gm7d2")
@@ -406,6 +413,7 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lke5m")
 
 [node name="Panel3" type="Panel" parent="Panel" unique_id=1207671842]
+oversampling_with_scale = 2
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -510,5 +518,7 @@ custom_minimum_size = Vector2(222, 50)
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
 text = "PROCEED..."
+
+[connection signal="pressed" from="VBoxContainer2/RerollButton/HBoxContainer/Button" to="." method="_on_reroll_pressed"]
 
 [connection signal="pressed" from="VBoxContainer2/ProceedButton/Button" to="." method="_on_proceed_button_pressed"]

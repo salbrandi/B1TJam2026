@@ -1,20 +1,13 @@
 [gd_resource type="Resource" script_class="ShrineDice" format=3 uid="uid://bhb44vli8d6v0"]
 
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_6qdh5"]
 [ext_resource type="Texture2D" uid="uid://snmdwjkx4gnb" path="res://Resources/ShrineObjects/Sprites/d6.png" id="1_cpf6x"]
 [ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="1_dbw1j"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dbw1j"]
-load_path = "res://.godot/imported/dice-faces.png-6e2afa452a379b48b1551bd77d6ea0d7.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cpf6x"]
-atlas = SubResource("CompressedTexture2D_dbw1j")
-region = Rect2(0, 0, 32, 32)
-
 [resource]
 script = ExtResource("1_dbw1j")
-num_sides = 6
+values = Array[int]([1, 2, 3, 4, 5, 6])
 current_value = 1
-faces_atlas = SubResource("AtlasTexture_cpf6x")
 name = "D6"
 effect = "Rolls 1-6"
 icon = ExtResource("1_cpf6x")

@@ -36,6 +36,8 @@ signal battle_over
 signal game_over
 signal getting_player_input
 
+var pending_rolls: Dictionary = {}
+
 func _init() -> void:
 	Global.gm = self
 
@@ -64,12 +66,11 @@ func transition_to_combat(from_scene: String) -> void:
 func transition_to_after_combat(from_scene: String) -> void:
 	transition_scenes(from_scene, "after_combat")
 	emit_signal("battle_over")
-	
 
 func transition_to_shop(from_scene: String) -> void:
 	transition_scenes(from_scene, "shop")
 	emit_signal("shop_opened")
-
+	
 func transition_to_game_over(from_scene: String) -> void:
 	transition_scenes(from_scene, "game_over")
 	emit_signal("game_over")
@@ -77,24 +78,60 @@ func transition_to_game_over(from_scene: String) -> void:
 func transition_to_title(from_scene: String) -> void:
 	transition_scenes(from_scene, "title")
 
-func dice_rolled(dice: Array[int], is_player_dice: bool) -> void:
-	var dice_sum: int = 0
-	# TODO apply dice and shrine object effects here
-	
-	for result in dice:
-		dice_sum += result
+func all_effects() -> Array[ShrineEffect]:
+	var effects: Array[ShrineEffect] = []
+	for item in current_player_shrine_objects:
+		effects.append_array(item.effects)
+	return effects
+
+func add_shrine_object(item: ShrineObject) -> void:
+	current_player_shrine_objects.append(item)
+	for effect in item.effects:
+		effect.on_pickup()
+
+func add_score(amount: int) -> void:
+	current_player_score += amount
+
+func add_followers(amount: int) -> void:
+	player_follower_count += amount
+
+func followers_percent(percent: float) -> void:
+	player_follower_count = int(player_follower_count * (1.0 + percent))
+
+func steal_followers(amount: int) -> void:
+	var taken := mini(amount, enemy_follower_count)
+	enemy_follower_count -= taken
+	player_follower_count += taken
+
+func score_rolls(rolls: Array[int], is_player_dice: bool) -> void:
+	pending_rolls[is_player_dice] = rolls
+	var total := 0
+	for value in rolls:
+		total += value
 	if is_player_dice:
-		current_player_score += dice_sum * player_follower_count
-		total_scores_reported += 1
+		var effects := all_effects()
+		for value in rolls:
+			for effect in effects:
+				effect.on_die_rolled(value)
+		var score := float(total * player_follower_count)
+		for effect in effects:
+			score = effect.modify_score(score)
+		current_player_score += int(score)
+		for effect in effects:
+			effect.on_roll_complete()
 	else:
-		current_enemy_score += dice_sum * enemy_follower_count
-		total_scores_reported += 1
-	
-	if total_scores_reported == 2:
-		total_scores_reported = 0
+		current_enemy_score += total * enemy_follower_count
+	if pending_rolls.size() == 2:
 		end_combat()
+		pending_rolls.clear()
+
+func end_combat() -> void:
+	for effect in all_effects():
+		effect.on_combat_end()
 	
-func end_combat():
+	calculate_wins_losses()
+	
+func calculate_wins_losses():
 	if current_player_score >= current_enemy_score:
 		_is_win = true
 		player_total_wins += 1
@@ -107,6 +144,14 @@ func end_combat():
 	_waiting_for_player_input = true
 	await getting_player_input
 		
+	transition_to_after_combat("battle")
+	
+	after_combat_input()
+	
+func after_combat_input():
+	_waiting_for_player_input = true
+	await getting_player_input
+	
 	if player_total_wins == 10:
 		_is_victory = true
 		transition_to_game_over("battle")
@@ -117,8 +162,4 @@ func end_combat():
 		transition_to_game_over("battle")
 		return
 		
-	transition_to_after_combat("battle")
-	
-	_waiting_for_player_input = true
-	await getting_player_input
-	transition_to_shop("after_combat")
+	transition_to_shop("after_combat")	

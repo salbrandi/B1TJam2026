@@ -17,8 +17,7 @@
 volume_db = -7.017
 script = ExtResource("1_yw55o")
 sounds = Array[AudioStream]([ExtResource("2_5u5av"), ExtResource("3_xmdwn"), ExtResource("4_fh8ve")])
-fade_start_time = 0.3
-fade_time = 0.3
+fade_time = 0.01
 
 [node name="DiceRoll" type="AudioStreamPlayer" parent="." unique_id=71574982]
 script = ExtResource("1_yw55o")
