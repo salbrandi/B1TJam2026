@@ -2,13 +2,16 @@ extends Node
 
 const DICE_RECT_SCENE := preload("res://UI/DiceRect.tscn")
 
+var _is_roll_enabled: bool
+
 @export var is_player_dice: bool = false
 
 func _ready() -> void:
 	await get_tree().process_frame
-	intialize_combat()
+	Global.gm.initalize_combat.connect(intialize_combat)
 
-func intialize_combat() -> void:
+func intialize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int) -> void:
+	_is_roll_enabled = true
 	for child in get_children():
 		child.queue_free()
 	# create a dice for each ShrineDice in the grid
@@ -35,6 +38,10 @@ func roll_all_dice() -> Array[int]:
 
 
 func _on_button_pressed():
+	if not _is_roll_enabled:
+		return
+		
+	_is_roll_enabled = false
 	%SoundManager/SweepingSynth.play_random_sound()
 	var rolls := await roll_all_dice()
 	Global.gm.score_rolls(rolls, is_player_dice)
