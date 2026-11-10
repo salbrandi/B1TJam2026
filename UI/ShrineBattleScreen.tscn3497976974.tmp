@@ -1,0 +1,298 @@
+[gd_scene format=3 uid="uid://bxrlf7xjnneu2"]
+
+[ext_resource type="Script" uid="uid://sjcoh8dt4tdt" path="res://UI/Scripts/autobattle_scene.gd" id="1_435sf"]
+[ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/Sprites/dice-faces.png" id="2_ocyaw"]
+[ext_resource type="Texture2D" uid="uid://bcpa32hg3mgi1" path="res://UI/Sprites/cthulu-god.png" id="3_bx1by"]
+[ext_resource type="Script" uid="uid://vyolun4emo6r" path="res://UI/battle_score_label.gd" id="3_nat1o"]
+[ext_resource type="PackedScene" uid="uid://c6gjwqyyjttdx" path="res://UI/ShrineGrid.tscn" id="3_ocyaw"]
+[ext_resource type="Texture2D" uid="uid://dyiqkv808jec7" path="res://UI/Sprites/benevolent-cube.png" id="3_oq1rh"]
+[ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="4_bu5cc"]
+[ext_resource type="Texture2D" uid="uid://cpn1kw0asharu" path="res://UI/Sprites/unkowable-toad.png" id="4_ji2s3"]
+[ext_resource type="PackedScene" uid="uid://dflnd1db5ihqg" path="res://Sound/SoundManager.tscn" id="4_vkv4v"]
+[ext_resource type="Script" uid="uid://bvlmq3x6dfq66" path="res://UI/Scripts/dice_handler.gd" id="4_ytthq"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="5_2ocd6"]
+[ext_resource type="Script" uid="uid://cm3bwfmhhv0gp" path="res://UI/Scripts/DiceRect.gd" id="5_rf8r7"]
+[ext_resource type="Resource" uid="uid://cjylyp0sk1r7i" path="res://Resources/ShrineObjects/Dice/d10.tres" id="11_nat1o"]
+[ext_resource type="Texture2D" uid="uid://cmuvmg8a6rgnp" path="res://UI/Sprites/fallen-head.png" id="12_wng8v"]
+[ext_resource type="PackedScene" uid="uid://c6gkll0t6vxml" path="res://UI/DiceRect.tscn" id="13_621yj"]
+[ext_resource type="PackedScene" uid="uid://dxwlachk6s58i" path="res://UI/WinCount.tscn" id="13_bx1by"]
+[ext_resource type="Script" uid="uid://b5trm118wwsny" path="res://UI/Scripts/follower_count_label.gd" id="13_wng8v"]
+[ext_resource type="PackedScene" uid="uid://c6o7ja74g2eyw" path="res://UI/LivesLeft.tscn" id="14_ji2s3"]
+[ext_resource type="Texture2D" uid="uid://db7diihj280ls" path="res://UI/Sprites/stick_figure_jumping.png" id="15_0tvvx"]
+[ext_resource type="Script" uid="uid://c5qkakasimmmk" path="res://UI/followerCountLabel.gd" id="16_gq47y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
+atlas = ExtResource("2_ocyaw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdwk8"]
+atlas = ExtResource("15_0tvvx")
+region = Rect2(0, 0, 16, 16)
+
+[node name="ShrineBattleScreen" type="Control" unique_id=706737663]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_right = 1279.0
+offset_bottom = 720.0
+script = ExtResource("1_435sf")
+enemy_icons = Array[Texture2D]([ExtResource("12_wng8v"), ExtResource("3_bx1by"), ExtResource("4_ji2s3")])
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=718305159]
+layout_mode = 0
+offset_right = 1281.0
+offset_bottom = 720.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1086372515]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="PlayerScoreLabel" type="Label" parent="CenterContainer/HBoxContainer" unique_id=62404417]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "10"
+horizontal_alignment = 1
+script = ExtResource("3_nat1o")
+
+[node name="Dash" type="Label" parent="CenterContainer/HBoxContainer" unique_id=1613577372]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "-"
+
+[node name="EnemyScoreLabel" type="Label" parent="CenterContainer/HBoxContainer" unique_id=1690199438]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "10"
+horizontal_alignment = 1
+script = ExtResource("3_nat1o")
+is_player_score = false
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1352046641]
+visible = false
+layout_mode = 0
+offset_right = 474.0
+offset_bottom = 79.0
+texture = ExtResource("2_ocyaw")
+stretch_mode = 4
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1348684702]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="PlayerContainer" type="CenterContainer" parent="GridContainer" unique_id=756122685]
+custom_minimum_size = Vector2(640, 720)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/PlayerContainer" unique_id=2087025952]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DeityIcon" type="TextureRect" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=1325839354]
+custom_minimum_size = Vector2(240, 128)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_oq1rh")
+expand_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=399318846]
+layout_mode = 2
+
+[node name="ShrineGrid" parent="GridContainer/PlayerContainer/VBoxContainer/MarginContainer2" unique_id=495070305 instance=ExtResource("3_ocyaw")]
+layout_mode = 2
+is_player_grid = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=197926843]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/PlayerContainer/VBoxContainer/MarginContainer" unique_id=901366882]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+alignment = 1
+script = ExtResource("4_ytthq")
+is_player_dice = true
+
+[node name="Dice2" type="TextureRect" parent="GridContainer/PlayerContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=617147894]
+layout_mode = 2
+texture = SubResource("AtlasTexture_lke5m")
+script = ExtResource("5_rf8r7")
+
+[node name="Button" type="Button" parent="GridContainer/PlayerContainer/VBoxContainer" unique_id=1451408597]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "ROLL"
+
+[node name="EnemyContainer" type="CenterContainer" parent="GridContainer" unique_id=313893942]
+custom_minimum_size = Vector2(640, 720)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/EnemyContainer" unique_id=1477156220]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DeityIcon" type="TextureRect" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=1372843442]
+custom_minimum_size = Vector2(240, 128)
+layout_mode = 2
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_wng8v")
+expand_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=666959879]
+layout_mode = 2
+
+[node name="ShrineGrid" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer2" unique_id=698383202 instance=ExtResource("3_ocyaw")]
+layout_mode = 2
+default_objects = Array[ExtResource("5_2ocd6")]([ExtResource("11_nat1o")])
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=2120659682]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DiceContainer" type="HFlowContainer" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer" unique_id=1705542725]
+layout_mode = 2
+theme_override_constants/h_separation = 7
+alignment = 1
+script = ExtResource("4_ytthq")
+
+[node name="Dice" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" unique_id=1104608372 instance=ExtResource("13_621yj")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=410157076]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+disabled = true
+text = "ROLL"
+
+[node name="SoundManager" parent="." unique_id=782213402 instance=ExtResource("4_vkv4v")]
+unique_name_in_owner = true
+
+[node name="PlayerFollowersLabel" type="VBoxContainer" parent="." unique_id=752098391]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 150.0
+offset_right = 144.0
+offset_bottom = 220.0
+
+[node name="Followers" type="Label" parent="PlayerFollowersLabel" unique_id=1768713872]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+theme_override_font_sizes/font_size = 16
+text = "Followers"
+horizontal_alignment = 1
+
+[node name="FollowerCount" type="Label" parent="PlayerFollowersLabel" unique_id=1127469576]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "1132"
+horizontal_alignment = 1
+script = ExtResource("13_wng8v")
+
+[node name="EnemyFollowersLabel" type="VBoxContainer" parent="." unique_id=1242905840]
+layout_mode = 0
+offset_left = 1155.0
+offset_top = 150.0
+offset_right = 1227.0
+offset_bottom = 220.0
+
+[node name="Followers" type="Label" parent="EnemyFollowersLabel" unique_id=1554497455]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+theme_override_font_sizes/font_size = 16
+text = "Followers"
+horizontal_alignment = 1
+
+[node name="FollowerCount" type="Label" parent="EnemyFollowersLabel" unique_id=590199266]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "1132"
+horizontal_alignment = 1
+script = ExtResource("13_wng8v")
+player_label = false
+
+[node name="FollowerCount" type="MarginContainer" parent="." unique_id=516349078]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+
+[node name="hbox" type="HBoxContainer" parent="FollowerCount" unique_id=2122168557]
+layout_mode = 2
+theme_override_constants/separation = 19
+
+[node name="WinCount" parent="FollowerCount/hbox" unique_id=460264632 instance=ExtResource("13_bx1by")]
+layout_mode = 2
+
+[node name="LivesLeft" parent="FollowerCount/hbox" unique_id=1330708374 instance=ExtResource("14_ji2s3")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FollowerCount/hbox" unique_id=195924846]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="followerIcon" type="TextureRect" parent="FollowerCount/hbox/HBoxContainer" unique_id=1423740141]
+custom_minimum_size = Vector2(49, 50)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -3.32)
+texture = SubResource("AtlasTexture_vdwk8")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="FollowerCount/hbox/HBoxContainer" unique_id=1106565633]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "16"
+vertical_alignment = 1
+script = ExtResource("16_gq47y")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1357473936]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 408.0
+offset_top = -192.0
+offset_right = -372.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect" unique_id=1933320390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinLossLabel" type="Label" parent="ColorRect/CenterContainer" unique_id=214293288]
+layout_mode = 2
+theme = ExtResource("4_bu5cc")
+text = "Win!"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="GridContainer/PlayerContainer/VBoxContainer/Button" to="GridContainer/PlayerContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]
+[connection signal="pressed" from="GridContainer/PlayerContainer/VBoxContainer/Button" to="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]

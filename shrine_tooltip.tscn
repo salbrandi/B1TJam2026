@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bvp10qq5bv5ut"]
+
+[ext_resource type="Script" uid="uid://b0rd63r011ts4" path="res://shrine_tooltip.gd" id="1_uonlw"]
+[ext_resource type="FontFile" uid="uid://cm3k1ytg6n6ay" path="res://UI/PixelOperator.ttf" id="2_l8qwl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8qwl"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_l8qwl"]
+color = Color(1, 1, 1, 1)
+grow_begin = -5.0
+grow_end = -5.0
+thickness = 3
+
+[node name="ShrineTooltip" type="PanelContainer" unique_id=2065005481]
+custom_minimum_size = Vector2(125, 125)
+offset_right = 250.0
+offset_bottom = 287.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l8qwl")
+script = ExtResource("1_uonlw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1737977085]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1613271546]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=72078155]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Name goes here"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_l8qwl")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=97569887]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_l8qwl")
+
+[node name="ItemEffect" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1926685173]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(125, 125)
+layout_mode = 2
+tooltip_text = "Item effects go here"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_l8qwl")
+horizontal_alignment = 1
+autowrap_mode = 2

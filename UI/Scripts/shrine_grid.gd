@@ -26,6 +26,8 @@ signal placements_changed
 
 @export var is_player_grid: bool = false
 
+const TOOLTIP_SCENE := preload("res://shrine_tooltip.tscn")
+
 var _placements: Array[Dictionary] = []
 var _dragged: Dictionary = {}
 var _target := Rect2i()
@@ -46,6 +48,7 @@ func _ready() -> void:
 		Global.gm.player_grid = self
 		Global.gm.shrine_object_added.connect(_on_shrine_object_added)
 		Global.gm.shrine_object_removed.connect(_on_shrine_object_removed)
+	ThemeDB.get_default_theme().set_stylebox("panel", "TooltipPanel", StyleBoxEmpty.new())
 
 
 func _on_shrine_object_added(item: ShrineObject) -> void:
@@ -120,6 +123,22 @@ func publish_dice_adjacency() -> void:
 		Global.gm.player_dice_neighbours = edge_neighbour_indices()
 		Global.gm.player_item_dice = item_dice_neighbours()
 
+
+func _get_tooltip(at_position: Vector2) -> String:
+	var placement := get_object_at(cell_at_position(at_position))
+	if placement.is_empty():
+		return ""
+	var shrine: ShrineObject = placement["shrine"]
+	return "%s\n%s" % [shrine.name, shrine.effect]
+
+
+func _make_custom_tooltip(for_text: String) -> Object:
+	var placement := get_object_at(cell_at_position(get_local_mouse_position()))
+	if placement.is_empty():
+		return null
+	var tooltip := TOOLTIP_SCENE.instantiate()
+	tooltip.setup(placement["shrine"])
+	return tooltip
 
 func place_object(shrine: ShrineObject, cell: Vector2i) -> bool:
 	if not can_place(shrine, cell):
