@@ -17,8 +17,11 @@ func set_item(item: ShrineObject):
 	$Description.text = shrineObject.effect
 	$Icon.texture = shrineObject.icon
 	$Button/HBoxContainer/Price.text = str(shrineObject.price)
+	show()
 
 
 func _on_button_pressed():
+	if not Global.gm.spend_followers(shrineObject.price):
+		return
 	Global.gm.add_shrine_object(shrineObject)
 	hide()

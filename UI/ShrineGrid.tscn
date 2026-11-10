@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ciage5fp71e2r" path="res://UI/Sprites/inventory_slot_indicator.png" id="1_4632k"]
 [ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="2_7n60n"]
 [ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="3_f05nt"]
-[ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/dice.tres" id="4_f05nt"]
+[ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/d6.tres" id="4_f05nt"]
 
 [node name="ShrineGrid" type="Container" unique_id=495070305]
 custom_minimum_size = Vector2(192, 192)

@@ -2,12 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://dhtpmtiscct2r" path="res://Resources/ShrineObjects/Sprites/candle.png" id="1_k0vp6"]
 [ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="2_rjksn"]
+[ext_resource type="Script" uid="uid://b28xn2uv2aggw" path="res://Resources/ShrineObjects/Effects/AddDieValue.gd" id="3_adddie"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="add_one_to_dice"]
+script = ExtResource("3_adddie")
 
 [resource]
 script = ExtResource("2_rjksn")
 name = "Candles"
 effect = "All dice gain +1"
 icon = ExtResource("1_k0vp6")
+rarity = 80
 grid_width = 2
 grid_height = 2
+price = 100
+effects = Array[ExtResource("4_base")]([SubResource("add_one_to_dice")])
 metadata/_custom_type_script = "uid://5k3ce70ad2py"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://c7ibnr3ujw0d1"]
+
+[ext_resource type="Texture2D" uid="uid://baucocxouaikl" path="res://Resources/ShrineObjects/Sprites/cone-incense.png" id="1_incense"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="2_obj"]
+[ext_resource type="Script" uid="uid://b7sdc53ahl0nv" path="res://Resources/ShrineObjects/Effects/RerollOnValue.gd" id="3_reroll"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="reroll_on_one"]
+script = ExtResource("3_reroll")
+
+[resource]
+script = ExtResource("2_obj")
+name = "Incense Burner"
+effect = "Reroll dice that roll a 1"
+icon = ExtResource("1_incense")
+effects = Array[ExtResource("4_base")]([SubResource("reroll_on_one")])
+metadata/_custom_type_script = "uid://5k3ce70ad2py"

@@ -9,7 +9,7 @@ extends Node2D
 	"title": $Menu
 }
 
-var player_follower_count: int = 50
+@export var player_follower_count: int = 100
 var enemy_follower_count: int = 10
 
 var current_player_score: int = 0
@@ -32,6 +32,7 @@ var _waiting_for_player_input: bool = false
 
 signal initalize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
 signal shop_opened
+signal shrine_object_added(item: ShrineObject)
 signal battle_over
 signal game_over
 signal getting_player_input
@@ -86,14 +87,23 @@ func all_effects() -> Array[ShrineEffect]:
 
 func add_shrine_object(item: ShrineObject) -> void:
 	current_player_shrine_objects.append(item)
+	if item is ShrineDice:
+		current_player_dice.append(item as ShrineDice)
 	for effect in item.effects:
 		effect.on_pickup()
+	shrine_object_added.emit(item)
 
 func add_score(amount: int) -> void:
 	current_player_score += amount
 
 func add_followers(amount: int) -> void:
 	player_follower_count += amount
+
+func spend_followers(amount: int) -> bool:
+	if player_follower_count < amount:
+		return false
+	player_follower_count -= amount
+	return true
 
 func followers_percent(percent: float) -> void:
 	player_follower_count = int(player_follower_count * (1.0 + percent))

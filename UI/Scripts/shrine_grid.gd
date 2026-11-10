@@ -32,6 +32,14 @@ func _ready() -> void:
 	refresh()
 	show_markers(false)
 	initialize_combat()
+	if is_player_grid:
+		Global.gm.shrine_object_added.connect(_on_shrine_object_added)
+
+
+func _on_shrine_object_added(item: ShrineObject) -> void:
+	for i in columns * rows():
+		if place_object(item, Vector2i(i % columns, i / columns)):
+			return
 
 
 func initialize_combat():

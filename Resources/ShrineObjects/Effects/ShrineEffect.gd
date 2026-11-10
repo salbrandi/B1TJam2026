@@ -14,3 +14,9 @@ func on_roll_complete() -> void:
 
 func on_combat_end() -> void:
 	pass
+
+func modify_die(die: ShrineDice) -> void:
+	pass
+
+func should_reroll(value: int) -> bool:
+	return false

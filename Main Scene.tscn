@@ -6,6 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://d1omoofou3ys1" path="res://UI/Menu.tscn" id="3_2uwcf"]
 [ext_resource type="PackedScene" uid="uid://cf8i7bgn10r13" path="res://UI/AfterCombat.tscn" id="3_qg7el"]
 [ext_resource type="PackedScene" uid="uid://cmxsvl6i45vws" path="res://UI/Shop.tscn" id="5_h4phd"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="6_oyrw6"]
+[ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="7_i67la"]
+[ext_resource type="Resource" uid="uid://c7ibnr3ujw0d1" path="res://Resources/ShrineObjects/Items/IncenseBurner.tres" id="8_l0gsc"]
+[ext_resource type="Resource" uid="uid://c4r5ga2r8juj4" path="res://Resources/ShrineObjects/Items/FiveYenCoin.tres" id="9_twlps"]
+[ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="10_ee22n"]
+[ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/d6.tres" id="11_wf7hc"]
+[ext_resource type="Resource" uid="uid://cud4nhpnfft35" path="res://Resources/ShrineObjects/Dice/d4.tres" id="12_ii763"]
+[ext_resource type="Resource" uid="uid://snbd35fsqwkc" path="res://Resources/ShrineObjects/Dice/d8.tres" id="13_lk0i1"]
+[ext_resource type="Resource" uid="uid://cjylyp0sk1r7i" path="res://Resources/ShrineObjects/Dice/d10.tres" id="14_2jsji"]
+[ext_resource type="Resource" uid="uid://b545p77x33tq6" path="res://Resources/ShrineObjects/Dice/d12.tres" id="15_ffnbw"]
 
 [node name="MainScene" type="Node2D" unique_id=699406317]
 script = ExtResource("1_2uwcf")
@@ -21,5 +31,7 @@ visible = false
 
 [node name="Shop" parent="." unique_id=1662070465 instance=ExtResource("5_h4phd")]
 visible = false
+offering_pool = Array[ExtResource("6_oyrw6")]([ExtResource("7_i67la"), ExtResource("8_l0gsc"), ExtResource("9_twlps")])
+dice_pool = Array[ExtResource("10_ee22n")]([ExtResource("11_wf7hc"), ExtResource("12_ii763"), ExtResource("13_lk0i1"), ExtResource("14_2jsji"), ExtResource("15_ffnbw")])
 
 [node name="Menu" parent="." unique_id=1703320354 instance=ExtResource("3_2uwcf")]

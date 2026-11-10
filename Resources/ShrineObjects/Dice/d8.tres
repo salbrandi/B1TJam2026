@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShrineDice" format=3 uid="uid://snbd35fsqwkc"]
+
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_mv6ut"]
+[ext_resource type="Texture2D" uid="uid://snmdwjkx4gnb" path="res://Resources/ShrineObjects/Sprites/d6.png" id="2_wuryc"]
+[ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="3_o058u"]
+
+[resource]
+script = ExtResource("3_o058u")
+values = Array[int]([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+current_value = 1
+name = "D10"
+effect = "Rolls 1-10"
+icon = ExtResource("2_wuryc")
+rarity = 50
+metadata/_custom_type_script = "uid://ketutherx66m"

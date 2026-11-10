@@ -14,11 +14,17 @@
 [node name="SoundManager" type="Node" unique_id=782213402]
 
 [node name="SweepingSynth" type="AudioStreamPlayer" parent="." unique_id=564271164]
-volume_db = -7.017
+volume_db = -25.156
+pitch_scale = 0.24
 script = ExtResource("1_yw55o")
 sounds = Array[AudioStream]([ExtResource("2_5u5av"), ExtResource("3_xmdwn"), ExtResource("4_fh8ve")])
-fade_time = 0.01
+fade_start_time = 0.5
+fade_time = 0.5
 
 [node name="DiceRoll" type="AudioStreamPlayer" parent="." unique_id=71574982]
+volume_db = -3.692
+pitch_scale = 0.48
 script = ExtResource("1_yw55o")
 sounds = Array[AudioStream]([ExtResource("3_5u5av"), ExtResource("4_xmdwn"), ExtResource("5_fh8ve"), ExtResource("6_uy3hf"), ExtResource("7_wvsxp"), ExtResource("8_p4nqc")])
+fade_start_time = 0.3
+fade_time = 0.3

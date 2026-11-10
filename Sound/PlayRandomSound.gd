@@ -2,7 +2,6 @@ extends AudioStreamPlayer
 
 @export var sounds: Array[AudioStream] = []
 
-var volume_tween: Tween
 var base_volume_db: float
 
 @export var fade_start_time: float = 0
@@ -16,18 +15,18 @@ func _ready() -> void:
 func play_random_sound() -> void:
 	if sounds.is_empty():
 		return
-	if volume_tween:
-		volume_tween.kill()
-	volume_db = base_volume_db
-	stream = sounds.pick_random()
-	play()
+	var player := AudioStreamPlayer.new()
+	player.stream = sounds.pick_random()
+	player.volume_db = base_volume_db
+	player.bus = bus
+	add_child(player)
+	player.finished.connect(player.queue_free)
+	player.play()
 	if fade_time > 0.0:
-		fade_out(fade_time)
+		_fade_out(player)
 
 
-func fade_out(duration: float = fade_time) -> void:
-	if volume_tween:
-		volume_tween.kill()
-	volume_tween = create_tween()
-	volume_tween.tween_property(self, "volume_linear", 0.0, duration).set_delay(fade_start_time)
-	volume_tween.tween_callback(stop)
+func _fade_out(player: AudioStreamPlayer) -> void:
+	var tween := player.create_tween()
+	tween.tween_property(player, "volume_linear", 0.0, fade_time).set_delay(fade_start_time)
+	tween.tween_callback(player.queue_free)
