@@ -3,6 +3,69 @@
 [ext_resource type="Script" uid="uid://pwwcb0jc0ysu" path="res://UI/Scripts/game_over.gd" id="1_t641b"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_3ly53"]
 [ext_resource type="PackedScene" uid="uid://wssnl82u7gt0" path="res://UI/Firework.tscn" id="3_uyqdc"]
+[ext_resource type="Texture2D" uid="uid://c7mfdp6h0sibk" path="res://UI/Sprites/skelemerchant.png" id="4_dy830"]
+[ext_resource type="FontFile" uid="uid://cm3k1ytg6n6ay" path="res://UI/PixelOperator.ttf" id="5_i0dbh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icvhn"]
+atlas = ExtResource("4_dy830")
+region = Rect2(0, 0, 90, 87)
+
+[sub_resource type="Animation" id="Animation_s5esk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 90, 87)]
+}
+
+[sub_resource type="Animation" id="Animation_2e0xv"]
+resource_name = "chatter"
+length = 3.0000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.91, 1, 1.2, 1.425964, 1.5, 1.6031688, 1.7002116),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 90, 87), Rect2(90, 0, 90, 87), Rect2(180, 0, 90, 87), Rect2(270, 0, 90, 87), Rect2(360, 0, 90, 87), Rect2(450, 0, 90, 87), Rect2(540, 0, 90, 87), Rect2(630, 0, 90, 87), Rect2(720, 0, 90, 87), Rect2(810, 0, 90, 87), Rect2(900, 0, 90, 87), Rect2(0, 0, 90, 87), Rect2(90, 0, 90, 87), Rect2(180, 0, 90, 87), Rect2(90, 0, 90, 87), Rect2(0, 0, 90, 87)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bp4jc"]
+_data = {
+&"RESET": SubResource("Animation_s5esk"),
+&"chatter": SubResource("Animation_2e0xv")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u82uy"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fffj"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="GameOver" type="Control" unique_id=105094686]
 layout_mode = 3
@@ -37,5 +100,77 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_3ly53")
 text = "Back To Menu"
+
+[node name="shopkeep" type="TextureRect" parent="." unique_id=653109038]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.999999
+offset_top = -239.99994
+offset_right = 58.0
+offset_bottom = -192.99994
+grow_vertical = 0
+scale = Vector2(5, 5)
+texture = SubResource("AtlasTexture_icvhn")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="shopkeep" unique_id=491731491]
+libraries/ = SubResource("AnimationLibrary_bp4jc")
+autoplay = &"chatter"
+
+[node name="Panel" type="Panel" parent="." unique_id=772937630]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 264.0
+offset_top = -104.0
+offset_right = 595.0
+offset_bottom = -35.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u82uy")
+
+[node name="Panel3" type="Panel" parent="Panel" unique_id=1699023932]
+oversampling_with_scale = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -74.0
+offset_right = 34.0
+offset_bottom = -49.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u82uy")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1796650351]
+oversampling_with_scale = 2
+layout_mode = 0
+offset_right = 328.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("5_i0dbh")
+theme_override_font_sizes/font_size = 48
+text = "Try Again!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="Panel" unique_id=93797282]
+oversampling_with_scale = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -58.0
+offset_right = 341.0
+offset_bottom = 11.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7fffj")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

@@ -2,6 +2,8 @@ extends Control
 
 @onready var firework = $Firework
 @onready var final_title = $CenterContainer/VBoxContainer/FinalWinOrLossTitle
+@onready var shopkeeper = $shopkeep
+@onready var shopkeeper_panel = $Panel
 
 func _ready() -> void:
 	Global.gm.game_over.connect(process_game_over)
@@ -11,6 +13,8 @@ func _process(delta: float) -> void:
 	pass
 	
 func process_game_over():
+	shopkeeper.visible = false
+	shopkeeper_panel.visible = false
 	if is_inside_tree() and is_visible_in_tree():
 		if Global.gm._is_victory:
 			process_victory()
@@ -23,6 +27,8 @@ func process_victory() -> void:
 	spawn_fireworks()
 	
 func process_loss() -> void:
+	shopkeeper.visible = true
+	shopkeeper_panel.visible = true
 	final_title.text = "You Lost!"
 	
 func spawn_fireworks() -> void:

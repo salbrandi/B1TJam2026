@@ -4,6 +4,8 @@ extends Control
 @onready var progress_container = $GridContainer/MiddleThird/ProgressContainer
 @onready var follower = $GridContainer/BottomThird/FollowerContainer/Follower
 @onready var follower_container = $GridContainer/BottomThird/FollowerContainer
+@onready var shopkeeper = $shopkeep
+@onready var shopkeeper_panel = $Panel
 @onready var follower_container_size = [$GridContainer.size.x, $GridContainer/BottomThird.size.y]
 
 @onready var filled_trophy = load("res://UI/Sprites/filled_trophy.png")
@@ -20,6 +22,9 @@ func _process(delta: float) -> void:
 	pass
 
 func process_battle():
+	follower_container.visible = false
+	shopkeeper.visible = false
+	shopkeeper_panel.visible = false
 	if is_inside_tree() and is_visible_in_tree():
 		if Global.gm._is_win:
 			process_win()
@@ -28,6 +33,7 @@ func process_battle():
 	pass
 	
 func process_win():
+	follower_container.visible = true
 	var next_win: TextureRect = null
 	var index = 1
 	
@@ -49,6 +55,8 @@ func process_win():
 	pass
 	
 func process_loss():
+	shopkeeper.visible = true
+	shopkeeper_panel.visible = true
 	var next_loss: TextureRect = null
 	var index = 1
 	
