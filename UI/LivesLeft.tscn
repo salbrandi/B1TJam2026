@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6o7ja74g2eyw"]
 
-[ext_resource type="Script" uid="uid://8b7pwggaoata" path="res://UI/lives_left.gd" id="1_fki82"]
+[ext_resource type="Script" uid="uid://8b7pwggaoata" path="res://UI/Scripts/lives_left.gd" id="1_fki82"]
 [ext_resource type="Texture2D" uid="uid://byge3jcmm4f3v" path="res://UI/Sprites/filled_heart.png" id="1_j2l16"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_fki82"]
 

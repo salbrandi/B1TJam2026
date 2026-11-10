@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxwlachk6s58i"]
 
 [ext_resource type="Texture2D" uid="uid://dyrf70m2epfdb" path="res://UI/Sprites/filled_trophy.png" id="1_hfv4e"]
-[ext_resource type="Script" uid="uid://dun2yx1munx15" path="res://UI/win_count.gd" id="1_r4exh"]
+[ext_resource type="Script" uid="uid://dun2yx1munx15" path="res://UI/Scripts/win_count.gd" id="1_r4exh"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="2_r4exh"]
 
 [node name="WinCount" type="HBoxContainer" unique_id=460264632]
