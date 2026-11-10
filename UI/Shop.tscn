@@ -13,8 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://c7mfdp6h0sibk" path="res://UI/Sprites/skelemerchant.png" id="7_2e0xv"]
 [ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/d6.tres" id="8_424kp"]
 [ext_resource type="Resource" uid="uid://c4r5ga2r8juj4" path="res://Resources/ShrineObjects/Items/FiveYenCoin.tres" id="9_coin"]
-[ext_resource type="Script" uid="uid://ctoe1odyq27om" path="res://UI/RandomLabel.gd" id="14_roqh7"]
-[ext_resource type="Script" uid="uid://c5qkakasimmmk" path="res://UI/followerCountLabel.gd" id="15_6eo2p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
 atlas = ExtResource("6_2e0xv")
@@ -523,34 +521,6 @@ custom_minimum_size = Vector2(222, 50)
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
 text = "PROCEED..."
-
-[node name="FollowerCount" type="MarginContainer" parent="." unique_id=857065446]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 49.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 100
-
-[node name="hbox" type="HBoxContainer" parent="FollowerCount" unique_id=1005743529]
-custom_minimum_size = Vector2(308.32, 0)
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="FollowerCount/hbox" unique_id=1309299138]
-layout_mode = 2
-theme = ExtResource("1_gm7d2")
-text = "Worshippers:"
-
-[node name="Label2" type="Label" parent="FollowerCount/hbox" unique_id=1817590109]
-layout_mode = 2
-theme = ExtResource("1_gm7d2")
-text = "16"
-vertical_alignment = 1
-script = ExtResource("15_6eo2p")
 
 [connection signal="pressed" from="VBoxContainer2/RerollButton/HBoxContainer/Button" to="." method="_on_reroll_pressed"]
 [connection signal="pressed" from="VBoxContainer2/ProceedButton/Button" to="." method="_on_proceed_button_pressed"]

@@ -36,6 +36,8 @@ signal shrine_object_added(item: ShrineObject)
 signal battle_over
 signal game_over
 signal getting_player_input
+signal lost_life
+signal win_gained
 
 var pending_rolls: Dictionary = {}
 
@@ -161,6 +163,11 @@ func calculate_wins_losses():
 func after_combat_input():
 	_waiting_for_player_input = true
 	await getting_player_input
+	
+	if _is_win:
+		emit_signal("win_gained")
+	else:
+		emit_signal("life_lost")
 	
 	if player_total_wins == 10:
 		_is_victory = true
