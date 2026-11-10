@@ -25,6 +25,7 @@ var current_player_shrine_objects: Array[ShrineObject] = []
 var current_enemy_shrine_objects: Array[ShrineObject] = []
 
 var _waiting_for_player_input: bool = false
+var _is_exiting_to_menu: bool = false
 const AUTO_ADVANCE_SECONDS := 10
 var paused_scene: Control
 
@@ -67,6 +68,7 @@ func _input(event: InputEvent) -> void:
 		if all_screens["title"].is_visible_in_tree() or all_screens["credits"].is_visible_in_tree():
 			return
 		toggle_pause()
+		return
 		
 	if not _waiting_for_player_input:
 		return
@@ -74,7 +76,7 @@ func _input(event: InputEvent) -> void:
 	if get_tree().paused:
 		return
 	
-	if event.is_pressed() and not event.is_echo():
+	if event.is_pressed() and not event.is_echo() and event is InputEventMouseButton:
 		_waiting_for_player_input = false
 		get_viewport().set_input_as_handled()
 		emit_signal("getting_player_input")
@@ -94,6 +96,7 @@ func transition_to_after_combat(from_scene: String) -> void:
 	emit_signal("process_battle")
 
 func transition_to_shop(from_scene: String) -> void:
+	_is_exiting_to_menu = false
 	transition_scenes(from_scene, "shop")
 	emit_signal("shop_opened")
 	
@@ -121,6 +124,9 @@ func transition_to_credits(from_scene: String) -> void:
 	transition_scenes(from_scene, "credits")
 
 func transition_to_title(from_scene: String) -> void:
+	_is_exiting_to_menu = true
+	if paused_scene:
+		paused_scene.visible = false
 	transition_scenes(from_scene, "title")
 
 func reset_game() -> void:
@@ -139,6 +145,9 @@ func reset_game() -> void:
 	player_lives_remaining = 10
 	_is_win = false
 	_is_victory = false
+	_waiting_for_player_input = false
+	emit_signal("win_gained")
+	emit_signal("lost_life")
 
 func all_effects() -> Array[ShrineEffect]:
 	var effects: Array[ShrineEffect] = []
@@ -264,21 +273,30 @@ func calculate_wins_losses():
 	
 	emit_signal("combat_over")
 		
-	await _wait_for_advance()
+	var advance = await _wait_for_advance()
+	
+	if not advance:
+		return
 		
 	transition_to_after_combat("battle")
 	
 	after_combat_input()
 
-func _wait_for_advance() -> void:
+func _wait_for_advance() -> bool:
 	_waiting_for_player_input = true
 	var timer := get_tree().create_timer(AUTO_ADVANCE_SECONDS)
 	while _waiting_for_player_input and timer.time_left > 0.0:
 		await get_tree().process_frame
+		if _is_exiting_to_menu:
+			return false
 	_waiting_for_player_input = false
+	return true
 	
 func after_combat_input():
-	await _wait_for_advance()
+	var advance = await _wait_for_advance()
+	
+	if not advance:
+		return
 	
 	if _is_win:
 		emit_signal("win_gained")
