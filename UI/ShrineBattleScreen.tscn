@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://cmuvmg8a6rgnp" path="res://UI/Sprites/fallen-head.png" id="12_wng8v"]
 [ext_resource type="PackedScene" uid="uid://c6gkll0t6vxml" path="res://UI/DiceRect.tscn" id="13_621yj"]
 [ext_resource type="Script" uid="uid://b5trm118wwsny" path="res://UI/Scripts/follower_count_label.gd" id="13_wng8v"]
+[ext_resource type="PackedScene" uid="uid://dxwlachk6s58i" path="res://UI/WinCount.tscn" id="16_ji2s3"]
+[ext_resource type="PackedScene" uid="uid://c6o7ja74g2eyw" path="res://UI/LivesLeft.tscn" id="17_0tvvx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lke5m"]
 atlas = ExtResource("2_ocyaw")
@@ -213,6 +215,20 @@ text = "1132"
 horizontal_alignment = 1
 script = ExtResource("13_wng8v")
 player_label = false
+
+[node name="WinCount" parent="." unique_id=460264632 instance=ExtResource("16_ji2s3")]
+layout_mode = 0
+offset_left = 1027.0
+offset_top = 12.0
+offset_right = 1100.0
+offset_bottom = 62.0
+
+[node name="LivesLeft" parent="." unique_id=1330708374 instance=ExtResource("17_0tvvx")]
+layout_mode = 0
+offset_left = 1153.0
+offset_top = 12.0
+offset_right = 1226.0
+offset_bottom = 62.0
 
 [connection signal="pressed" from="GridContainer/PlayerContainer/VBoxContainer/Button" to="GridContainer/PlayerContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]
 [connection signal="pressed" from="GridContainer/PlayerContainer/VBoxContainer/Button" to="GridContainer/EnemyContainer/VBoxContainer/MarginContainer/DiceContainer" method="_on_button_pressed"]
