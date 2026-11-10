@@ -13,5 +13,5 @@ script = ExtResource("1_obj")
 name = "Apple"
 effect = "Gain +1 follower per combat for each apple you own"
 icon = ExtResource("2_icon")
-price = 50
+price = 5
 effects = Array[ExtResource("4_base")]([SubResource("apple_followers")])

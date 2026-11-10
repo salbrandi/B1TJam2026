@@ -194,7 +194,7 @@ func score_rolls(rolls: Array[int], dice: Array[ShrineDice], is_player_dice: boo
 	pending_rolls[is_player_dice] = rolls
 	var total := 0
 	for value in rolls:
-		total += maxi(value, 1)
+		total += value
 	if is_player_dice:
 		var effects := all_effects()
 		for effect in effects:
