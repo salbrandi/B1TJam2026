@@ -204,7 +204,7 @@ func calculate_wins_losses():
 		_is_win = false
 		player_lives_remaining = maxi(0, player_lives_remaining - 1)
 		player_follower_count = maxi(0, player_follower_count - (player_follower_count/2 - 10))
-		add_followers(followers_gained_per_life_lost * (10 - player_lives_remaining))
+		add_followers(100 + followers_gained_per_life_lost * (10 - player_lives_remaining))
 	
 	emit_signal("combat_over")
 		

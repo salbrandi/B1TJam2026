@@ -155,6 +155,8 @@ func end_drag() -> void:
 
 
 func _get_drag_data(at_position: Vector2) -> Variant:
+	if not is_player_grid:
+		return null
 	var cell := cell_at_position(at_position)
 	var placement := get_object_at(cell)
 	if placement.is_empty():
@@ -179,6 +181,8 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if not is_player_grid:
+		return false
 	if not (data is Dictionary and data.has("shrine")):
 		return false
 	show_markers(true)
@@ -192,6 +196,8 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
+	if not is_player_grid:
+		return
 	var origin := determine_drop_origin(at_position, data)
 	if _dragged.is_empty():
 		_placements.append({"shrine": data["shrine"], "cell": origin})
