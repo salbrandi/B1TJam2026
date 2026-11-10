@@ -154,12 +154,13 @@ func can_add_shrine_object(item: ShrineObject) -> bool:
 func add_shrine_object(item: ShrineObject) -> void:
 	if not can_add_shrine_object(item):
 		return
-	current_player_shrine_objects.append(item)
-	if item is ShrineDice:
-		current_player_dice.append(item as ShrineDice)
-	for effect in item.effects:
+	var instance := item.duplicate() as ShrineObject
+	current_player_shrine_objects.append(instance)
+	if instance is ShrineDice:
+		current_player_dice.append(instance as ShrineDice)
+	for effect in instance.effects:
 		effect.on_pickup()
-	shrine_object_added.emit(item)
+	shrine_object_added.emit(instance)
 
 func remove_shrine_object(item: ShrineObject) -> void:
 	current_player_shrine_objects.erase(item)

@@ -67,7 +67,8 @@ func _on_shrine_object_removed(item: ShrineObject) -> void:
 func initialize_combat(extra_objects: Array[ShrineObject] = []):
 	_placements.clear()
 	current_dice.clear()
-	for shrineObj in default_objects + extra_objects:
+	for shrine_template in default_objects + extra_objects:
+		var shrineObj := shrine_template.duplicate() as ShrineObject
 		if shrineObj is ShrineDice:
 			current_dice.append(shrineObj as ShrineDice)
 		for i in columns * rows:
