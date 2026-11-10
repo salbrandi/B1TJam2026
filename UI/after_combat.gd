@@ -58,7 +58,7 @@ func process_loss():
 	shopkeeper.visible = true
 	shopkeeper_panel.visible = true
 	var next_loss: TextureRect = null
-	var index = 1
+	var index = 0
 	
 	title_text.text = "Loss"
 	

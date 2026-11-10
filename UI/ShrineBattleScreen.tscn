@@ -231,15 +231,15 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -400.0
+offset_left = -1280.0
 offset_bottom = 70.0
 grow_horizontal = 0
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 100
 
 [node name="hbox" type="HBoxContainer" parent="FollowerCount" unique_id=2122168557]
 layout_mode = 2
 theme_override_constants/separation = 19
+alignment = 1
 
 [node name="WinCount" parent="FollowerCount/hbox" unique_id=460264632 instance=ExtResource("13_bx1by")]
 layout_mode = 2
