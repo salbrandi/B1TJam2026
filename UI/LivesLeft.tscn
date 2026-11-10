@@ -15,4 +15,4 @@ texture = ExtResource("1_j2l16")
 [node name="LivesLabel" type="Label" parent="." unique_id=1924809274]
 layout_mode = 2
 theme = ExtResource("2_fki82")
-text = "0"
+text = "10"
