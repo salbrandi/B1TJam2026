@@ -61,3 +61,5 @@ visible = false
 [node name="PauseMenu" parent="." unique_id=313423106 instance=ExtResource("2_0ejt0")]
 visible = false
 z_index = 4096
+
+[node name="AdvanceTimer" type="Timer" parent="." unique_id=643592752]
