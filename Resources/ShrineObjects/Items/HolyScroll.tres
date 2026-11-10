@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://bga05b7626k17"]
+
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_eae85"]
+[ext_resource type="Script" uid="uid://bo6tcbmo7mb18" path="res://Resources/ShrineObjects/Effects/AdjacentDiceBonus.gd" id="2_7yj5t"]
+[ext_resource type="Texture2D" uid="uid://pxscp2vua7kv" path="res://Resources/ShrineObjects/Sprites/scroll1.png" id="3_860d5"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="4_c3n4p"]
+
+[sub_resource type="Resource" id="adjacent_bonus"]
+script = ExtResource("2_7yj5t")
+
+[resource]
+script = ExtResource("4_c3n4p")
+name = "Holy Scroll"
+effect = "Adjacent dice get +1 for each other adjacent dice"
+icon = ExtResource("3_860d5")
+rarity = 30
+price = 200
+effects = Array[ExtResource("1_eae85")]([SubResource("adjacent_bonus")])

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://dapd3yx8xxxgm"]
+
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="1_obj"]
+[ext_resource type="Texture2D" uid="uid://dxgrvxiuwmeev" path="res://Resources/ShrineObjects/Sprites/alien-skull.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bxgm4qos7jc0l" path="res://Resources/ShrineObjects/Effects/AlienSkullEffect.gd" id="3_skull"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="alien_skull"]
+script = ExtResource("3_skull")
+
+[resource]
+script = ExtResource("1_obj")
+name = "Alien Skull"
+effect = "Adjacent dice roll max value. Consume a random adjacent dice each combat"
+icon = ExtResource("2_icon")
+effects = Array[ExtResource("4_base")]([SubResource("alien_skull")])

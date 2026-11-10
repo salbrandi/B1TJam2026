@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://cvxn1is6k8tfs"]
+
+[ext_resource type="Texture2D" uid="uid://foq4jsais7vp" path="res://Resources/ShrineObjects/Sprites/bindings.png" id="1_bindings"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="2_obj"]
+[ext_resource type="Script" uid="uid://rg518720m254" path="res://Resources/ShrineObjects/Effects/DarkGodBindings.gd" id="3_bindings"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="dark_god_bindings"]
+script = ExtResource("3_bindings")
+
+[resource]
+script = ExtResource("2_obj")
+name = "Bindings of a Dark God"
+effect = "On pickup, lose all followers. Rolling a die gains followers equal to its value; rolling its maximum loses that many instead"
+icon = ExtResource("1_bindings")
+grid_width = 3
+grid_height = 3
+price = 1000
+effects = Array[ExtResource("4_base")]([SubResource("dark_god_bindings")])
+metadata/_custom_type_script = "uid://5k3ce70ad2py"

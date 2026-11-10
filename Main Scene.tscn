@@ -11,11 +11,27 @@
 [ext_resource type="Resource" uid="uid://c7ibnr3ujw0d1" path="res://Resources/ShrineObjects/Items/IncenseBurner.tres" id="8_l0gsc"]
 [ext_resource type="Resource" uid="uid://c4r5ga2r8juj4" path="res://Resources/ShrineObjects/Items/FiveYenCoin.tres" id="9_twlps"]
 [ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="10_ee22n"]
+[ext_resource type="Resource" uid="uid://cvxn1is6k8tfs" path="res://Resources/ShrineObjects/Items/BindingsOfADarkGod.tres" id="10_i67la"]
+[ext_resource type="Resource" uid="uid://cv052ac6yelc4" path="res://Resources/ShrineObjects/Items/Tithe.tres" id="10_l0gsc"]
+[ext_resource type="Resource" uid="uid://ddjxbuml57s1q" path="res://Resources/ShrineObjects/Items/Orange.tres" id="11_c6uaq"]
 [ext_resource type="Resource" uid="uid://bhb44vli8d6v0" path="res://Resources/ShrineObjects/Dice/d6.tres" id="11_wf7hc"]
+[ext_resource type="Resource" uid="uid://bga05b7626k17" path="res://Resources/ShrineObjects/Items/HolyScroll.tres" id="12_gwubx"]
 [ext_resource type="Resource" uid="uid://cud4nhpnfft35" path="res://Resources/ShrineObjects/Dice/d4.tres" id="12_ii763"]
+[ext_resource type="Resource" uid="uid://ckfvkbypp18ud" path="res://Resources/ShrineObjects/Items/GamblingTicket.tres" id="13_6lj3j"]
 [ext_resource type="Resource" uid="uid://snbd35fsqwkc" path="res://Resources/ShrineObjects/Dice/d8.tres" id="13_lk0i1"]
+[ext_resource type="Resource" uid="uid://b25xw6w2cg4lw" path="res://Resources/ShrineObjects/Items/Apple.tres" id="14_0u44j"]
 [ext_resource type="Resource" uid="uid://cjylyp0sk1r7i" path="res://Resources/ShrineObjects/Dice/d10.tres" id="14_2jsji"]
+[ext_resource type="Resource" uid="uid://cfj2vycw332re" path="res://Resources/ShrineObjects/Items/Shuriken.tres" id="15_b1qwl"]
 [ext_resource type="Resource" uid="uid://b545p77x33tq6" path="res://Resources/ShrineObjects/Dice/d12.tres" id="15_ffnbw"]
+[ext_resource type="Resource" uid="uid://d3lrsqe8pqbra" path="res://Resources/ShrineObjects/Items/Knucklebones.tres" id="16_sd1nh"]
+[ext_resource type="Resource" uid="uid://cxdmsj7gpx40j" path="res://Resources/ShrineObjects/Dice/d20.tres" id="17_lk0i1"]
+[ext_resource type="Resource" uid="uid://da1iqxfhv4b4" path="res://Resources/ShrineObjects/Dice/d100.tres" id="18_2jsji"]
+[ext_resource type="Resource" uid="uid://bpi54eeqlfboc" path="res://Resources/ShrineObjects/Dice/GamblersDice.tres" id="18_ee22n"]
+[ext_resource type="Resource" uid="uid://cnmsfouofr26c" path="res://Resources/ShrineObjects/Dice/HungryDice.tres" id="19_wf7hc"]
+[ext_resource type="Resource" uid="uid://cw3akcx8ef7hv" path="res://Resources/ShrineObjects/Dice/GrosMichel.tres" id="22_ffnbw"]
+[ext_resource type="Resource" uid="uid://koenl3h7iliu" path="res://Resources/ShrineObjects/Items/BlackHole.tres" id="26_n5wc5"]
+[ext_resource type="Resource" uid="uid://dapd3yx8xxxgm" path="res://Resources/ShrineObjects/Items/AlienSkull.tres" id="27_0u44j"]
+[ext_resource type="Resource" uid="uid://b1f43kfk2rtva" path="res://Resources/ShrineObjects/Items/GamblersCoin.tres" id="31_ms8wd"]
 
 [node name="MainScene" type="Node2D" unique_id=699406317]
 script = ExtResource("1_2uwcf")
@@ -31,7 +47,8 @@ visible = false
 
 [node name="Shop" parent="." unique_id=1662070465 instance=ExtResource("5_h4phd")]
 visible = false
-offering_pool = Array[ExtResource("6_oyrw6")]([ExtResource("7_i67la"), ExtResource("8_l0gsc"), ExtResource("9_twlps")])
-dice_pool = Array[ExtResource("10_ee22n")]([ExtResource("11_wf7hc"), ExtResource("12_ii763"), ExtResource("13_lk0i1"), ExtResource("14_2jsji"), ExtResource("15_ffnbw")])
+offering_pool = Array[ExtResource("6_oyrw6")]([ExtResource("7_i67la"), ExtResource("8_l0gsc"), ExtResource("9_twlps"), ExtResource("10_l0gsc"), ExtResource("11_c6uaq"), ExtResource("12_gwubx"), ExtResource("13_6lj3j"), ExtResource("14_0u44j"), ExtResource("15_b1qwl"), ExtResource("16_sd1nh")])
+dice_pool = Array[ExtResource("10_ee22n")]([ExtResource("11_wf7hc"), ExtResource("12_ii763"), ExtResource("13_lk0i1"), ExtResource("14_2jsji"), ExtResource("15_ffnbw"), ExtResource("17_lk0i1"), ExtResource("18_2jsji")])
+cursed_pool = Array[ExtResource("6_oyrw6")]([ExtResource("10_i67la"), ExtResource("18_ee22n"), ExtResource("19_wf7hc"), ExtResource("22_ffnbw"), ExtResource("26_n5wc5"), ExtResource("27_0u44j"), ExtResource("31_ms8wd")])
 
 [node name="Menu" parent="." unique_id=1703320354 instance=ExtResource("3_2uwcf")]

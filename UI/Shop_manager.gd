@@ -5,7 +5,7 @@ extends Control
 @export var dice_pool: Array[ShrineDice] = []
 @export var cursed_pool: Array[ShrineObject] = []
 
-@onready var offering_slot: ShopItem = $ItemCards/GridContainer/ItemSlot/ShopItem
+@onready var offering_slot: ShopItem = $ItemCards/GridContainer/ItemSlot/MarginContainer/ShopItem
 @onready var dice_slot: ShopItem = $ItemCards/GridContainer/DiceSlot/ShopItem
 @onready var cursed_slot: ShopItem = $ItemCards/GridContainer/CurseSlot/ShopItem
 
@@ -23,9 +23,15 @@ func _ready():
 	offering_tiers = build_rarity_tiers(offering_pool)
 	dice_tiers = build_rarity_tiers(dice_pool)
 	cursed_tiers = build_rarity_tiers(cursed_pool)
+	cursed_slot.purchased.connect(_on_cursed_purchased)
 	await get_tree().process_frame
 	Global.gm.shop_opened.connect(_on_shop_opened)
 	_on_shop_opened()
+
+
+func _on_cursed_purchased(item: ShrineObject) -> void:
+	cursed_pool.erase(item)
+	cursed_tiers = build_rarity_tiers(cursed_pool)
 
 
 func _on_shop_opened():
@@ -48,7 +54,6 @@ func build_rarity_tiers(pool: Array) -> Dictionary:
 	return tiers
 
 
-# Rolls down, starting from the highest rarity tier. 
 func roll_from_tiers(tiers: Dictionary) -> ShrineObject:
 	if tiers.is_empty():
 		return null

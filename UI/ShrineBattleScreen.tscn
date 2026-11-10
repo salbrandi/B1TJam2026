@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" uid="uid://sjcoh8dt4tdt" path="res://UI/Scripts/autobattle_scene.gd" id="1_435sf"]
 [ext_resource type="Texture2D" uid="uid://c2icwn0c0vrwf" path="res://UI/Sprites/dice-faces.png" id="2_ocyaw"]
+[ext_resource type="Texture2D" uid="uid://bcpa32hg3mgi1" path="res://UI/Sprites/cthulu-god.png" id="3_bx1by"]
 [ext_resource type="Script" uid="uid://vyolun4emo6r" path="res://UI/battle_score_label.gd" id="3_nat1o"]
 [ext_resource type="PackedScene" uid="uid://c6gjwqyyjttdx" path="res://UI/ShrineGrid.tscn" id="3_ocyaw"]
 [ext_resource type="Texture2D" uid="uid://dyiqkv808jec7" path="res://UI/Sprites/benevolent-cube.png" id="3_oq1rh"]
 [ext_resource type="Theme" uid="uid://x7yljq6un6p8" path="res://UI/default_theme.tres" id="4_bu5cc"]
+[ext_resource type="Texture2D" uid="uid://cpn1kw0asharu" path="res://UI/Sprites/unkowable-toad.png" id="4_ji2s3"]
 [ext_resource type="PackedScene" uid="uid://dflnd1db5ihqg" path="res://Sound/SoundManager.tscn" id="4_vkv4v"]
 [ext_resource type="Script" uid="uid://bvlmq3x6dfq66" path="res://UI/Scripts/dice_handler.gd" id="4_ytthq"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="5_2ocd6"]
 [ext_resource type="Script" uid="uid://cm3bwfmhhv0gp" path="res://UI/Scripts/DiceRect.gd" id="5_rf8r7"]
+[ext_resource type="Resource" uid="uid://cjylyp0sk1r7i" path="res://Resources/ShrineObjects/Dice/d10.tres" id="11_nat1o"]
 [ext_resource type="Texture2D" uid="uid://cmuvmg8a6rgnp" path="res://UI/Sprites/fallen-head.png" id="12_wng8v"]
 [ext_resource type="PackedScene" uid="uid://c6gkll0t6vxml" path="res://UI/DiceRect.tscn" id="13_621yj"]
 [ext_resource type="Script" uid="uid://b5trm118wwsny" path="res://UI/Scripts/follower_count_label.gd" id="13_wng8v"]
@@ -24,6 +28,7 @@ offset_left = -1.0
 offset_right = 1279.0
 offset_bottom = 720.0
 script = ExtResource("1_435sf")
+enemy_icons = Array[Texture2D]([ExtResource("12_wng8v"), ExtResource("3_bx1by"), ExtResource("4_ji2s3")])
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=718305159]
 layout_mode = 0
@@ -140,6 +145,7 @@ layout_mode = 2
 
 [node name="ShrineGrid" parent="GridContainer/EnemyContainer/VBoxContainer/MarginContainer2" unique_id=698383202 instance=ExtResource("3_ocyaw")]
 layout_mode = 2
+default_objects = Array[ExtResource("5_2ocd6")]([ExtResource("11_nat1o")])
 
 [node name="MarginContainer" type="MarginContainer" parent="GridContainer/EnemyContainer/VBoxContainer" unique_id=2120659682]
 layout_mode = 2

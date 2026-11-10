@@ -9,8 +9,9 @@ extends Node2D
 	"title": $Menu
 }
 
+@export var followers_gained_per_life_lost: int = 50
 @export var player_follower_count: int = 100
-var enemy_follower_count: int = 10
+var enemy_follower_count: int = 50
 
 var current_player_score: int = 0
 var current_enemy_score: int = 0
@@ -20,9 +21,14 @@ var current_player_shrine_objects: Array[ShrineObject] = []
 var current_enemy_shrine_objects: Array[ShrineObject] = []
 
 var _waiting_for_player_input: bool = false
+const AUTO_ADVANCE_SECONDS := 2.5
 
 @export var current_player_dice: Array[ShrineDice] = []
 @export var current_enemy_dice: Array[ShrineDice] = []
+var player_dice_adjacency: Array[int] = []
+var player_dice_right_neighbour: Array[int] = []
+var player_dice_neighbours: Array = []
+var player_item_dice: Array[Dictionary] = []
 @export var follower_requirement_to_win: int = 10000
 @export var player_total_wins: int = 0
 @export var player_lives_remaining: int = 10
@@ -33,6 +39,7 @@ var _waiting_for_player_input: bool = false
 signal initalize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
 signal shop_opened
 signal shrine_object_added(item: ShrineObject)
+signal shrine_object_removed(item: ShrineObject)
 signal battle_over
 signal game_over
 signal getting_player_input
@@ -95,11 +102,17 @@ func add_shrine_object(item: ShrineObject) -> void:
 		effect.on_pickup()
 	shrine_object_added.emit(item)
 
+func remove_shrine_object(item: ShrineObject) -> void:
+	current_player_shrine_objects.erase(item)
+	if item is ShrineDice:
+		current_player_dice.erase(item as ShrineDice)
+	shrine_object_removed.emit(item)
+
 func add_score(amount: int) -> void:
 	current_player_score += amount
 
 func add_followers(amount: int) -> void:
-	player_follower_count += amount
+	player_follower_count = maxi(0, player_follower_count + amount)
 
 func spend_followers(amount: int) -> bool:
 	if player_follower_count < amount:
@@ -108,20 +121,22 @@ func spend_followers(amount: int) -> bool:
 	return true
 
 func followers_percent(percent: float) -> void:
-	player_follower_count = int(player_follower_count * (1.0 + percent))
+	player_follower_count = maxi(0, int(player_follower_count * (1.0 + percent)))
 
 func steal_followers(amount: int) -> void:
 	var taken := mini(amount, enemy_follower_count)
 	enemy_follower_count -= taken
 	player_follower_count += taken
 
-func score_rolls(rolls: Array[int], is_player_dice: bool) -> void:
+func score_rolls(rolls: Array[int], dice: Array[ShrineDice], is_player_dice: bool) -> void:
 	pending_rolls[is_player_dice] = rolls
 	var total := 0
 	for value in rolls:
 		total += value
 	if is_player_dice:
 		var effects := all_effects()
+		for effect in effects:
+			effect.on_all_rolls(rolls, current_player_dice.size())
 		for value in rolls:
 			for effect in effects:
 				effect.on_die_rolled(value)
@@ -129,8 +144,14 @@ func score_rolls(rolls: Array[int], is_player_dice: bool) -> void:
 		for effect in effects:
 			score = effect.modify_score(score)
 		current_player_score += int(score)
+		for i in rolls.size():
+			for effect in effects:
+				effect.on_die_settled(dice[i], rolls[i])
+			for effect in dice[i].effects:
+				effect.on_die_settled(dice[i], rolls[i])
 		for effect in effects:
 			effect.on_roll_complete()
+
 	else:
 		current_enemy_score += total * enemy_follower_count
 	if pending_rolls.size() == 2:
@@ -150,19 +171,25 @@ func calculate_wins_losses():
 		player_follower_count += enemy_follower_count/2
 	else:
 		_is_win = false
-		player_lives_remaining -= 1
-		player_follower_count -= player_follower_count/2 - 10
+		player_lives_remaining = maxi(0, player_lives_remaining - 1)
+		player_follower_count = maxi(0, player_follower_count - (player_follower_count/2 - 10))
+		add_followers(followers_gained_per_life_lost * (10 - player_lives_remaining))
 		
-	_waiting_for_player_input = true
-	await getting_player_input
+	await _wait_for_advance()
 		
 	transition_to_after_combat("battle")
 	
 	after_combat_input()
+
+func _wait_for_advance() -> void:
+	_waiting_for_player_input = true
+	var timer := get_tree().create_timer(AUTO_ADVANCE_SECONDS)
+	while _waiting_for_player_input and timer.time_left > 0.0:
+		await get_tree().process_frame
+	_waiting_for_player_input = false
 	
 func after_combat_input():
-	_waiting_for_player_input = true
-	await getting_player_input
+	await _wait_for_advance()
 	
 	if _is_win:
 		emit_signal("win_gained")

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://cfj2vycw332re"]
+
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_l3shr"]
+[ext_resource type="Script" uid="uid://bo6tcbmo7mb18" path="res://Resources/ShrineObjects/Effects/AdjacentDiceBonus.gd" id="2_w8klc"]
+[ext_resource type="Texture2D" uid="uid://dh6ixh8k1vmtf" path="res://Resources/ShrineObjects/Sprites/shuriken.png" id="3_l3shr"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="4_r6wgh"]
+
+[sub_resource type="Resource" id="Resource_0tvvx"]
+script = ExtResource("2_w8klc")
+amount_per_die = 4
+min_adjacent_dice = 4
+
+[resource]
+script = ExtResource("4_r6wgh")
+name = "Shuriken"
+effect = "if there are 4 dice adjacent to this, they all get +4"
+icon = ExtResource("3_l3shr")
+rarity = 75
+grid_width = 2
+grid_height = 2
+price = 200
+effects = Array[ExtResource("1_l3shr")]([SubResource("Resource_0tvvx")])
+metadata/_custom_type_script = "uid://5k3ce70ad2py"

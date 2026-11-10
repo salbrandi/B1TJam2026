@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://d3lrsqe8pqbra"]
+
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_4cuql"]
+[ext_resource type="Texture2D" uid="uid://0xvx6ak8q7rv" path="res://Resources/ShrineObjects/Sprites/knucklebones.png" id="2_0sfu2"]
+[ext_resource type="Script" uid="uid://bo6tcbmo7mb18" path="res://Resources/ShrineObjects/Effects/AdjacentDiceBonus.gd" id="2_4cuql"]
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="4_stde1"]
+
+[sub_resource type="Resource" id="Resource_0tvvx"]
+script = ExtResource("2_4cuql")
+
+[resource]
+script = ExtResource("4_stde1")
+name = "Knucklebones"
+effect = "Adjacent dice get +1 for each other dice adjacent to this"
+icon = ExtResource("2_0sfu2")
+rarity = 75
+grid_width = 2
+grid_height = 2
+price = 200
+effects = Array[ExtResource("1_4cuql")]([SubResource("Resource_0tvvx")])
+metadata/_custom_type_script = "uid://5k3ce70ad2py"

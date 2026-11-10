@@ -3,9 +3,18 @@ extends Container
 
 signal placements_changed
 
-@export var columns: int = 6:
+@export var columns: int = 8:
 	set(value):
 		columns = value
+		if is_inside_tree():
+			_sync_cells()
+		refresh()
+
+@export var rows: int = 8:
+	set(value):
+		rows = value
+		if is_inside_tree():
+			_sync_cells()
 		refresh()
 
 @export var cell_size := Vector2(96, 96):
@@ -29,33 +38,43 @@ func _ready() -> void:
 	_layer.draw.connect(draw_placements)
 	add_child(_layer)
 	child_entered_tree.connect(func(_node): move_child.call_deferred(_layer, -1))
+	_sync_cells()
 	refresh()
 	show_markers(false)
 	initialize_combat()
 	if is_player_grid:
 		Global.gm.shrine_object_added.connect(_on_shrine_object_added)
+		Global.gm.shrine_object_removed.connect(_on_shrine_object_removed)
 
 
 func _on_shrine_object_added(item: ShrineObject) -> void:
-	for i in columns * rows():
+	for i in columns * rows:
 		if place_object(item, Vector2i(i % columns, i / columns)):
 			return
 
 
-func initialize_combat():
+func _on_shrine_object_removed(item: ShrineObject) -> void:
+	for placement in _placements.duplicate():
+		if placement["shrine"] == item:
+			_placements.erase(placement)
+	handle_grid_update()
+
+
+func initialize_combat(extra_objects: Array[ShrineObject] = []):
+	_placements.clear()
 	current_dice.clear()
-	for shrineObj in default_objects:
+	for shrineObj in default_objects + extra_objects:
 		if shrineObj is ShrineDice:
 			current_dice.append(shrineObj as ShrineDice)
-		for i in columns * rows():
+		for i in columns * rows:
 			if place_object(shrineObj, Vector2i(i % columns, i / columns)):
 				break
 	if is_player_grid:
 		Global.gm.current_player_dice = current_dice
 	else:
 		Global.gm.current_enemy_dice = current_dice
+	publish_dice_adjacency()
 
-# Arrange children
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_SORT_CHILDREN:
 		var cells := get_cells()
@@ -78,7 +97,7 @@ func _process(_delta: float) -> void:
 
 
 func _get_minimum_size() -> Vector2:
-	return Vector2(columns, rows()) * cell_size
+	return Vector2(columns, rows) * cell_size
 
 
 func refresh() -> void:
@@ -89,7 +108,16 @@ func refresh() -> void:
 
 func handle_grid_update() -> void:
 	_layer.queue_redraw()
+	publish_dice_adjacency()
 	placements_changed.emit()
+
+
+func publish_dice_adjacency() -> void:
+	if is_player_grid:
+		Global.gm.player_dice_adjacency = adjacent_dice_counts()
+		Global.gm.player_dice_right_neighbour = right_neighbour_indices()
+		Global.gm.player_dice_neighbours = edge_neighbour_indices()
+		Global.gm.player_item_dice = item_dice_neighbours()
 
 
 func place_object(shrine: ShrineObject, cell: Vector2i) -> bool:
@@ -116,6 +144,14 @@ func cell_at_position(pos: Vector2) -> Vector2i:
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		show_markers(not get_object_at(cell_at_position(event.position)).is_empty())
+
+
+func _get_tooltip(at_position: Vector2) -> String:
+	var placement := get_object_at(cell_at_position(at_position))
+	if placement.is_empty():
+		return ""
+	var shrine: ShrineObject = placement["shrine"]
+	return "%s\n%s" % [shrine.name, shrine.effect]
 
 
 func end_drag() -> void:
@@ -174,13 +210,13 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 
 func determine_drop_origin(at_position: Vector2, data: Dictionary) -> Vector2i:
 	var shrine: ShrineObject = data["shrine"]
-	var max_origin := Vector2i(columns, rows()) - Vector2i(shrine.grid_width, shrine.grid_height)
+	var max_origin := Vector2i(columns, rows) - Vector2i(shrine.grid_width, shrine.grid_height)
 	return (cell_at_position(at_position) - data["grab"]).clamp(Vector2i.ZERO, max_origin)
 
 
 func can_place(shrine: ShrineObject, origin: Vector2i, ignore: Dictionary = {}) -> bool:
 	var new_area := area(shrine, origin)
-	if not Rect2i(Vector2i.ZERO, Vector2i(columns, rows())).encloses(new_area):
+	if not Rect2i(Vector2i.ZERO, Vector2i(columns, rows)).encloses(new_area):
 		return false
 	for placement in _placements:
 		if placement != ignore and area(placement["shrine"], placement["cell"]).intersects(new_area):
@@ -228,5 +264,104 @@ func show_markers(on: bool) -> void:
 		cell.visible = on
 
 
-func rows() -> int:
-	return ceili(float(get_cells().size()) / columns)
+func _sync_cells() -> void:
+	var cells := get_cells()
+	var target := columns * rows
+	while cells.size() < target:
+		var cell: Control
+		if cells.is_empty():
+			cell = TextureRect.new()
+		else:
+			cell = cells[0].duplicate() as Control
+		add_child(cell)
+		cells.append(cell)
+	while cells.size() > target:
+		var cell := cells.pop_back() as Control
+		remove_child(cell)
+		cell.queue_free()
+
+
+func adjacent_dice_counts() -> Array[int]:
+	var areas := get_dice_areas()
+	var counts: Array[int] = []
+	for i in areas.size():
+		var count := 0
+		for j in areas.size():
+			if i != j and _edge_adjacent(areas[i], areas[j]):
+				count += 1
+		counts.append(count)
+	return counts
+
+
+func right_neighbour_indices() -> Array[int]:
+	var areas := get_dice_areas()
+	var neighbours: Array[int] = []
+	for i in areas.size():
+		var found := -1
+		for j in areas.size():
+			if i != j and _touches_right(areas[i], areas[j]):
+				found = j
+				break
+		neighbours.append(found)
+	return neighbours
+
+
+func edge_neighbour_indices() -> Array:
+	var areas := get_dice_areas()
+	var neighbours: Array = []
+	for i in areas.size():
+		var found: Array[int] = []
+		for j in areas.size():
+			if i != j and _edge_adjacent(areas[i], areas[j]):
+				found.append(j)
+		neighbours.append(found)
+	return neighbours
+
+
+func item_dice_neighbours() -> Array[Dictionary]:
+	var areas := get_dice_areas()
+	var result: Array[Dictionary] = []
+	for placement in _placements:
+		var shrine: ShrineObject = placement["shrine"]
+		if shrine is ShrineDice:
+			continue
+		var item_area := area(shrine, placement["cell"])
+		var dice: Array[int] = []
+		var right: Array[int] = []
+		for i in areas.size():
+			if _edge_adjacent(item_area, areas[i]):
+				dice.append(i)
+			if _touches_right(item_area, areas[i]):
+				right.append(i)
+		result.append({"item": shrine, "dice": dice, "right": right})
+	return result
+
+
+func get_dice_areas() -> Array[Rect2i]:
+	var unclaimed := _placements.duplicate()
+	var result: Array[Rect2i] = []
+	for die in current_dice:
+		var found := {}
+		for placement in unclaimed:
+			if placement["shrine"] == die:
+				found = placement
+				break
+		if found.is_empty():
+			result.append(Rect2i())
+		else:
+			unclaimed.erase(found)
+			result.append(area(found["shrine"], found["cell"]))
+	return result
+
+
+func _touches_right(a: Rect2i, b: Rect2i) -> bool:
+	return a.has_area() and b.position.x == a.end.x and b.position.y < a.end.y and b.end.y > a.position.y
+
+
+func _edge_adjacent(a: Rect2i, b: Rect2i) -> bool:
+	for x in range(a.position.x, a.end.x):
+		for y in range(a.position.y, a.end.y):
+			for offset in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+				if b.has_point(Vector2i(x, y) + offset):
+					return true
+	return false

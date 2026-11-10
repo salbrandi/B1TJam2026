@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShrineDice" format=3 uid="uid://ce7uxe77cah0r"]
+
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_gq0dd"]
+[ext_resource type="Texture2D" uid="uid://snmdwjkx4gnb" path="res://Resources/ShrineObjects/Sprites/d6.png" id="2_dc2p0"]
+[ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="3_v5lfs"]
+
+[resource]
+script = ExtResource("3_v5lfs")
+values = Array[int]([20])
+current_value = 20
+name = "Boulder"
+effect = "Bigger. Always rolls 20"
+icon = ExtResource("2_dc2p0")
+rarity = 80
+grid_width = 2
+grid_height = 2
+price = 300
+metadata/_custom_type_script = "uid://ketutherx66m"

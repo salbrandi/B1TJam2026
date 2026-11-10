@@ -12,4 +12,5 @@ name = "D10"
 effect = "Rolls 1-10"
 icon = ExtResource("2_bhfo1")
 rarity = 50
+price = 15
 metadata/_custom_type_script = "uid://ketutherx66m"

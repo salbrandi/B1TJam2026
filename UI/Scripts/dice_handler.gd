@@ -3,6 +3,7 @@ extends Node
 const DICE_RECT_SCENE := preload("res://UI/DiceRect.tscn")
 
 var _is_roll_enabled: bool
+var _rect_by_index: Dictionary = {}
 
 @export var is_player_dice: bool = false
 
@@ -14,17 +15,85 @@ func intialize_combat(current_shrine_objects: Array[ShrineObject], current_playe
 	_is_roll_enabled = true
 	for child in get_children():
 		child.queue_free()
-	# create a dice for each ShrineDice in the grid
 	var typed_dice = Global.gm.current_player_dice if is_player_dice else Global.gm.current_enemy_dice
-	for dice in typed_dice:
-		var dicerect := DICE_RECT_SCENE.instantiate() as DiceRect
-		var die := dice.duplicate() as ShrineDice
+	var adjacency: Array[int] = Global.gm.player_dice_adjacency
+	var dice_copies: Array[ShrineDice] = []
+	for i in typed_dice.size():
+		var die := (typed_dice[i] as ShrineDice).duplicate() as ShrineDice
 		if is_player_dice:
+			var adjacent_count := adjacency[i] if i < adjacency.size() else 0
 			for effect in Global.gm.all_effects():
 				effect.modify_die(die)
-		dicerect.dice = die
+				effect.modify_die_adjacency(die, adjacent_count)
+		dice_copies.append(die)
+	if is_player_dice:
+		_apply_item_neighbour_effects(dice_copies)
+	var consumed: Dictionary = _apply_consumption(typed_dice, dice_copies) if is_player_dice else {}
+	if is_player_dice:
+		_apply_adjacent_consumption(consumed)
+		_apply_random_consumption(consumed, dice_copies.size())
+	_rect_by_index.clear()
+	for i in dice_copies.size():
+		if consumed.has(i):
+			continue
+		var dicerect := DICE_RECT_SCENE.instantiate() as DiceRect
+		dicerect.dice = dice_copies[i]
 		dicerect.roll_finished.connect(_on_dice_rect_roll_finished)
+		_rect_by_index[i] = dicerect
 		add_child(dicerect)
+
+
+func _apply_consumption(sources: Array, dice: Array[ShrineDice]) -> Dictionary:
+	var consumed := {}
+	var right: Array[int] = Global.gm.player_dice_right_neighbour
+	for i in dice.size():
+		if consumed.has(i) or i >= right.size() or right[i] < 0 or consumed.has(right[i]):
+			continue
+		var j := right[i]
+		for effect in (sources[i] as ShrineDice).effects:
+			if effect.consume_die(dice[i], dice[j]):
+				consumed[j] = true
+				break
+	return consumed
+
+
+func _apply_item_neighbour_effects(dice: Array[ShrineDice]) -> void:
+	for entry in Global.gm.player_item_dice:
+		var item := entry["item"] as ShrineObject
+		for index in entry["dice"]:
+			for effect in item.effects:
+				effect.modify_die_next_to_item(dice[index])
+
+
+func _apply_adjacent_consumption(consumed: Dictionary) -> void:
+	for entry in Global.gm.player_item_dice:
+		var item := entry["item"] as ShrineObject
+		for effect in item.effects:
+			if not effect.consumes_random_adjacent_die():
+				continue
+			var candidates: Array[int] = []
+			for index in entry["dice"]:
+				if not consumed.has(index):
+					candidates.append(index)
+			if candidates.is_empty():
+				continue
+			consumed[candidates.pick_random()] = true
+
+
+func _apply_random_consumption(consumed: Dictionary, dice_count: int) -> void:
+	var candidates: Array[int] = []
+	for i in dice_count:
+		if not consumed.has(i):
+			candidates.append(i)
+	for effect in Global.gm.all_effects():
+		if candidates.is_empty():
+			break
+		if not effect.consumes_random_die():
+			continue
+		var picked: int = candidates.pick_random()
+		candidates.erase(picked)
+		consumed[picked] = true
+		effect.on_random_die_consumed()
 
 
 func roll_all_dice() -> Array[int]:
@@ -37,10 +106,58 @@ func roll_all_dice() -> Array[int]:
 				rerolls.append(child)
 		await _roll_dice_rects(rerolls)
 
+	if is_player_dice:
+		_apply_neighbour_effects()
+		_apply_right_roll_effects()
+		_apply_adjacent_roll_effects()
+
 	var rolls: Array[int] = []
 	for child in get_children():
 		rolls.append((child as DiceRect).dice.current_value)
 	return rolls
+
+
+func _apply_adjacent_roll_effects() -> void:
+	for entry in Global.gm.player_item_dice:
+		var item := entry["item"] as ShrineObject
+		for index in entry["dice"]:
+			if not _rect_by_index.has(index):
+				continue
+			var rect := _rect_by_index[index] as DiceRect
+			for effect in item.effects:
+				effect.on_adjacent_die_rolled(rect.dice)
+			rect.label.text = str(rect.dice.current_value)
+
+
+func _apply_right_roll_effects() -> void:
+	for entry in Global.gm.player_item_dice:
+		var item := entry["item"] as ShrineObject
+		var rolled_right := 0
+		for index in entry["right"]:
+			if _rect_by_index.has(index):
+				rolled_right += 1
+		for effect in item.effects:
+			effect.on_right_dice_rolled(rolled_right)
+
+
+func _apply_neighbour_effects() -> void:
+	var neighbours: Array = Global.gm.player_dice_neighbours
+	var snapshot := {}
+	for index in _rect_by_index:
+		snapshot[index] = (_rect_by_index[index] as DiceRect).dice.current_value
+	for index in _rect_by_index:
+		var source := (_rect_by_index[index] as DiceRect).dice
+		if index >= neighbours.size():
+			continue
+		for j in neighbours[index]:
+			if not _rect_by_index.has(j):
+				continue
+			var target := (_rect_by_index[j] as DiceRect).dice
+			for effect in source.effects:
+				effect.modify_neighbour_roll(source, snapshot[index], target)
+	for index in _rect_by_index:
+		var rect := _rect_by_index[index] as DiceRect
+		rect.label.text = str(rect.dice.current_value)
 
 
 func _roll_dice_rects(rects: Array) -> void:
@@ -73,4 +190,11 @@ func _on_button_pressed():
 	_is_roll_enabled = false
 	%SoundManager/SweepingSynth.play_random_sound()
 	var rolls := await roll_all_dice()
-	Global.gm.score_rolls(rolls, is_player_dice)
+	Global.gm.score_rolls(rolls, get_dice(), is_player_dice)
+
+
+func get_dice() -> Array[ShrineDice]:
+	var dice: Array[ShrineDice] = []
+	for child in get_children():
+		dice.append((child as DiceRect).dice)
+	return dice

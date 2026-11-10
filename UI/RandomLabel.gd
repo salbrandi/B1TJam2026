@@ -6,10 +6,18 @@ class_name RandomLabel
 @export var max_font_size: int = 48
 @export var min_font_size: int = 24
 
+var _box_size := Vector2.ZERO
+
 func _ready() -> void:
-	resized.connect(fit_text)
+	_box_size = size
+	resized.connect(_on_resized)
 	if random_texts.size() > 0:
 		set_fitted_text(random_texts.pick_random())
+
+func _on_resized() -> void:
+	if _box_size == Vector2.ZERO or size.x != _box_size.x:
+		_box_size = size
+		fit_text()
 
 func set_random_text() -> void:
 	if random_texts.size() > 0:
@@ -21,7 +29,7 @@ func set_fitted_text(new_text: String) -> void:
 
 func fit_text() -> void:
 	var font: Font = get_theme_font("font")
-	if not font or size.x <= 0 or size.y <= 0:
+	if not font or _box_size.x <= 0 or _box_size.y <= 0:
 		return
 
 	var current_size: int = max_font_size
@@ -30,9 +38,9 @@ func fit_text() -> void:
 		if autowrap_mode == TextServer.AUTOWRAP_OFF:
 			text_size = font.get_string_size(text, horizontal_alignment, -1, current_size)
 		else:
-			text_size = font.get_multiline_string_size(text, horizontal_alignment, size.x, current_size)
+			text_size = font.get_multiline_string_size(text, horizontal_alignment, _box_size.x, current_size)
 
-		if text_size.x <= size.x and text_size.y <= size.y:
+		if text_size.x <= _box_size.x and text_size.y <= _box_size.y:
 			break
 		current_size -= 1
 

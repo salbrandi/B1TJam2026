@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://b25xw6w2cg4lw"]
+
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="1_obj"]
+[ext_resource type="Texture2D" uid="uid://c3svnvcnkct2p" path="res://Resources/ShrineObjects/Sprites/apple.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://b1ojmjf6o3nmf" path="res://Resources/ShrineObjects/Effects/AppleFollowers.gd" id="3_apple"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="apple_followers"]
+script = ExtResource("3_apple")
+
+[resource]
+script = ExtResource("1_obj")
+name = "Apple"
+effect = "Gain +1 follower per combat for each apple you own"
+icon = ExtResource("2_icon")
+price = 50
+effects = Array[ExtResource("4_base")]([SubResource("apple_followers")])

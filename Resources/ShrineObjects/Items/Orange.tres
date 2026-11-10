@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://ddjxbuml57s1q"]
+
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="1_obj"]
+[ext_resource type="Texture2D" uid="uid://di0ln7xco8ycs" path="res://Resources/ShrineObjects/Sprites/orange.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bkk5ft8v8ntt5" path="res://Resources/ShrineObjects/Effects/OrangeEffect.gd" id="3_orange"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="orange_follower"]
+script = ExtResource("3_orange")
+
+[resource]
+script = ExtResource("1_obj")
+name = "Orange"
+effect = "When the dice to the right is rolled, gain 1 follower"
+icon = ExtResource("2_icon")
+price = 20
+effects = Array[ExtResource("4_base")]([SubResource("orange_follower")])

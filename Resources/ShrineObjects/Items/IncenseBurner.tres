@@ -7,11 +7,13 @@
 
 [sub_resource type="Resource" id="reroll_on_one"]
 script = ExtResource("3_reroll")
+once_per_combat = true
 
 [resource]
 script = ExtResource("2_obj")
 name = "Incense Burner"
-effect = "Reroll dice that roll a 1"
+effect = "Reroll the first die that rolls a 1 each combat"
 icon = ExtResource("1_incense")
+price = 30
 effects = Array[ExtResource("4_base")]([SubResource("reroll_on_one")])
 metadata/_custom_type_script = "uid://5k3ce70ad2py"

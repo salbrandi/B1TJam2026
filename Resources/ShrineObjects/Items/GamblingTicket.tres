@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://ckfvkbypp18ud"]
+
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="1_obj"]
+[ext_resource type="Texture2D" uid="uid://cq8qu1uv14lsk" path="res://Resources/ShrineObjects/Sprites/gambling-ticket.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://dskv6rt7p16yg" path="res://Resources/ShrineObjects/Effects/GamblingTicketEffect.gd" id="3_ticket"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
+
+[sub_resource type="Resource" id="gambling_ticket"]
+script = ExtResource("3_ticket")
+
+[resource]
+script = ExtResource("1_obj")
+name = "Gambling Ticket"
+effect = "If you roll all the same number, multiply your followers by the number of dice you own"
+icon = ExtResource("2_icon")
+rarity = 50
+price = 100
+effects = Array[ExtResource("4_base")]([SubResource("gambling_ticket")])

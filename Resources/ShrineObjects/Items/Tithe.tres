@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ShrineObject" format=3 uid="uid://cv052ac6yelc4"]
+
+[ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="1_obj"]
+[ext_resource type="Texture2D" uid="uid://b5u6ekbbpd1ps" path="res://Resources/ShrineObjects/Sprites/mark-of-greed.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="3_base"]
+[ext_resource type="Script" uid="uid://biptrl60aeaf8" path="res://Resources/ShrineObjects/Effects/ScoreBonusFromFollowers.gd" id="4_score"]
+[ext_resource type="Script" uid="uid://bo5bh5nj3em0s" path="res://Resources/ShrineObjects/Effects/FollowerPercent.gd" id="5_percent"]
+
+[sub_resource type="Resource" id="score_bonus"]
+script = ExtResource("4_score")
+
+[sub_resource type="Resource" id="follower_loss"]
+script = ExtResource("5_percent")
+
+[resource]
+script = ExtResource("1_obj")
+name = "Tithe"
+effect = "Your followers give 10% more score. Lose 5% of followers after each combat"
+icon = ExtResource("2_icon")
+rarity = 50
+effects = Array[ExtResource("3_base")]([SubResource("score_bonus"), SubResource("follower_loss")])
