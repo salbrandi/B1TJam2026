@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cqq10awc4185t" path="res://Gameplay/Gamemanager.gd" id="1_2uwcf"]
 [ext_resource type="PackedScene" uid="uid://bxrlf7xjnneu2" path="res://UI/ShrineBattleScreen.tscn" id="1_nxxrv"]
+[ext_resource type="PackedScene" uid="uid://ec0tyn45xbkt" path="res://UI/PauseMenu.tscn" id="2_0ejt0"]
 [ext_resource type="PackedScene" uid="uid://bjc3067dfy7wi" path="res://UI/GameOver.tscn" id="2_qg7el"]
 [ext_resource type="PackedScene" uid="uid://d1omoofou3ys1" path="res://UI/Menu.tscn" id="3_2uwcf"]
 [ext_resource type="PackedScene" uid="uid://cf8i7bgn10r13" path="res://UI/AfterCombat.tscn" id="3_qg7el"]
 [ext_resource type="PackedScene" uid="uid://cmxsvl6i45vws" path="res://UI/Shop.tscn" id="5_h4phd"]
+[ext_resource type="PackedScene" uid="uid://b2sglf6xl5igk" path="res://UI/credits.tscn" id="6_h4phd"]
 [ext_resource type="Script" uid="uid://5k3ce70ad2py" path="res://Resources/ShrineObjects/ShrineObject.gd" id="6_oyrw6"]
 [ext_resource type="Resource" uid="uid://drkjg1ar67oh3" path="res://Resources/ShrineObjects/Items/Candles.tres" id="7_i67la"]
 [ext_resource type="Resource" uid="uid://c7ibnr3ujw0d1" path="res://Resources/ShrineObjects/Items/IncenseBurner.tres" id="8_l0gsc"]
@@ -51,4 +53,11 @@ offering_pool = Array[ExtResource("6_oyrw6")]([ExtResource("7_i67la"), ExtResour
 dice_pool = Array[ExtResource("10_ee22n")]([ExtResource("11_wf7hc"), ExtResource("12_ii763"), ExtResource("13_lk0i1"), ExtResource("14_2jsji"), ExtResource("15_ffnbw"), ExtResource("17_lk0i1"), ExtResource("18_2jsji")])
 cursed_pool = Array[ExtResource("6_oyrw6")]([ExtResource("10_i67la"), ExtResource("18_ee22n"), ExtResource("19_wf7hc"), ExtResource("22_ffnbw"), ExtResource("26_n5wc5"), ExtResource("27_0u44j"), ExtResource("31_ms8wd")])
 
+[node name="Credits" parent="." unique_id=2060173719 instance=ExtResource("6_h4phd")]
+visible = false
+
 [node name="Menu" parent="." unique_id=1703320354 instance=ExtResource("3_2uwcf")]
+
+[node name="PauseMenu" parent="." unique_id=313423106 instance=ExtResource("2_0ejt0")]
+visible = false
+z_index = 4096

@@ -83,6 +83,13 @@ size_flags_horizontal = 4
 theme = ExtResource("2_h7hgu")
 text = "Start"
 
+[node name="CreditsButton" type="Button" parent="GridContainer/MiddleThird/VBoxContainer/VBoxContainer" unique_id=2102976404]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_h7hgu")
+text = "Credits"
+
 [node name="ExitGame" type="Button" parent="GridContainer/MiddleThird/VBoxContainer/VBoxContainer" unique_id=1282393345]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
@@ -105,7 +112,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="BottomThird" type="HBoxContainer" parent="GridContainer" unique_id=2007418809]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -119,4 +126,5 @@ position = Vector2(577, 194)
 scale = Vector2(2, 2)
 
 [connection signal="pressed" from="GridContainer/MiddleThird/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="GridContainer/MiddleThird/VBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="GridContainer/MiddleThird/VBoxContainer/VBoxContainer/ExitGame" to="." method="_on_exit_game_pressed"]

@@ -4,7 +4,9 @@ extends Node2D
 @onready var all_screens = {
 	"after_combat": $AfterCombat,
 	"battle": $ShrineBattleScreen,
+	"credits": $Credits,
 	"game_over": $GameOver,
+	"pause": $PauseMenu,
 	"shop": $Shop,
 	"title": $Menu
 }
@@ -22,6 +24,7 @@ var current_enemy_shrine_objects: Array[ShrineObject] = []
 
 var _waiting_for_player_input: bool = false
 const AUTO_ADVANCE_SECONDS := 2.5
+var paused_scene: Control
 
 @export var current_player_dice: Array[ShrineDice] = []
 @export var current_enemy_dice: Array[ShrineDice] = []
@@ -35,12 +38,13 @@ var player_item_dice: Array[Dictionary] = []
 @export var _is_win: bool
 @export var _is_victory: bool
 
-
 signal initalize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int)
 signal shop_opened
 signal shrine_object_added(item: ShrineObject)
 signal shrine_object_removed(item: ShrineObject)
 signal battle_over
+signal combat_over
+signal process_battle
 signal game_over
 signal getting_player_input
 signal lost_life
@@ -55,13 +59,21 @@ func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if all_screens["title"].is_visible_in_tree() or all_screens["credits"].is_visible_in_tree():
+			return
+		toggle_pause()
+		
 	if not _waiting_for_player_input:
+		return
+	
+	if get_tree().paused:
 		return
 	
 	if event.is_pressed() and not event.is_echo():
 		_waiting_for_player_input = false
 		get_viewport().set_input_as_handled()
-		getting_player_input.emit()
+		emit_signal("getting_player_input")
 
 func transition_scenes(from_scene: String, to_scene: String) -> void:
 	if all_screens.has(from_scene):
@@ -75,7 +87,7 @@ func transition_to_combat(from_scene: String) -> void:
 	
 func transition_to_after_combat(from_scene: String) -> void:
 	transition_scenes(from_scene, "after_combat")
-	emit_signal("battle_over")
+	emit_signal("process_battle")
 
 func transition_to_shop(from_scene: String) -> void:
 	transition_scenes(from_scene, "shop")
@@ -85,6 +97,25 @@ func transition_to_game_over(from_scene: String) -> void:
 	transition_scenes(from_scene, "game_over")
 	emit_signal("game_over")
 	
+func toggle_pause() -> void:
+	get_tree().paused = !get_tree().paused
+	
+	if all_screens["pause"].visible and paused_scene:
+		all_screens["pause"].visible = !all_screens["pause"].visible
+		paused_scene.visible = !paused_scene.visible
+		paused_scene = null
+		return
+	
+	for i in range(all_screens.size() - 1):
+		if all_screens.values()[i].visible == true:
+			paused_scene = all_screens.values()[i]
+	
+	paused_scene.visible = !paused_scene.visible
+	all_screens["pause"].visible = !all_screens["pause"].visible
+	
+func transition_to_credits(from_scene: String) -> void:
+	transition_scenes(from_scene, "credits")
+
 func transition_to_title(from_scene: String) -> void:
 	transition_scenes(from_scene, "title")
 
@@ -174,6 +205,8 @@ func calculate_wins_losses():
 		player_lives_remaining = maxi(0, player_lives_remaining - 1)
 		player_follower_count = maxi(0, player_follower_count - (player_follower_count/2 - 10))
 		add_followers(followers_gained_per_life_lost * (10 - player_lives_remaining))
+	
+	emit_signal("combat_over")
 		
 	await _wait_for_advance()
 		
@@ -194,16 +227,16 @@ func after_combat_input():
 	if _is_win:
 		emit_signal("win_gained")
 	else:
-		emit_signal("life_lost")
+		emit_signal("lost_life")
 	
 	if player_total_wins == 10:
 		_is_victory = true
-		transition_to_game_over("battle")
+		transition_to_game_over("after_combat")
 		return
 	
 	if player_lives_remaining == 0:
 		_is_victory = false
-		transition_to_game_over("battle")
+		transition_to_game_over("after_combat")
 		return
 		
 	transition_to_shop("after_combat")	
