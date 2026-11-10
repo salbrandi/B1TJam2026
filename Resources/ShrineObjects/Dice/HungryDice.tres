@@ -16,6 +16,6 @@ name = "Hungry Dice"
 effect = "Consumes the die to its right at combat start, adding a random face of it to each of its faces"
 icon = ExtResource("2_icon")
 rarity = 80
-price = 400
+price = 200
 effects = Array[ExtResource("4_base")]([SubResource("consume_right")])
 metadata/_custom_type_script = "uid://ketutherx66m"

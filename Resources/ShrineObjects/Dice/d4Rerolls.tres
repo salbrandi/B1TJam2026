@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ShrineDice" format=3 uid="uid://biic4mrvoirvd"]
+
+[ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="1_dice"]
+[ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="1_hi0ps"]
+[ext_resource type="Script" uid="uid://drp34bv1fywv0" path="res://Resources/ShrineObjects/Effects/ExtraRolls.gd" id="2_extra"]
+[ext_resource type="Texture2D" uid="uid://snmdwjkx4gnb" path="res://Resources/ShrineObjects/Sprites/d6.png" id="3_icon"]
+
+[sub_resource type="Resource" id="ExtraRolls_1"]
+script = ExtResource("2_extra")
+
+[resource]
+script = ExtResource("1_dice")
+values = Array[int]([1, 2, 3, 4])
+current_value = 1
+name = "FOUR!"
+effect = "d4 that rerolls 4 times"
+icon = ExtResource("3_icon")
+rarity = 50
+price = 40
+effects = Array[ExtResource("1_hi0ps")]([SubResource("ExtraRolls_1")])
+metadata/_custom_type_script = "uid://ketutherx66m"

@@ -24,7 +24,7 @@ func set_item(item: ShrineObject):
 	_fit_name()
 	$Description.text = shrineObject.effect
 	$Icon.texture = shrineObject.icon
-	button.get_node("HBoxContainer/Price").text = str(shrineObject.price)
+	button.get_node("HBoxContainer/Price").text = str(Global.gm.get_shop_price(shrineObject.price))
 	show()
 	button.disabled = false
 	button.modulate = Color.WHITE
@@ -44,7 +44,7 @@ func _fit_name():
 
 
 func _on_button_pressed():
-	if not Global.gm.can_add_shrine_object(shrineObject) or not Global.gm.spend_followers(shrineObject.price):
+	if not Global.gm.can_add_shrine_object(shrineObject) or not Global.gm.spend_followers(Global.gm.get_shop_price(shrineObject.price)):
 		return
 	Global.gm.add_shrine_object(shrineObject)
 	button.disabled = true

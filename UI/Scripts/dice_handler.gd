@@ -84,6 +84,7 @@ func roll_all_dice() -> Array[int]:
 	await _roll_dice_rects(get_children())
 
 	if is_player_dice:
+		await _apply_extra_rolls()
 		var rerolls: Array[Node] = []
 		for child in get_children():
 			if _should_reroll((child as DiceRect).dice.current_value):
@@ -153,6 +154,28 @@ func _roll_dice_rects(rects: Array) -> void:
 		if tween.is_running():
 			await tween.finished
 
+
+
+func _apply_extra_rolls() -> void:
+	var remaining := {}
+	for child in get_children():
+		var count := _extra_rolls_for((child as DiceRect).dice)
+		if count > 0:
+			remaining[child] = count
+	while not remaining.is_empty():
+		var batch: Array = remaining.keys()
+		await _roll_dice_rects(batch)
+		for child in batch:
+			remaining[child] -= 1
+			if remaining[child] <= 0:
+				remaining.erase(child)
+
+
+func _extra_rolls_for(die: ShrineDice) -> int:
+	var total := 0
+	for effect in die.effects:
+		total += effect.extra_rolls()
+	return total
 
 
 func _should_reroll(value: int) -> bool:

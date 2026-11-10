@@ -15,6 +15,9 @@ func modify_score(score: float) -> float:
 func on_roll_complete() -> void:
 	pass
 
+func on_combat_start() -> void:
+	pass
+
 func on_combat_end() -> void:
 	pass
 
@@ -32,6 +35,9 @@ func modify_neighbour_roll(die: ShrineDice, value: int, neighbour: ShrineDice) -
 
 func should_reroll(value: int) -> bool:
 	return false
+
+func extra_rolls() -> int:
+	return 0
 
 func consumes_random_die() -> bool:
 	return false

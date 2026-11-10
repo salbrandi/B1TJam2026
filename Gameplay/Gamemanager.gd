@@ -86,6 +86,8 @@ func transition_scenes(from_scene: String, to_scene: String) -> void:
 		all_screens[to_scene].show()
 
 func transition_to_combat(from_scene: String) -> void:
+	for effect in all_effects():
+		effect.on_combat_start()
 	emit_signal("initalize_combat", current_player_shrine_objects, current_player_dice, current_enemy_dice, player_follower_count, enemy_follower_count)
 	transition_scenes(from_scene, "battle")
 	
@@ -176,6 +178,9 @@ func spend_followers(amount: int) -> bool:
 		return false
 	player_follower_count -= amount
 	return true
+
+func get_shop_price(base_price: int) -> int:
+	return roundi(base_price * (1.0 + 0.1 * player_total_wins))
 
 func followers_percent(percent: float) -> void:
 	player_follower_count = maxi(0, int(player_follower_count * (1.0 + percent)))

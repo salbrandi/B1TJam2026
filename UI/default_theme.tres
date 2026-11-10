@@ -46,6 +46,18 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yj5t"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [resource]
 default_font = ExtResource("1_drjrk")
 default_font_size = 48
@@ -55,3 +67,4 @@ Button/styles/disabled = SubResource("StyleBoxFlat_xj1xw")
 Button/styles/hover = SubResource("StyleBoxFlat_drjrk")
 Button/styles/normal = SubResource("StyleBoxFlat_alyq0")
 Button/styles/pressed = SubResource("StyleBoxFlat_i5s7b")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_7yj5t")

@@ -15,6 +15,7 @@ current_value = 1
 name = "My Band"
 effect = "Rolls 1-12. Every adjacent die gets this die's rolled value added to it"
 icon = ExtResource("2_icon")
+rarity = 80
 price = 200
 effects = Array[ExtResource("4_base")]([SubResource("my_band")])
 metadata/_custom_type_script = "uid://ketutherx66m"

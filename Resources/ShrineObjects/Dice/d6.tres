@@ -11,5 +11,6 @@ current_value = 1
 name = "D6"
 effect = "Rolls 1-6"
 icon = ExtResource("2_3cyk2")
-rarity = 20
+rarity = 50
+price = 50
 metadata/_custom_type_script = "uid://ketutherx66m"
