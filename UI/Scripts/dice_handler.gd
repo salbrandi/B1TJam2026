@@ -111,7 +111,7 @@ func _apply_adjacent_roll_effects() -> void:
 			var rect := _rect_by_index[index] as DiceRect
 			for effect in item.effects:
 				effect.on_adjacent_die_rolled(rect.dice)
-			rect.label.text = str(rect.dice.current_value)
+			rect.set_value_text(rect.dice.current_value)
 
 
 func _apply_right_roll_effects() -> void:
@@ -142,7 +142,7 @@ func _apply_neighbour_effects() -> void:
 				effect.modify_neighbour_roll(source, snapshot[index], target)
 	for index in _rect_by_index:
 		var rect := _rect_by_index[index] as DiceRect
-		rect.label.text = str(rect.dice.current_value)
+		rect.set_value_text(rect.dice.current_value)
 
 
 func _roll_dice_rects(rects: Array) -> void:

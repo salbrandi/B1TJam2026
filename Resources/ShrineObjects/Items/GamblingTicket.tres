@@ -13,6 +13,6 @@ script = ExtResource("1_obj")
 name = "Gambling Ticket"
 effect = "If you roll all the same number, multiply your followers by the number of dice you own"
 icon = ExtResource("2_icon")
-rarity = 50
+rarity = 75
 price = 100
 effects = Array[ExtResource("4_base")]([SubResource("gambling_ticket")])

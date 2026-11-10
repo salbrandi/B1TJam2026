@@ -11,9 +11,12 @@ signal roll_finished
 @export var SHAKE_CYCLES := 1.0
 @export var SHAKE_ANGLE := 12.0
 
+const LABEL_MIN_FONT_SIZE := 8
+
 var animator: AnimationPlayer
 var label: Label
 var rolling_texture: AtlasTexture
+var label_max_font_size: int
 
 func _ready() -> void:
 	texture = (texture as AtlasTexture).duplicate()
@@ -21,7 +24,10 @@ func _ready() -> void:
 	animator = $AnimationPlayer
 	if animator:
 		animator.clear_caches()
-	label = $Label
+	label = get_node_or_null("Label")
+	if label:
+		label_max_font_size = label.get_theme_font_size("font_size")
+		label.resized.connect(_fit_label)
 	if dice:
 		pass
 	else:
@@ -52,9 +58,29 @@ func roll() -> Tween:
 
 func finish_roll() -> void:
 	animator.play("RESET")
-	label.text = str(dice.current_value)
+	set_value_text(dice.current_value)
 	label.show()
 	roll_finished.emit()
+
+
+func set_value_text(value: int) -> void:
+	label.text = str(value)
+	_fit_label()
+
+
+func _fit_label() -> void:
+	var font := label.get_theme_font("font")
+	var width := label.size.x
+	var height := label.size.y
+	if not font or width <= 0 or height <= 0:
+		return
+	var font_size := label_max_font_size
+	while font_size > LABEL_MIN_FONT_SIZE:
+		var text_size := font.get_string_size(label.text, label.horizontal_alignment, -1, font_size)
+		if text_size.x <= width and text_size.y <= height:
+			break
+		font_size -= 1
+	label.add_theme_font_size_override("font_size", font_size)
 
 
 func animate_roll(t: float, base_rotation: float, cycles: float, angle: float) -> void:
