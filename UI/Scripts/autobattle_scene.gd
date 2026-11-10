@@ -1,6 +1,6 @@
 extends Control
 
-const ENEMY_FOLLOWERS_PER_ITEM := Vector2i(50, 200)
+const ENEMY_FOLLOWERS_PER_WIN := Vector2i(400, 600)
 
 @onready var roll_button: Button = $GridContainer/PlayerContainer/VBoxContainer/Button
 @onready var enemy_grid: ShrineGrid = $GridContainer/EnemyContainer/VBoxContainer/MarginContainer2/ShrineGrid
@@ -39,12 +39,12 @@ func _build_enemy_board() -> void:
 	var tiers: Dictionary = shop.build_rarity_tiers(shop.offering_pool + shop.dice_pool)
 	var items: Array[ShrineObject] = []
 	var followers := 50
+	followers += randi_range(ENEMY_FOLLOWERS_PER_WIN.x, ENEMY_FOLLOWERS_PER_WIN.y) * (Global.gm.player_total_wins + 1)
 	for _i in Global.gm.player_total_wins + Global.gm.current_player_shrine_objects.size():
 		var item: ShrineObject = shop.roll_from_tiers(tiers)
 		if item == null:
 			break
 		items.append(item)
-		followers += randi_range(ENEMY_FOLLOWERS_PER_ITEM.x, ENEMY_FOLLOWERS_PER_ITEM.y)
 		followers -= item.price
 	Global.gm.enemy_follower_count = followers
 	enemy_grid.initialize_combat(items)

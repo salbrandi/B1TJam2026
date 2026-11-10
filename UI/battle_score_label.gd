@@ -4,6 +4,7 @@ extends Label
 @export var count_duration: float = 0.5
 @export var bounce_scale: float = 1.3
 @export var bounce_duration: float = 0.15
+@export var animate_decreases: bool = false
 
 var value: int = 0
 var displayed: int = 0
@@ -15,11 +16,11 @@ func _ready() -> void:
 	value = text.to_int()
 	displayed = value
 
-func _process(delta: float) -> void:
-	if is_player_score:
-		set_score(Global.gm.current_player_score)
-	else:
-		set_score(Global.gm.current_enemy_score)
+func _process(_delta: float) -> void:
+	set_score(_get_target_value())
+
+func _get_target_value() -> int:
+	return Global.gm.current_player_score if is_player_score else Global.gm.current_enemy_score
 
 func set_score(new_value: int) -> void:
 	if new_value == value:
@@ -28,7 +29,7 @@ func set_score(new_value: int) -> void:
 	value = new_value
 	if count_tween:
 		count_tween.kill()
-	if new_value <= from:
+	if new_value <= from and not animate_decreases:
 		_show(new_value)
 		return
 	count_tween = create_tween()
@@ -40,10 +41,20 @@ func _on_count_step(step: float) -> void:
 
 
 func _show(number: int) -> void:
-	text = str(number)
+	text = format_number(number)
 	if number > displayed:
 		_bounce()
 	displayed = number
+
+
+func format_number(number: int) -> String:
+	var digits := str(absi(number))
+	var result := ""
+	for i in range(digits.length()):
+		if i > 0 and (digits.length() - i) % 3 == 0:
+			result += " "
+		result += digits[i]
+	return "-" + result if number < 0 else result
 
 
 func _bounce() -> void:
