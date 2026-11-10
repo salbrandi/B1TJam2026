@@ -43,6 +43,7 @@ func _ready() -> void:
 	show_markers(false)
 	initialize_combat()
 	if is_player_grid:
+		Global.gm.player_grid = self
 		Global.gm.shrine_object_added.connect(_on_shrine_object_added)
 		Global.gm.shrine_object_removed.connect(_on_shrine_object_removed)
 
@@ -221,6 +222,13 @@ func can_place(shrine: ShrineObject, origin: Vector2i, ignore: Dictionary = {}) 
 		if placement != ignore and area(placement["shrine"], placement["cell"]).intersects(new_area):
 			return false
 	return true
+
+
+func has_room_for(shrine: ShrineObject) -> bool:
+	for i in columns * rows:
+		if can_place(shrine, Vector2i(i % columns, i / columns)):
+			return true
+	return false
 
 
 func get_object_at(cell: Vector2i) -> Dictionary:

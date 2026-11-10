@@ -1,6 +1,6 @@
 extends Control
 
-const ENEMY_FOLLOWERS_PER_ITEM := Vector2i(50, 100)
+const ENEMY_FOLLOWERS_PER_ITEM := Vector2i(50, 200)
 
 @onready var roll_button: Button = $GridContainer/PlayerContainer/VBoxContainer/Button
 @onready var enemy_grid: ShrineGrid = $GridContainer/EnemyContainer/VBoxContainer/MarginContainer2/ShrineGrid
@@ -45,6 +45,7 @@ func _build_enemy_board() -> void:
 			break
 		items.append(item)
 		followers += randi_range(ENEMY_FOLLOWERS_PER_ITEM.x, ENEMY_FOLLOWERS_PER_ITEM.y)
+		followers -= item.price
 	Global.gm.enemy_follower_count = followers
 	enemy_grid.initialize_combat(items)
 

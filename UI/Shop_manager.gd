@@ -9,7 +9,7 @@ extends Control
 @onready var dice_slot: ShopItem = $ItemCards/GridContainer/DiceSlot/ShopItem
 @onready var cursed_slot: ShopItem = $ItemCards/GridContainer/CurseSlot/ShopItem
 
-@export var base_reroll_cost: int = 10
+@export var base_reroll_cost: int = 5
 
 var offering_tiers: Dictionary = {}
 var dice_tiers: Dictionary = {}

@@ -44,7 +44,7 @@ func _fit_name():
 
 
 func _on_button_pressed():
-	if not Global.gm.spend_followers(shrineObject.price):
+	if not Global.gm.can_add_shrine_object(shrineObject) or not Global.gm.spend_followers(shrineObject.price):
 		return
 	Global.gm.add_shrine_object(shrineObject)
 	button.disabled = true

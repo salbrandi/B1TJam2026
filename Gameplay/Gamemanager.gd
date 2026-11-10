@@ -12,8 +12,10 @@ extends Node2D
 }
 
 @export var followers_gained_per_life_lost: int = 50
-@export var player_follower_count: int = 100
-var enemy_follower_count: int = 50
+@export var enemy_base_starting_followers: int = 200
+@export var player_base_starting_followers: int = 200
+@onready var player_follower_count: int = player_base_starting_followers
+@onready var enemy_follower_count: int = enemy_base_starting_followers
 
 var current_player_score: int = 0
 var current_enemy_score: int = 0
@@ -23,7 +25,7 @@ var current_player_shrine_objects: Array[ShrineObject] = []
 var current_enemy_shrine_objects: Array[ShrineObject] = []
 
 var _waiting_for_player_input: bool = false
-const AUTO_ADVANCE_SECONDS := 2.5
+const AUTO_ADVANCE_SECONDS := 10
 var paused_scene: Control
 
 @export var current_player_dice: Array[ShrineDice] = []
@@ -31,7 +33,9 @@ var paused_scene: Control
 var player_dice_adjacency: Array[int] = []
 var player_dice_right_neighbour: Array[int] = []
 var player_dice_neighbours: Array = []
+var player_grid = null
 var player_item_dice: Array[Dictionary] = []
+var dice_consumed_this_combat: Array[ShrineDice] = []
 @export var follower_requirement_to_win: int = 10000
 @export var player_total_wins: int = 0
 @export var player_lives_remaining: int = 10
@@ -119,13 +123,35 @@ func transition_to_credits(from_scene: String) -> void:
 func transition_to_title(from_scene: String) -> void:
 	transition_scenes(from_scene, "title")
 
+func reset_game() -> void:
+	current_player_score = 0
+	current_enemy_score = 0
+	total_scores_reported = 0
+	pending_rolls.clear()
+	dice_consumed_this_combat.clear()
+	current_player_shrine_objects.clear()
+	current_enemy_shrine_objects.clear()
+	if player_grid:
+		player_grid.initialize_combat()
+	player_follower_count = player_base_starting_followers
+	enemy_follower_count = enemy_base_starting_followers
+	player_total_wins = 0
+	player_lives_remaining = 10
+	_is_win = false
+	_is_victory = false
+
 func all_effects() -> Array[ShrineEffect]:
 	var effects: Array[ShrineEffect] = []
 	for item in current_player_shrine_objects:
 		effects.append_array(item.effects)
 	return effects
 
+func can_add_shrine_object(item: ShrineObject) -> bool:
+	return player_grid == null or player_grid.has_room_for(item)
+
 func add_shrine_object(item: ShrineObject) -> void:
+	if not can_add_shrine_object(item):
+		return
 	current_player_shrine_objects.append(item)
 	if item is ShrineDice:
 		current_player_dice.append(item as ShrineDice)
@@ -190,10 +216,40 @@ func score_rolls(rolls: Array[int], dice: Array[ShrineDice], is_player_dice: boo
 		pending_rolls.clear()
 
 func end_combat() -> void:
+	consume_dice_at_combat_end()
 	for effect in all_effects():
 		effect.on_combat_end()
 	
 	calculate_wins_losses()
+
+func consume_dice_at_combat_end() -> void:
+	var doomed: Array[ShrineDice] = dice_consumed_this_combat.duplicate()
+	dice_consumed_this_combat.clear()
+	for entry in player_item_dice:
+		var item := entry["item"] as ShrineObject
+		for effect in item.effects:
+			if not effect.consumes_random_adjacent_die():
+				continue
+			var candidates: Array[ShrineDice] = []
+			for index in entry["dice"]:
+				var die := current_player_dice[index]
+				if not doomed.has(die):
+					candidates.append(die)
+			if not candidates.is_empty():
+				doomed.append(candidates.pick_random())
+	for effect in all_effects():
+		if not effect.consumes_random_die():
+			continue
+		var candidates: Array[ShrineDice] = []
+		for die in current_player_dice:
+			if not doomed.has(die):
+				candidates.append(die)
+		if candidates.is_empty():
+			break
+		doomed.append(candidates.pick_random())
+		effect.on_random_die_consumed()
+	for die in doomed:
+		remove_shrine_object(die)
 	
 func calculate_wins_losses():
 	if current_player_score >= current_enemy_score:

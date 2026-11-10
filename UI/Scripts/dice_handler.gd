@@ -10,9 +10,20 @@ var _rect_by_index: Dictionary = {}
 func _ready() -> void:
 	await get_tree().process_frame
 	Global.gm.initalize_combat.connect(intialize_combat)
+	if is_player_dice:
+		Global.gm.shrine_object_removed.connect(_on_shrine_object_removed)
 
 func intialize_combat(current_shrine_objects: Array[ShrineObject], current_player_dice: Array[ShrineDice], current_enemy_dice: Array[ShrineDice], player_follower_count: int, enemy_follower_count: int) -> void:
 	_is_roll_enabled = true
+	_spawn_dice(true)
+
+
+func _on_shrine_object_removed(item: ShrineObject) -> void:
+	if item is ShrineDice:
+		_spawn_dice(false)
+
+
+func _spawn_dice(apply_consumption: bool) -> void:
 	for child in get_children():
 		child.queue_free()
 	var typed_dice = Global.gm.current_player_dice if is_player_dice else Global.gm.current_enemy_dice
@@ -28,10 +39,14 @@ func intialize_combat(current_shrine_objects: Array[ShrineObject], current_playe
 		dice_copies.append(die)
 	if is_player_dice:
 		_apply_item_neighbour_effects(dice_copies)
-	var consumed: Dictionary = _apply_consumption(typed_dice, dice_copies) if is_player_dice else {}
+	var consumed: Dictionary = {}
 	if is_player_dice:
-		_apply_adjacent_consumption(consumed)
-		_apply_random_consumption(consumed, dice_copies.size())
+		if apply_consumption:
+			for index in _apply_consumption(typed_dice, dice_copies):
+				Global.gm.dice_consumed_this_combat.append(typed_dice[index])
+		for i in typed_dice.size():
+			if Global.gm.dice_consumed_this_combat.has(typed_dice[i]):
+				consumed[i] = true
 	_rect_by_index.clear()
 	for i in dice_copies.size():
 		if consumed.has(i):
@@ -63,37 +78,6 @@ func _apply_item_neighbour_effects(dice: Array[ShrineDice]) -> void:
 		for index in entry["dice"]:
 			for effect in item.effects:
 				effect.modify_die_next_to_item(dice[index])
-
-
-func _apply_adjacent_consumption(consumed: Dictionary) -> void:
-	for entry in Global.gm.player_item_dice:
-		var item := entry["item"] as ShrineObject
-		for effect in item.effects:
-			if not effect.consumes_random_adjacent_die():
-				continue
-			var candidates: Array[int] = []
-			for index in entry["dice"]:
-				if not consumed.has(index):
-					candidates.append(index)
-			if candidates.is_empty():
-				continue
-			consumed[candidates.pick_random()] = true
-
-
-func _apply_random_consumption(consumed: Dictionary, dice_count: int) -> void:
-	var candidates: Array[int] = []
-	for i in dice_count:
-		if not consumed.has(i):
-			candidates.append(i)
-	for effect in Global.gm.all_effects():
-		if candidates.is_empty():
-			break
-		if not effect.consumes_random_die():
-			continue
-		var picked: int = candidates.pick_random()
-		candidates.erase(picked)
-		consumed[picked] = true
-		effect.on_random_die_consumed()
 
 
 func roll_all_dice() -> Array[int]:

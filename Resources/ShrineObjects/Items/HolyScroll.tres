@@ -13,6 +13,6 @@ script = ExtResource("4_c3n4p")
 name = "Holy Scroll"
 effect = "Adjacent dice get +1 for each other adjacent dice"
 icon = ExtResource("3_860d5")
-rarity = 30
+rarity = 80
 price = 200
 effects = Array[ExtResource("1_eae85")]([SubResource("adjacent_bonus")])

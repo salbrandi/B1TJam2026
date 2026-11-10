@@ -51,5 +51,6 @@ func spawn_fireworks() -> void:
 
 
 func _on_back_to_menu_pressed() -> void:
+	Global.gm.reset_game()
 	Global.gm.transition_to_title("game_over")
 	pass
