@@ -40,7 +40,7 @@ func _build_enemy_board() -> void:
 	var items: Array[ShrineObject] = []
 	var followers := 0
 	followers += randi_range(ENEMY_FOLLOWERS_PER_WIN.x, ENEMY_FOLLOWERS_PER_WIN.y) * (Global.gm.player_total_wins + 1 + 10 - Global.gm.player_lives_remaining)
-	for _i in Global.gm.player_total_wins + Global.gm.current_player_shrine_objects.size():
+	for _i in Global.gm.player_total_wins + 10 - Global.gm.player_lives_remaining + Global.gm.current_player_shrine_objects.size():
 		var item: ShrineObject = shop.roll_from_tiers(tiers)
 		if item == null:
 			break
