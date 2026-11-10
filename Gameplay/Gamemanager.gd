@@ -163,7 +163,7 @@ func score_rolls(rolls: Array[int], dice: Array[ShrineDice], is_player_dice: boo
 	pending_rolls[is_player_dice] = rolls
 	var total := 0
 	for value in rolls:
-		total += value
+		total += maxi(value, 1)
 	if is_player_dice:
 		var effects := all_effects()
 		for effect in effects:
@@ -171,7 +171,7 @@ func score_rolls(rolls: Array[int], dice: Array[ShrineDice], is_player_dice: boo
 		for value in rolls:
 			for effect in effects:
 				effect.on_die_rolled(value)
-		var score := float(total * player_follower_count)
+		var score := float(total * maxi(player_follower_count, 1))
 		for effect in effects:
 			score = effect.modify_score(score)
 		current_player_score += int(score)
@@ -184,7 +184,7 @@ func score_rolls(rolls: Array[int], dice: Array[ShrineDice], is_player_dice: boo
 			effect.on_roll_complete()
 
 	else:
-		current_enemy_score += total * enemy_follower_count
+		current_enemy_score += total * maxi(enemy_follower_count, 1)
 	if pending_rolls.size() == 2:
 		end_combat()
 		pending_rolls.clear()

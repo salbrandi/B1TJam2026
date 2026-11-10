@@ -146,13 +146,6 @@ func _gui_input(event: InputEvent) -> void:
 		show_markers(not get_object_at(cell_at_position(event.position)).is_empty())
 
 
-func _get_tooltip(at_position: Vector2) -> String:
-	var placement := get_object_at(cell_at_position(at_position))
-	if placement.is_empty():
-		return ""
-	var shrine: ShrineObject = placement["shrine"]
-	return "%s\n%s" % [shrine.name, shrine.effect]
-
 
 func end_drag() -> void:
 	_dragged = {}
@@ -254,7 +247,7 @@ func draw_object(canvas: CanvasItem, shrine: ShrineObject, rect: Rect2) -> void:
 func get_cells() -> Array[Control]:
 	var cells: Array[Control] = []
 	for child in get_children():
-		if child != _layer:
+		if child != _layer and child is Control:
 			cells.append(child as Control)
 	return cells
 
@@ -262,6 +255,7 @@ func get_cells() -> Array[Control]:
 func show_markers(on: bool) -> void:
 	for cell in get_cells():
 		cell.visible = on
+
 
 
 func _sync_cells() -> void:

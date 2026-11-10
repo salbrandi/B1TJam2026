@@ -13,4 +13,6 @@ script = ExtResource("1_obj")
 name = "Black Hole"
 effect = "Consume one random dice per combat to gain 10% more followers"
 icon = ExtResource("2_icon")
+grid_width = 2
+grid_height = 2
 effects = Array[ExtResource("4_base")]([SubResource("black_hole")])

@@ -18,4 +18,6 @@ name = "Tithe"
 effect = "Your followers give 10% more score. Lose 5% of followers after each combat"
 icon = ExtResource("2_icon")
 rarity = 50
+grid_width = 2
+grid_height = 2
 effects = Array[ExtResource("3_base")]([SubResource("score_bonus"), SubResource("follower_loss")])

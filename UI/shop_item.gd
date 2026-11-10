@@ -27,7 +27,7 @@ func set_item(item: ShrineObject):
 	button.get_node("HBoxContainer/Price").text = str(shrineObject.price)
 	show()
 	button.disabled = false
-
+	button.modulate = Color.WHITE
 
 func _fit_name():
 	var font: Font = $Name.get_theme_font("font")
@@ -48,4 +48,5 @@ func _on_button_pressed():
 		return
 	Global.gm.add_shrine_object(shrineObject)
 	button.disabled = true
+	button.modulate = Color.BLACK
 	purchased.emit(shrineObject)

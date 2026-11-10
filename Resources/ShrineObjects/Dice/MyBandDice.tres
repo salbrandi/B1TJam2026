@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="ShrineDice" format=3]
+[gd_resource type="Resource" script_class="ShrineDice" format=3 uid="uid://6ajr7jnvsopd"]
 
 [ext_resource type="Script" uid="uid://ketutherx66m" path="res://Resources/ShrineObjects/Dice.gd" id="1_dice"]
 [ext_resource type="Texture2D" uid="uid://snmdwjkx4gnb" path="res://Resources/ShrineObjects/Sprites/d6.png" id="2_icon"]
-[ext_resource type="Script" path="res://Resources/ShrineObjects/Effects/MyBandEffect.gd" id="3_band"]
+[ext_resource type="Script" uid="uid://jgihel4t13qr" path="res://Resources/ShrineObjects/Effects/MyBandEffect.gd" id="3_band"]
 [ext_resource type="Script" uid="uid://bitggnrnfqlj7" path="res://Resources/ShrineObjects/Effects/ShrineEffect.gd" id="4_base"]
 
 [sub_resource type="Resource" id="my_band"]
@@ -15,5 +15,6 @@ current_value = 1
 name = "My Band"
 effect = "Rolls 1-12. Every adjacent die gets this die's rolled value added to it"
 icon = ExtResource("2_icon")
+price = 200
 effects = Array[ExtResource("4_base")]([SubResource("my_band")])
 metadata/_custom_type_script = "uid://ketutherx66m"

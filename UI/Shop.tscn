@@ -551,7 +551,6 @@ theme_override_constants/separation = 19
 [node name="WinCount" parent="FollowerCount/hbox" unique_id=460264632 instance=ExtResource("15_3fu01")]
 layout_mode = 2
 theme = ExtResource("1_gm7d2")
-text = "Followers:"
 
 [node name="LivesLeft" parent="FollowerCount/hbox" unique_id=1330708374 instance=ExtResource("16_0q02r")]
 layout_mode = 2
